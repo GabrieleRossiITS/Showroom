@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 
-type Props = {
-    pageTitle: string;
-};
+function redirectHome() {
+    window.location.href = "/";
+}
 
-export default function Header({ pageTitle }: Props) {
+export default function Header() {
     const navLinks = [
-        { to: "/", label: "Opere" },
+        { to: "/artworks", label: "Opere" },
         { to: "/artist", label: "Artista" },
         { to: "/expositions", label: "Mostre" },
         { to: "/about", label: "Contatti" },
@@ -15,17 +15,18 @@ export default function Header({ pageTitle }: Props) {
     return (
         <header
             className="
-                            absolute top-0 left-0 right-0 
+                            fixed top-0 left-0 right-0 
                             mt-4 mx-4
                             py-6 px-14
                             z-50 
                             rounded-4xl bg-white/20 border border-white/20 
+                            backdrop-blur-md
                             flex justify-between items-center 
                             text-(--deep-charcoal)
                             "
         >
-            <h1 className="text-md font-bold tracking-widest uppercase">
-                {pageTitle}
+            <h1 className="text-md font-bold tracking-widest uppercase cursor-pointer" onClick={redirectHome}>
+                Robert Doineau
             </h1>
             <nav>
                 <ul className="flex gap-8 lg:gap-12 font-medium text-md">

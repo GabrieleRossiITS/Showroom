@@ -9,7 +9,7 @@ export const Route = createFileRoute("/artist")({
 
 function Artist() {
     return (
-        <main className="page-wrap px-6 md:px-12 pt-40 pb-24 relative min-h-screen overflow-hidden">
+        <main className="page-wrap px-6 md:px-12 relative min-h-screen overflow-hidden">
             <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-400/10 blur-[120px] animate-pulse pointer-events-none" />
             <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-400/10 blur-[120px] animate-pulse pointer-events-none" />
 

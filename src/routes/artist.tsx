@@ -1,221 +1,308 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import Button from "#/components/ui/Button";
+import { MoveLeft } from "lucide-react";
 
 export const Route = createFileRoute("/artist")({
     component: Artist,
     staticData: {
-        title: "Artista",
+        title: "L'Artista - Robert Doisneau",
     },
 });
 
 function Artist() {
-    return (
-        <main className="page-wrap px-6 md:px-12 relative min-h-screen overflow-hidden">
-            <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-400/10 blur-[120px] animate-pulse pointer-events-none" />
-            <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-400/10 blur-[120px] animate-pulse pointer-events-none" />
+    const fadeIn = {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.8 },
+    };
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_2fr] gap-16 relative z-10 w-full max-w-[1600px] mx-auto">
-                <div className="relative h-[60vh] lg:h-[85vh] w-full lg:sticky lg:top-40 z-20 group perspective-2000">
-                    <div className="w-full h-full rounded-4xl bg-white/15 backdrop-blur-2xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] overflow-hidden flex flex-col items-center justify-center transition-all duration-700">
-                        <div className="w-48 h-48 mb-10 border-4 border-dashed border-(--parisian-stone)/40 rounded-full animate-[spin_12s_linear_infinite] flex items-center justify-center text-(--parisian-stone)">
-                            <div className="w-36 h-36 border-2 border-solid border-(--parisian-stone)/30 rounded-full animate-[spin_6s_linear_infinite_reverse] flex items-center justify-center backdrop-blur-md bg-white/5">
-                                <span className="text-2xl font-black tracking-[0.2em] text-(--deep-charcoal) opacity-80">
-                                    3D
-                                </span>
-                            </div>
-                        </div>
-                        <h3 className="text-3xl font-bold text-(--deep-charcoal) mb-4 text-center px-6">
-                            Robert Doisneau
-                            <br />
-                            <span className="text-xl font-medium opacity-60">
-                                Digital Reconstruction
-                            </span>
-                        </h3>
-                        <p className="text-(--parisian-stone) text-base text-center px-12 max-w-sm leading-relaxed opacity-80">
-                            Spazio riservato per l'integrazione di Three.js. Il
-                            modello 3D interattivo verrà renderizzato qui.
-                        </p>
-                    </div>
+    return (
+        <main className="page-wrap px-6 md:px-12 relative min-h-screen pb-32">
+            {/* Ambient Background Elements */}
+            <div className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-(--burnished-copper)/5 blur-[120px] pointer-events-none z-0" />
+            <div className="fixed bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-(--parisian-stone)/5 blur-[120px] pointer-events-none z-0" />
+
+            <div className="relative z-10 w-full max-w-7xl mx-auto pt-24 lg:pt-32">
+                <div className="mb-12">
+                    <Button
+                        onClick={() => (window.location.href = "/")}
+                        variant="ghost"
+                        size="sm"
+                        className="gap-2 text-(--parisian-stone-dark) hover:text-(--deep-charcoal)"
+                    >
+                        <MoveLeft className="w-4 h-4" />
+                        Torna alla Home
+                    </Button>
                 </div>
 
-                <div className="flex flex-col gap-10">
-                    <section className="rounded-4xl p-10 md:p-14 bg-white/25 backdrop-blur-2xl border border-white/40 shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
-                        <p className="island-kicker mb-4 text-sm uppercase tracking-[0.3em] text-slate-500 font-semibold opacity-70">
-                            L'Umanista della Strada
-                        </p>
-                        <h1 className="display-title mb-8 text-6xl md:text-7xl font-black bg-clip-text text-transparent bg-linear-to-br from-slate-900 via-slate-800 to-slate-400 leading-tight">
-                            Robert Doisneau
-                        </h1>
-                        <p className="m-0 text-xl md:text-2xl leading-relaxed text-slate-800 font-medium opacity-90">
-                            "Quello che cercavo di mostrare era un mondo dove mi
-                            sarei sentito bene, dove le persone sarebbero state
-                            gentili, dove avrei trovato la tenerezza che speravo
-                            di ricevere. Le mie foto erano come una prova che
-                            questo mondo può esistere."
-                        </p>
-                    </section>
+                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_2fr] gap-12 lg:gap-20 items-start">
+                    {/* Left Column: 3D Workspace / Portrait Placeholder */}
+                    <div className="lg:sticky lg:top-32 space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1 }}
+                            className="relative group aspect-square lg:aspect-4/5 w-full rounded-[3rem] bg-(--vintage-sepia-light)/40 backdrop-blur-3xl border border-(--line) shadow-2xl overflow-hidden flex flex-col items-center justify-center p-8 text-center"
+                        >
+                            {/* Inner Glow/Glint effect */}
+                            <div className="absolute inset-0 rounded-[3rem] border border-white/40 pointer-events-none mix-blend-overlay" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <section className="rounded-4xl p-10 bg-white/20 backdrop-blur-xl border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
-                            <h2 className="text-3xl font-extrabold text-slate-900 mb-6 flex items-center gap-3">
-                                <span className="w-8 h-1 bg-blue-500 rounded-full"></span>
-                                Origini
-                            </h2>
-                            <p className="text-slate-700 leading-relaxed text-lg mb-6">
-                                Nato nel 1912 a Gentilly, Doisneau crebbe in un
-                                ambiente piccolo-borghese che segnò
-                                profondamente la sua visione del mondo. Rimasto
-                                orfano in tenera età, trovò rifugio nel disegno
-                                e successivamente nella tecnica dell'incisione
-                                presso l'École Estienne.
-                            </p>
-                            <p className="text-slate-700 leading-relaxed text-lg">
-                                La sua timidezza iniziale lo portò a fotografare
-                                prima i ciottoli delle strade, poi gli oggetti,
-                                e solo molto più tardi le persone, sviluppando
-                                quella pazienza infinita che sarebbe diventata
-                                il suo marchio di fabbrica nel catturare
-                                "l'attimo cercato".
-                            </p>
-                        </section>
+                            <div className="relative w-48 h-48 mb-12">
+                                <div className="absolute inset-0 border-4 border-dashed border-(--burnished-copper)/20 rounded-full animate-[spin_20s_linear_infinite]" />
+                                <div className="absolute inset-4 border-2 border-solid border-(--deep-charcoal)/10 rounded-full animate-[spin_10s_linear_infinite_reverse] flex items-center justify-center bg-white/5 backdrop-blur-sm">
+                                    <div className="text-3xl font-serif italic text-(--deep-charcoal) opacity-40">
+                                        RD
+                                    </div>
+                                </div>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-xs font-mono uppercase tracking-[0.4em] text-(--burnished-copper) font-bold animate-pulse">
+                                        Loading 3D
+                                    </span>
+                                </div>
+                            </div>
 
-                        <section className="rounded-4xl p-10 bg-white/20 backdrop-blur-xl border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
-                            <h2 className="text-3xl font-extrabold text-slate-900 mb-6 flex items-center gap-3">
-                                <span className="w-8 h-1 bg-purple-500 rounded-full"></span>
-                                Gli Anni Renault
-                            </h2>
-                            <p className="text-slate-700 leading-relaxed text-lg mb-6">
-                                Nel 1934 iniziò a lavorare come fotografo
-                                industriale per la Renault a Billancourt. Questa
-                                esperienza fu fondamentale per comprendere la
-                                disciplina tecnica, ma il lavoro ripetitivo e
-                                l'ambiente di fabbrica lo soffocarono.
+                            <h3 className="text-3xl font-serif font-bold text-(--deep-charcoal) mb-4">
+                                L'Obiettivo <br /> Interattivo
+                            </h3>
+                            <p className="text-(--parisian-stone-dark) text-sm max-w-xs leading-relaxed">
+                                In questa sezione verrà integrato un modello 3D
+                                interattivo della fotocamera e dello spazio di
+                                lavoro dell'artista.
                             </p>
-                            <p className="text-slate-700 leading-relaxed text-lg">
-                                Fu licenziato nel 1939 per i suoi continui
-                                ritardi, un evento che lui stesso definì come
-                                l'inizio della sua vera libertà. Da quel
-                                momento, le strade di Parigi divennero il suo
-                                unico ufficio e la sua eterna ispirazione.
-                            </p>
-                        </section>
+
+                            <div className="mt-8 flex gap-2">
+                                {[1, 2, 3].map((i) => (
+                                    <div
+                                        key={i}
+                                        className="w-1.5 h-1.5 rounded-full bg-(--burnished-copper)/30"
+                                    />
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            {...fadeIn}
+                            className="p-8 rounded-4xl bg-(--deep-charcoal) text-(--vintage-sepia) shadow-xl"
+                        >
+                            <h4 className="text-xs font-mono uppercase tracking-[0.3em] mb-4 opacity-70">
+                                Riassunto biografia
+                            </h4>
+                            <div className="space-y-4 text-sm font-medium">
+                                <div className="flex justify-between border-b border-white/10 pb-2">
+                                    <span className="opacity-60">Attività</span>
+                                    <span>1912 - 1994 (Gentilly, Francia)</span>
+                                </div>
+                                <div className="flex justify-between border-b border-white/10 pb-2">
+                                    <span className="opacity-60">
+                                        Nazionalità
+                                    </span>
+                                    <span>Francese</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="opacity-60"></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            {...fadeIn}
+                            className="p-8 rounded-4xl bg-(--deep-charcoal) text-(--vintage-sepia) shadow-xl"
+                        >
+                            <h4 className="text-xs font-mono uppercase tracking-[0.3em] mb-4 opacity-70">
+                                Dettagli Tecnici
+                            </h4>
+                            <div className="space-y-4 text-sm font-medium">
+                                <div className="flex justify-between border-b border-white/10 pb-2">
+                                    <span className="opacity-60">Attività</span>
+                                    <span>1930 - 1994</span>
+                                </div>
+                                <div className="flex justify-between border-b border-white/10 pb-2">
+                                    <span className="opacity-60">Stile</span>
+                                    <span>Umanista</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="opacity-60">Soggetto</span>
+                                    <span>Parigi, Vita Quotidiana</span>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
 
-                    <section className="rounded-4xl p-10 md:p-14 bg-white/25 backdrop-blur-2xl border border-white/40 shadow-[0_4px_24px_rgba(0,0,0,0.03)] relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/30 rounded-full blur-[80px] pointer-events-none"></div>
-                        <h2 className="text-4xl font-black text-slate-900 mb-8">
-                            Resistenza e Liberazione
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12">
-                            <p className="text-slate-700 leading-relaxed text-lg">
-                                Durante l'occupazione nazista, Doisneau mise le
-                                sue abilità di incisore al servizio della
-                                Resistenza francese, falsificando documenti
-                                d'identità e passaporti per aiutare chi era
-                                perseguitato. Non smise mai di scattare,
-                                documentando clandestinamente la vita sotto il
-                                giogo dell'occupante.
+                    {/* Right Column: Content Sections */}
+                    <div className="space-y-12 lg:space-y-20">
+                        <motion.section
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="bg-(--vintage-sepia-light)/60 backdrop-blur-xl p-10 md:p-16 rounded-[4rem] border border-(--line) shadow-sm"
+                        >
+                            <span className="inline-block px-4 py-1.5 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) text-xs font-bold uppercase tracking-[0.2em] mb-8">
+                                L'Umanista della Strada
+                            </span>
+                            <h1 className="text-6xl md:text-8xl font-serif font-bold text-(--deep-charcoal) mb-10 leading-none tracking-tight">
+                                Robert <br />
+                                <span className="text-(--burnished-copper)">
+                                    Doisneau
+                                </span>
+                            </h1>
+                            <p className="text-2xl md:text-3xl text-(--parisian-stone-dark) leading-relaxed font-serif italic opacity-90">
+                                "Quello che cercavo di mostrare era un mondo
+                                dove mi sarei sentito bene, dove le persone
+                                sarebbero state gentili, dove avrei trovato la
+                                tenerezza che speravo di ricevere."
                             </p>
-                            <p className="text-slate-700 leading-relaxed text-lg">
-                                Nel 1944 fu tra i primi a scendere in strada per
-                                immortalare la Liberazione di Parigi. Le sue
-                                foto di quei giorni non celebrano solo la
-                                vittoria militare, ma la rinascita della gioia,
-                                i baci rubati tra le barricate e il ritorno
-                                della libertà nel cuore dei parigini.
-                            </p>
-                        </div>
-                    </section>
+                        </motion.section>
 
-                    <section className="rounded-4xl p-10 md:p-14 bg-white/25 backdrop-blur-2xl border border-white/40 shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
-                        <h2 className="text-4xl font-black text-slate-900 mb-8">
-                            La Filosofia dell'Imperfetto
-                        </h2>
-                        <p className="text-slate-700 leading-relaxed text-xl mb-10 italic">
-                            "Non fotografo la vita così com'è, ma la vita come
-                            vorrei che fosse."
-                        </p>
-                        <div className="flex flex-col gap-8">
-                            <div className="bg-slate-900/5 p-8 rounded-3xl border border-slate-900/10">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                                    La Fotografia Umanista
-                                </h3>
-                                <p className="text-slate-700 leading-relaxed text-lg">
-                                    Insieme a Henri Cartier-Bresson e Willy
-                                    Ronis, Doisneau è il pilastro della
-                                    fotografia umanista. Mentre Cartier-Bresson
-                                    cercava il "momento decisivo" con rigore
-                                    geometrico, Doisneau cercava il "momento di
-                                    grazia", l'istante in cui l'ordinario
-                                    diventa straordinario grazie a un gesto, uno
-                                    sguardo o una coincidenza buffa.
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                            <motion.section
+                                {...fadeIn}
+                                className="p-10 rounded-[3rem] bg-white/40 backdrop-blur-md border border-(--line) hover:bg-white/60 transition-colors duration-500"
+                            >
+                                <h2 className="text-3xl font-serif font-bold text-(--deep-charcoal) mb-6 flex items-baseline gap-4">
+                                    <span className="text-4xl text-(--burnished-copper)/40">
+                                        01
+                                    </span>
+                                    Origini
+                                </h2>
+                                <p className="text-(--parisian-stone-dark) leading-relaxed text-lg mb-6">
+                                    Nato nel 1912 a Gentilly, Doisneau crebbe in
+                                    un ambiente piccolo-borghese che segnò
+                                    profondamente la sua visione del mondo.
+                                    Rimasto orfano in tenera età, trovò rifugio
+                                    nel disegno.
+                                </p>
+                                <p className="text-(--parisian-stone-dark) leading-relaxed text-lg">
+                                    La sua timidezza lo portò a fotografare
+                                    prima gli oggetti, poi i ciottoli, e solo
+                                    più tardi le persone, catturando "l'attimo
+                                    cercato".
+                                </p>
+                            </motion.section>
+
+                            <motion.section
+                                {...fadeIn}
+                                className="p-10 rounded-[3rem] bg-white/40 backdrop-blur-md border border-(--line) hover:bg-white/60 transition-colors duration-500"
+                            >
+                                <h2 className="text-3xl font-serif font-bold text-(--deep-charcoal) mb-6 flex items-baseline gap-4">
+                                    <span className="text-4xl text-(--burnished-copper)/40">
+                                        02
+                                    </span>
+                                    Renault
+                                </h2>
+                                <p className="text-(--parisian-stone-dark) leading-relaxed text-lg mb-6">
+                                    Nel 1934 iniziò a lavorare come fotografo
+                                    industriale per la Renault. Questa
+                                    esperienza fu fondamentale per la disciplina
+                                    tecnica.
+                                </p>
+                                <p className="text-(--parisian-stone-dark) leading-relaxed text-lg">
+                                    Fu licenziato nel 1939, evento che definì
+                                    come l'inizio della sua vera libertà nelle
+                                    strade di Parigi.
+                                </p>
+                            </motion.section>
+                        </div>
+
+                        <motion.section
+                            {...fadeIn}
+                            className="rounded-[4rem] p-12 md:p-20 bg-(--deep-charcoal) text-(--vintage-sepia) relative overflow-hidden group shadow-2xl"
+                        >
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-(--burnished-copper)/10 rounded-full blur-[100px] pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-10 relative z-10">
+                                Resistenza e Liberazione
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10 opacity-80">
+                                <p className="text-lg leading-relaxed">
+                                    Durante l'occupazione, Doisneau mise le sue
+                                    abilità di incisore al servizio della
+                                    Resistenza, falsificando documenti
+                                    d'identità per aiutare i perseguitati.
+                                </p>
+                                <p className="text-lg leading-relaxed">
+                                    Nel 1944 immortalò la Liberazione di Parigi,
+                                    celebrando la rinascita della gioia e i baci
+                                    rubati tra le barricate.
                                 </p>
                             </div>
-                            <div className="bg-slate-900/5 p-8 rounded-3xl border border-slate-900/10">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                                    L'Enigmatismo Quotidiano
-                                </h3>
-                                <p className="text-slate-700 leading-relaxed text-lg">
-                                    Prediligeva le periferie, i bistrot, i
-                                    bambini che giocano per strada. La sua
-                                    Parigi non è quella dei monumenti
-                                    cartolineschi, ma quella dei lavoratori,
-                                    degli innamorati e dei sognatori. Ogni
-                                    scatto è una piccola narrazione, un
-                                    frammento di un film che lo spettatore è
-                                    invitato a completare.
-                                </p>
+                        </motion.section>
+
+                        <motion.section
+                            {...fadeIn}
+                            className="bg-(--vintage-sepia-light)/40 backdrop-blur-xl p-12 md:p-20 rounded-[4rem] border border-(--line)"
+                        >
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-(--deep-charcoal) mb-12">
+                                La Filosofia dell'Imperfetto
+                            </h2>
+                            <div className="grid grid-cols-1 gap-12">
+                                <div className="space-y-6">
+                                    <h3 className="text-2xl font-serif font-bold text-(--burnished-copper-deep)">
+                                        Il Momento di Grazia
+                                    </h3>
+                                    <p className="text-xl text-(--parisian-stone-dark) leading-relaxed opacity-90">
+                                        Doisneau cercava l'istante in cui
+                                        l'ordinario diventa straordinario grazie
+                                        a un gesto, uno sguardo o una
+                                        coincidenza buffa. Prediligeva le
+                                        periferie, i bistrot, i bambini
+                                        scacciati dai loro giochi.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </motion.section>
 
-                    <section className="rounded-4xl p-10 md:p-14 bg-white/25 backdrop-blur-2xl border border-white/40 shadow-[0_4px_24px_rgba(0,0,0,0.03)] relative overflow-hidden group">
-                        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-100/30 rounded-full blur-[100px] pointer-events-none"></div>
-                        <h2 className="text-4xl font-black text-slate-900 mb-8 relative z-10">
-                            L'Icona: Le Baiser de l'Hôtel de Ville
-                        </h2>
-                        <p className="text-slate-700 leading-relaxed text-lg mb-8 relative z-10">
-                            Scattata nel 1950 per la rivista LIFE, questa
-                            immagine è diventata il manifesto mondiale del
-                            romanticismo parigino. Per anni fu considerata un
-                            perfetto scatto rubato, finché non si scoprì che
-                            Doisneau aveva chiesto a due giovani attori,
-                            Françoise Bornet e Jacques Carteaud, di posare per
-                            lui.
-                        </p>
-                        <div className="bg-white/40 backdrop-blur-2xl p-8 rounded-3xl border border-white/60 relative z-10 shadow-sm">
-                            <p className="text-slate-800 leading-relaxed text-lg font-medium italic">
-                                "Perché dovrei vergognarmene? Avevo intravisto
-                                il potenziale di quel momento e l'ho messo in
-                                scena per assicurarmi di catturarne l'essenza.
-                                La verità di una foto non sta nel modo in cui è
-                                stata scattata, ma nel sentimento che evoca."
+                        <motion.section
+                            {...fadeIn}
+                            className="relative rounded-[4rem] overflow-hidden group shadow-2xl"
+                        >
+                            <div className="absolute inset-0 bg-(--burnished-copper) p-1 pr-1.5 pb-1.5 rounded-[4rem]">
+                                <div className="w-full h-full bg-white/10 backdrop-blur-3xl rounded-[3.8rem] p-12 md:p-20">
+                                    <h2 className="text-4xl font-serif font-bold text-(--deep-charcoal) mb-8">
+                                        L'Icona: Le Baiser
+                                    </h2>
+                                    <p className="text-(--parisian-stone-dark) text-lg leading-relaxed mb-10">
+                                        Scattata nel 1950, questa immagine è il
+                                        manifesto mondiale del romanticismo. "La
+                                        verità di una foto non sta nel modo in
+                                        cui è stata scattata, ma nel sentimento
+                                        che evoca."
+                                    </p>
+                                    <div className="inline-flex items-center gap-4 text-(--burnished-copper-deep) font-serif italic text-xl">
+                                        <div className="w-12 h-px bg-(--burnished-copper)" />
+                                        Hôtel de Ville, 1950
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.section>
+
+                        <motion.section
+                            {...fadeIn}
+                            className="p-10 md:p-14 bg-white/30 backdrop-blur-2xl border border-white/50 rounded-[4rem] shadow-sm mb-20"
+                        >
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-(--deep-charcoal) mb-8">
+                                Eredità Spirituale
+                            </h2>
+                            <p className="text-(--parisian-stone-dark) leading-relaxed text-lg mb-6">
+                                Robert Doisneau ha lasciato un archivio di circa
+                                450.000 negativi, una miniera d'oro di memoria
+                                collettiva. Ha ricevuto i massimi onori, tra cui
+                                il Prix Niépce nel 1956 e la Legion d'Onore nel
+                                1984.
                             </p>
-                        </div>
-                    </section>
-
-                    <section className="rounded-4xl p-10 md:p-14 bg-white/30 backdrop-blur-2xl border border-white/50 shadow-[0_10px_40px_rgba(0,0,0,0.04)] mb-20">
-                        <h2 className="text-4xl font-black text-slate-900 mb-8">
-                            Eredità Spirituale
-                        </h2>
-                        <p className="text-slate-700 leading-relaxed text-lg mb-6">
-                            Robert Doisneau ha lasciato un archivio di circa
-                            450.000 negativi, una miniera d'oro di memoria
-                            collettiva. Ha ricevuto i massimi onori, tra cui il
-                            Prix Niépce nel 1956 e la Legion d'Onore nel 1984,
-                            ma è sempre rimasto quel "pescatore di immagini"
-                            umile e curioso.
-                        </p>
-                        <p className="text-slate-700 leading-relaxed text-lg">
-                            Oggi il suo lavoro continua ad essere esposto nei
-                            più grandi musei del mondo, dal MoMA di New York al
-                            Centre Pompidou di Parigi, ricordandoci che la
-                            bellezza non va cercata lontano, ma si nasconde
-                            proprio dietro l'angolo della nostra strada
-                            quotidiana.
-                        </p>
-                    </section>
+                            <p className="text-(--parisian-stone-dark) leading-relaxed text-lg">
+                                Oggi il suo lavoro continua ad essere esposto
+                                nei più grandi musei del mondo, ricordandoci che
+                                la bellezza non va cercata lontano, ma si
+                                nasconde proprio dietro l'angolo.
+                            </p>
+                        </motion.section>
+                    </div>
                 </div>
             </div>
         </main>
     );
 }
+
+export default Artist;

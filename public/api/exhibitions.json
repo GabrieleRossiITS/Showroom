@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "title": "Henri Cartier-Bresson: L'istante decisivo",
+        "location": "MUDEC - Museo delle Culture, Milano",
+        "coordinates": {
+            "lat": 45.4526,
+            "lng": 9.1614
+        },
+        "maps_url": "https://maps.app.goo.gl/MUDEC_Milano",
+        "status": "past",
+        "start_date": "2025-09-15",
+        "end_date": "2026-01-28",
+        "description": "Una grande retrospettiva dedicata al maestro francese, fondatore dell'agenzia Magnum Photos. In esposizione oltre 100 stampe vintage che raccontano il suo incredibile viaggio attraverso il Novecento.",
+        "artworks_included": [1, 2, 5, 8]
+    },
+    {
+        "id": 2,
+        "title": "Sebastião Salgado: Amazônia",
+        "location": "Fabbrica del Vapore, Milano",
+        "coordinates": {
+            "lat": 45.4844,
+            "lng": 9.1772
+        },
+        "maps_url": "https://maps.app.goo.gl/FabbricaVapore_Milano",
+        "status": "ongoing",
+        "start_date": "2026-02-10",
+        "end_date": "2026-05-30",
+        "description": "Un'immersione visiva e sonora nella foresta amazzonica. Salgado documenta la bellezza della natura incontaminata e delle popolazioni indigene per sensibilizzare sulla crisi climatica.",
+        "artworks_included": [3, 4, 9, 12, 15]
+    },
+    {
+        "id": 3,
+        "title": "Steve McCurry: Icons",
+        "location": "Palazzo Reale, Milano",
+        "coordinates": {
+            "lat": 45.4633,
+            "lng": 9.191
+        },
+        "maps_url": "https://maps.app.goo.gl/PalazzoReale_Milano",
+        "status": "upcoming",
+        "start_date": "2026-06-15",
+        "end_date": "2026-10-10",
+        "description": "Le immagini più iconiche del celebre fotografo americano, inclusa la famosa 'Ragazza Afgana'. Un viaggio attraverso i colori dell'India, del Sud-est asiatico e del Medio Oriente.",
+        "artworks_included": [6, 7, 10, 11]
+    }
+]

@@ -1,48 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
+import { getExhibitions } from "public/api/fetchers";
 
 export const Route = createFileRoute("/exhibitions/")({
+    loader: () => getExhibitions(),
     component: Expositions,
     staticData: {
         title: "Mostre",
     },
 });
 
-const expositions = [
-    {
-        year: "2024",
-        title: "Robert Doisneau: La lenteur",
-        location: "Palazzo Roverella, Rovigo",
-        status: "In corso",
-    },
-    {
-        year: "2023",
-        title: "Parigi, la vita!",
-        location: "Museo dell'Ara Pacis, Roma",
-        status: "Passata",
-    },
-    {
-        year: "2022",
-        title: "Les Halles: Il ventre di Parigi",
-        location: "Forum des Halles, Paris",
-        status: "Passata",
-    },
-    {
-        year: "2021",
-        title: "Il bacio e altre storie",
-        location: "Camera - Centro Italiano per la Fotografia, Torino",
-        status: "Passata",
-    },
-    {
-        year: "2019",
-        title: "Pescatore di immagini",
-        location: "Palazzo Ducale, Genova",
-        status: "Passata",
-    },
-];
-
 function Expositions() {
+    const exhibitions = Route.useLoaderData();
     return (
         <>
             <div className="fixed inset-0 pointer-events-none z-0 bg-(--vintage-sepia)" />
@@ -58,13 +28,13 @@ function Expositions() {
                     </h1>
 
                     <div className="space-y-6">
-                        {expositions.map((exp, i) => (
+                        {exhibitions.map((exp) => (
                             <motion.div
-                                key={i}
+                                key={exp.id}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{
-                                    delay: 0.2 + i * 0.1,
+                                    delay: 0.2 + exp.id * 0.1,
                                     duration: 0.5,
                                 }}
                                 className="group relative bg-(--deep-charcoal) p-8 rounded-[2.5rem] overflow-hidden hover:scale-[1.02] transition-transform duration-500 cursor-pointer shadow-xl shadow-(--burnished-copper)/10"
@@ -73,7 +43,9 @@ function Expositions() {
                                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                                     <div className="flex items-start md:items-center gap-6 md:gap-8 flex-col md:flex-row">
                                         <span className="text-4xl md:text-5xl font-black text-(--burnished-copper) font-mono">
-                                            {exp.year}
+                                            {new Date(
+                                                exp.start_date,
+                                            ).getFullYear()}
                                         </span>
                                         <div>
                                             <h3 className="text-2xl font-bold text-(--vintage-sepia-light) mb-2 group-hover:text-white transition-colors">
@@ -88,7 +60,7 @@ function Expositions() {
                                     <div className="shrink-0 flex self-start md:self-auto">
                                         <span
                                             className={`px-5 py-2 rounded-full text-sm font-bold tracking-widest uppercase ${
-                                                exp.status === "In corso"
+                                                exp.status === "ongoing"
                                                     ? "bg-(--burnished-copper) text-(--vintage-sepia)"
                                                     : "bg-(--vintage-sepia)/10 text-(--vintage-sepia)/60"
                                             }`}

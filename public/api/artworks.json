@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "title": "La première maîtresse,",
+        "year": 1933,
+        "image": "http://localhost:3000/images/1.jpeg"
+    },
+    {
+        "id": 2,
+        "title": "Défilé de soldats allemands",
+        "year": 1943,
+        "image": "http://localhost:3000/images/2.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Barricade",
+        "year": 1944,
+        "image": "http://localhost:3000/images/3.jpeg"
+    },
+    {
+        "id": 4,
+        "title": "Place Saint-Michel",
+        "year": 1944,
+        "image": "http://localhost:3000/images/4.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Amour et Barbelés",
+        "year": 1944,
+        "image": "http://localhost:3000/images/5.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Les glaneurs de charbon",
+        "year": 1945,
+        "image": "http://localhost:3000/images/6.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Donio, dresseur de chiens",
+        "year": 1946,
+        "image": "http://localhost:3000/images/7.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Bolides",
+        "year": 1946,
+        "image": "http://localhost:3000/images/8.jpg"
+    },
+    {
+        "id": 9,
+        "title": "Le regard oblique (boutique de Romi)",
+        "year": 1948,
+        "image": "http://localhost:3000/images/9.jpg"
+    },
+    {
+        "id": 10,
+        "title": "Baiser de l'Hôtel de Ville",
+        "year": 1950,
+        "image": "http://localhost:3000/images/10.jpg"
+    },
+    {
+        "id": 11,
+        "title": "L'Enfer",
+        "year": 1952,
+        "image": "http://localhost:3000/images/11.jpg"
+    },
+    {
+        "id": 12,
+        "title": "Les pains de Picasso",
+        "year": 1952,
+        "image": "http://localhost:3000/images/12.jpg"
+    },
+    {
+        "id": 13,
+        "title": "Les Chiens de la Chapelle",
+        "year": 1953,
+        "image": "http://localhost:3000/images/13.jpg"
+    },
+    {
+        "id": 14,
+        "title": "Le manège de Monsieur Barré",
+        "year": 1955,
+        "image": "http://localhost:3000/images/14.jpg"
+    },
+    {
+        "id": 15,
+        "title": "L'information scolaire",
+        "year": 1956,
+        "image": "http://localhost:3000/images/15.jpg"
+    },
+    {
+        "id": 16,
+        "title": "Le cadran scolaire",
+        "year": 1956,
+        "image": "http://localhost:3000/images/16.jpg"
+    },
+    {
+        "id": 17,
+        "title": "Bassin de la Villette",
+        "year": 1957,
+        "image": "http://localhost:3000/images/17.jpg"
+    },
+    {
+        "id": 18,
+        "title": "Un musicien sous la pluie",
+        "year": 1957,
+        "image": "http://localhost:3000/images/18.jpg"
+    }
+]

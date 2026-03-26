@@ -3,258 +3,18 @@ import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Button from "#/components/ui/Button";
+import { getArtworks } from "public/api/fetchers";
 
 export const Route = createFileRoute("/artworks/")({
+    loader: () => getArtworks(),
     component: ArtworkGallery,
     staticData: {
         title: "Robert Doisneau - Opere",
     },
 });
 
-const artworks = [
-    {
-        id: 1,
-        type: "border-copper",
-        size: "w-72 h-[34rem]",
-        y: "-translate-y-8",
-        title: "Le Baiser de l'Hôtel de Ville",
-        year: "1950",
-    },
-    {
-        id: 2,
-        type: "border-copper",
-        size: "w-[28rem] h-[28rem]",
-        y: "translate-y-24",
-        title: "Les Animaux Supérieurs",
-        year: "1954",
-    },
-    {
-        id: 3,
-        type: "border-copper",
-        size: "w-64 h-72",
-        y: "-translate-y-16",
-        title: "L'Enfer",
-        year: "1952",
-    },
-    {
-        id: 4,
-        type: "border-copper",
-        size: "w-80 h-[36rem]",
-        y: "translate-y-4",
-        title: "Le Cadran Solaire",
-        year: "1956",
-    },
-    {
-        id: 5,
-        type: "border-copper",
-        size: "w-[22rem] h-[28rem]",
-        y: "-translate-y-32",
-        title: "Les Hélicoptères",
-        year: "1972",
-    },
-    {
-        id: 6,
-        type: "border-copper",
-        size: "w-[26rem] h-[32rem]",
-        y: "translate-y-12",
-        title: "La Dame aux Caniches",
-        year: "1942",
-    },
-    {
-        id: 7,
-        type: "border-copper",
-        size: "w-72 h-[40rem]",
-        y: "-translate-y-8",
-        title: "La Voiture",
-        year: "1948",
-    },
-    {
-        id: 8,
-        type: "border-copper",
-        size: "w-[28rem] h-[30rem]",
-        y: "translate-y-16",
-        title: "L'Accordéoniste de la Rue",
-        year: "1951",
-    },
-    {
-        id: 9,
-        type: "border-copper",
-        size: "w-64 h-[36rem]",
-        y: "-translate-y-20",
-        title: "Le Pont des Arts",
-        year: "1953",
-    },
-    {
-        id: 10,
-        type: "border-copper",
-        size: "w-72 h-[28rem]",
-        y: "translate-y-8",
-        title: "Les Enfants de la Place",
-        year: "1947",
-    },
-    {
-        id: 11,
-        type: "border-copper",
-        size: "w-80 h-[38rem]",
-        y: "-translate-y-12",
-        title: "Le Manège de Monsieur",
-        year: "1955",
-    },
-    {
-        id: 12,
-        type: "border-copper",
-        size: "w-[24rem] h-[32rem]",
-        y: "translate-y-28",
-        title: "Bistrot Parisien",
-        year: "1949",
-    },
-    {
-        id: 13,
-        type: "border-copper",
-        size: "w-72 h-[34rem]",
-        y: "-translate-y-4",
-        title: "La Concierge",
-        year: "1945",
-    },
-    {
-        id: 14,
-        type: "border-copper",
-        size: "w-[26rem] h-[28rem]",
-        y: "translate-y-12",
-        title: "Le Photographe Ambulant",
-        year: "1958",
-    },
-    {
-        id: 15,
-        type: "border-copper",
-        size: "w-64 h-[40rem]",
-        y: "-translate-y-24",
-        title: "Un Chien Sur Les Quais",
-        year: "1950",
-    },
-    {
-        id: 16,
-        type: "border-copper",
-        size: "w-[30rem] h-[32rem]",
-        y: "translate-y-6",
-        title: "Le Musicien Aveugle",
-        year: "1946",
-    },
-    {
-        id: 17,
-        type: "border-copper",
-        size: "w-72 h-[36rem]",
-        y: "-translate-y-16",
-        title: "L'Heure de Pointe",
-        year: "1960",
-    },
-    {
-        id: 18,
-        type: "border-copper",
-        size: "w-[22rem] h-[26rem]",
-        y: "translate-y-20",
-        title: "Les Pigeons du Square",
-        year: "1954",
-    },
-    {
-        id: 19,
-        type: "border-copper",
-        size: "w-80 h-[34rem]",
-        y: "-translate-y-10",
-        title: "Le Marché aux Puces",
-        year: "1957",
-    },
-    {
-        id: 20,
-        type: "border-copper",
-        size: "w-[28rem] h-[38rem]",
-        y: "translate-y-14",
-        title: "L'Amour à Paris",
-        year: "1952",
-    },
-    {
-        id: 21,
-        type: "border-copper",
-        size: "w-64 h-[30rem]",
-        y: "-translate-y-28",
-        title: "Le Vitrier",
-        year: "1948",
-    },
-    {
-        id: 22,
-        type: "border-copper",
-        size: "w-72 h-[32rem]",
-        y: "translate-y-8",
-        title: "Les Amoureux du Métro",
-        year: "1959",
-    },
-    {
-        id: 23,
-        type: "border-copper",
-        size: "w-[26rem] h-[36rem]",
-        y: "-translate-y-14",
-        title: "Le Matin Calme",
-        year: "1944",
-    },
-    {
-        id: 24,
-        type: "border-copper",
-        size: "w-[30rem] h-[28rem]",
-        y: "translate-y-24",
-        title: "Café de Flore",
-        year: "1956",
-    },
-    {
-        id: 25,
-        type: "border-copper",
-        size: "w-72 h-[40rem]",
-        y: "-translate-y-6",
-        title: "La Tour Eiffel sous la Brume",
-        year: "1953",
-    },
-    {
-        id: 26,
-        type: "border-copper",
-        size: "w-80 h-[32rem]",
-        y: "translate-y-10",
-        title: "Les Petits Écoliers",
-        year: "1949",
-    },
-    {
-        id: 27,
-        type: "border-copper",
-        size: "w-[24rem] h-[34rem]",
-        y: "-translate-y-20",
-        title: "Le Chat Sur Le Toit",
-        year: "1951",
-    },
-    {
-        id: 28,
-        type: "border-copper",
-        size: "w-[28rem] h-[38rem]",
-        y: "translate-y-16",
-        title: "Dimanche au Parc",
-        year: "1955",
-    },
-    {
-        id: 29,
-        type: "border-copper",
-        size: "w-64 h-[28rem]",
-        y: "-translate-y-12",
-        title: "Le Gardien de Nuit",
-        year: "1962",
-    },
-    {
-        id: 30,
-        type: "border-copper",
-        size: "w-72 h-[36rem]",
-        y: "translate-y-4",
-        title: "La Fin du Jour",
-        year: "1950",
-    },
-];
-
 function ArtworkGallery() {
+    const artworks = Route.useLoaderData();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -263,12 +23,9 @@ function ArtworkGallery() {
 
         const onWheel = (e: WheelEvent) => {
             if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-
             if (e.deltaY === 0) return;
-
             e.preventDefault();
-
-            el.scrollLeft += e.deltaY * 1;
+            el.scrollLeft += e.deltaY * 1.2;
         };
 
         el.addEventListener("wheel", onWheel, { passive: false });
@@ -317,29 +74,58 @@ function ArtworkGallery() {
 
             <div
                 ref={scrollContainerRef}
-                className="relative z-10 h-[80vh] flex items-center overflow-x-auto overflow-y-hidden no-scrollbar gap-16"
+                className="relative z-10 h-[85vh] flex items-center overflow-x-auto overflow-y-hidden no-scrollbar gap-20 px-24"
             >
-                {artworks.map((art) => {
-                    const isCopper = art.type === "border-copper";
-                    const borderColor = isCopper
-                        ? "bg-(--burnished-copper)"
-                        : "bg-(--deep-charcoal)";
+                {artworks.map((art, index) => {
+                    const borderColor = "bg-(--burnished-copper)";
                     const shadowColor = "shadow-(--burnished-copper)/50";
+                    const heightClasses = [
+                        "h-[35vh]",
+                        "h-[65vh]",
+                        "h-[45vh]",
+                        "h-[55vh]",
+                        "h-[30vh]",
+                        "h-[75vh]",
+                    ];
+                    const hClass = heightClasses[index % heightClasses.length];
+
+                    const alignClasses = [
+                        "self-start mt-12",
+                        "self-end mb-12",
+                        "self-center",
+                        "self-start mt-24",
+                        "self-end mb-24",
+                    ];
+                    const alignClass =
+                        alignClasses[index % alignClasses.length];
+
+                    const aspectClasses = [
+                        "aspect-square",
+                        "aspect-[4/5]",
+                        "aspect-[3/2]",
+                        "aspect-[2/3]",
+                        "aspect-video",
+                    ];
+                    const aspectClass =
+                        aspectClasses[index % aspectClasses.length];
 
                     return (
                         <motion.div
                             key={art.id}
-                            className={`shrink-0 ${art.size} ${art.y} transition-transform hover:scale-102 duration-500 cursor-pointer group`}
+                            className={`shrink-0 ${hClass} ${aspectClass} ${alignClass} transition-transform hover:scale-[1.05] duration-500 cursor-pointer group`}
                         >
                             <div
-                                className={`w-full h-full rounded-[4rem] p-3 ${borderColor} shadow-2xl ${shadowColor} relative overflow-hidden flex items-center justify-center`}
+                                className={`w-full h-full rounded-[3.5rem] p-3 ${borderColor} shadow-2xl ${shadowColor} relative overflow-hidden flex items-center justify-center`}
                             >
-                                <div className="w-full h-full rounded-[3.2rem] bg-(--deep-charcoal) overflow-hidden relative shadow-[inset_0_20px_40px_rgba(0,0,0,0.8)] border border-(--line)">
-                                    <div className="absolute inset-0 bg-(--deep-charcoal) flex items-center justify-center group-hover:scale-110 transition-transform duration-[2s] ease-out">
-                                        <div className="text-(--inset-glint)/5 text-9xl font-black">
-                                            {art.id}
-                                        </div>
+                                <div className="w-full h-full rounded-[2.8rem] bg-(--deep-charcoal) overflow-hidden relative shadow-[inset_0_20px_40px_rgba(0,0,0,0.8)] border border-(--line)">
+                                    <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-[2s] ease-out">
+                                        <img
+                                            src={art.image}
+                                            alt={art.title}
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
+
                                     <div className="absolute inset-0 bg-linear-to-t from-(--deep-charcoal)/90 via-(--deep-charcoal)/10 to-transparent pointer-events-none" />
 
                                     <div className="absolute bottom-10 left-8 right-8 pointer-events-none translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
@@ -351,24 +137,18 @@ function ArtworkGallery() {
                                         </p>
                                     </div>
                                 </div>
-
-                                <div className="absolute inset-0 rounded-[4rem] border border-(--inset-glint)/20 mix-blend-overlay pointer-events-none" />
+                                <div className="absolute inset-0 rounded-[3.5rem] border border-(--inset-glint)/20 mix-blend-overlay pointer-events-none" />
                             </div>
                         </motion.div>
                     );
                 })}
 
-                <div className="shrink-0 w-[10vw] h-full" />
+                <div className="shrink-0 w-[20vw] h-full" />
             </div>
 
             <style>{`
-                .no-scrollbar::-webkit-scrollbar {
-                    display: none;
-                }
-                .no-scrollbar {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
+                .no-scrollbar::-webkit-scrollbar { display: none; }
+                .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
         </>
     );

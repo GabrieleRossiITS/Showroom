@@ -19,6 +19,7 @@ export const Route = createRootRoute({
             {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1',
+                lang: 'it',
             },
             {
                 title: 'TanStack Start Starter',
@@ -51,7 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             </head>
             <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(196,132,100,0.24)] ">
                 <Header />
-                <main className='page-wrap px-6 md:px-12 pt-24 min-h-screen overflow-hidden'>
+                <main className='relative page-wrap pt-24 min-h-screen overflow-hidden'>
                     {children}
                 </main>
                 <Footer />

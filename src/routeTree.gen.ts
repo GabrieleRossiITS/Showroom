@@ -9,22 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ExpositionsRouteImport } from './routes/expositions'
-import { Route as ArtworksRouteImport } from './routes/artworks'
 import { Route as ArtistRouteImport } from './routes/artist'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ExhibitionsIndexRouteImport } from './routes/exhibitions/index'
+import { Route as ArtworksIndexRouteImport } from './routes/artworks/index'
+import { Route as ExhibitionsIdRouteImport } from './routes/exhibitions/$id'
+import { Route as ArtworksIdRouteImport } from './routes/artworks/$id'
 
-const ExpositionsRoute = ExpositionsRouteImport.update({
-  id: '/expositions',
-  path: '/expositions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArtworksRoute = ArtworksRouteImport.update({
-  id: '/artworks',
-  path: '/artworks',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ArtistRoute = ArtistRouteImport.update({
   id: '/artist',
   path: '/artist',
@@ -40,61 +32,97 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExhibitionsIndexRoute = ExhibitionsIndexRouteImport.update({
+  id: '/exhibitions/',
+  path: '/exhibitions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtworksIndexRoute = ArtworksIndexRouteImport.update({
+  id: '/artworks/',
+  path: '/artworks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExhibitionsIdRoute = ExhibitionsIdRouteImport.update({
+  id: '/exhibitions/$id',
+  path: '/exhibitions/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtworksIdRoute = ArtworksIdRouteImport.update({
+  id: '/artworks/$id',
+  path: '/artworks/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/artist': typeof ArtistRoute
-  '/artworks': typeof ArtworksRoute
-  '/expositions': typeof ExpositionsRoute
+  '/artworks/$id': typeof ArtworksIdRoute
+  '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/artworks/': typeof ArtworksIndexRoute
+  '/exhibitions/': typeof ExhibitionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/artist': typeof ArtistRoute
-  '/artworks': typeof ArtworksRoute
-  '/expositions': typeof ExpositionsRoute
+  '/artworks/$id': typeof ArtworksIdRoute
+  '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/artworks': typeof ArtworksIndexRoute
+  '/exhibitions': typeof ExhibitionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/artist': typeof ArtistRoute
-  '/artworks': typeof ArtworksRoute
-  '/expositions': typeof ExpositionsRoute
+  '/artworks/$id': typeof ArtworksIdRoute
+  '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/artworks/': typeof ArtworksIndexRoute
+  '/exhibitions/': typeof ExhibitionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/artist' | '/artworks' | '/expositions'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/artist'
+    | '/artworks/$id'
+    | '/exhibitions/$id'
+    | '/artworks/'
+    | '/exhibitions/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/artist' | '/artworks' | '/expositions'
-  id: '__root__' | '/' | '/about' | '/artist' | '/artworks' | '/expositions'
+  to:
+    | '/'
+    | '/about'
+    | '/artist'
+    | '/artworks/$id'
+    | '/exhibitions/$id'
+    | '/artworks'
+    | '/exhibitions'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/artist'
+    | '/artworks/$id'
+    | '/exhibitions/$id'
+    | '/artworks/'
+    | '/exhibitions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ArtistRoute: typeof ArtistRoute
-  ArtworksRoute: typeof ArtworksRoute
-  ExpositionsRoute: typeof ExpositionsRoute
+  ArtworksIdRoute: typeof ArtworksIdRoute
+  ExhibitionsIdRoute: typeof ExhibitionsIdRoute
+  ArtworksIndexRoute: typeof ArtworksIndexRoute
+  ExhibitionsIndexRoute: typeof ExhibitionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/expositions': {
-      id: '/expositions'
-      path: '/expositions'
-      fullPath: '/expositions'
-      preLoaderRoute: typeof ExpositionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/artworks': {
-      id: '/artworks'
-      path: '/artworks'
-      fullPath: '/artworks'
-      preLoaderRoute: typeof ArtworksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/artist': {
       id: '/artist'
       path: '/artist'
@@ -116,6 +144,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/exhibitions/': {
+      id: '/exhibitions/'
+      path: '/exhibitions'
+      fullPath: '/exhibitions/'
+      preLoaderRoute: typeof ExhibitionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artworks/': {
+      id: '/artworks/'
+      path: '/artworks'
+      fullPath: '/artworks/'
+      preLoaderRoute: typeof ArtworksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exhibitions/$id': {
+      id: '/exhibitions/$id'
+      path: '/exhibitions/$id'
+      fullPath: '/exhibitions/$id'
+      preLoaderRoute: typeof ExhibitionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artworks/$id': {
+      id: '/artworks/$id'
+      path: '/artworks/$id'
+      fullPath: '/artworks/$id'
+      preLoaderRoute: typeof ArtworksIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -123,8 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ArtistRoute: ArtistRoute,
-  ArtworksRoute: ArtworksRoute,
-  ExpositionsRoute: ExpositionsRoute,
+  ArtworksIdRoute: ArtworksIdRoute,
+  ExhibitionsIdRoute: ExhibitionsIdRoute,
+  ArtworksIndexRoute: ArtworksIndexRoute,
+  ExhibitionsIndexRoute: ExhibitionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -2,7 +2,10 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="bg-white/25 backdrop-blur-2xl border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.02)] fixed bottom-0 left-0 right-0 p-4 flex flex-row justify-around items-center z-50">
+        <footer
+            className="bg-white/25 backdrop-blur-2xl border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.02)] 
+                            fixed bottom-0 left-0 right-0 p-4 flex flex-row justify-around items-center z-50"
+        >
             <p className="text-sm">
                 &copy; {year}{" "}
                 <i>

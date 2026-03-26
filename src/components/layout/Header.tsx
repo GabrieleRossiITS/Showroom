@@ -8,7 +8,7 @@ export default function Header() {
     const navLinks = [
         { to: "/artworks", label: "Opere" },
         { to: "/artist", label: "Artista" },
-        { to: "/expositions", label: "Mostre" },
+        { to: "/exhibitions", label: "Mostre" },
         { to: "/about", label: "Contatti" },
     ];
 
@@ -25,7 +25,10 @@ export default function Header() {
                             text-(--deep-charcoal)
                             "
         >
-            <h1 className="text-md font-bold tracking-widest uppercase cursor-pointer" onClick={redirectHome}>
+            <h1
+                className="text-md font-bold tracking-widest uppercase cursor-pointer"
+                onClick={redirectHome}
+            >
                 Robert Doineau
             </h1>
             <nav>

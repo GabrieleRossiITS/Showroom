@@ -1,6 +1,7 @@
 import Button from "#/components/ui/Button";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/")({
     component: App,
@@ -10,6 +11,7 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
+    const { t } = useTranslation();
     return (
         <>
             <div className="flex flex-col h-full max-w-7xl m-auto">
@@ -23,9 +25,7 @@ function App() {
                         Robert Doisneau
                     </h1>
                     <p className="text-xl text-(--parisian-stone-dark) leading-relaxed mb-12">
-                        Pioniere della fotografia umanista, le sue immagini
-                        catturano la poesia della vita quotidiana nelle strade
-                        di Parigi.
+                        {t("home.subtitle")}
                     </p>
                     <div className="flex flex-wrap gap-6">
                         <Button
@@ -37,7 +37,7 @@ function App() {
                             size="lg"
                             className="px-8 font-medium shadow-lg hover:shadow-xl"
                         >
-                            Esplora le Opere
+                            {t("home.exploreArtworks")}
                         </Button>
                         <Button
                             onClick={() => {
@@ -48,7 +48,7 @@ function App() {
                             size="lg"
                             className="px-8 font-medium"
                         >
-                            Le Mostre
+                            {t("home.exhibitions")}
                         </Button>
                     </div>
                 </motion.div>

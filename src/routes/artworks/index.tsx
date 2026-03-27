@@ -47,7 +47,7 @@ function ArtworkGallery() {
     return (
         <>
             {/* Complex Animated Background */}
-            <div className="absolute inset-0 pointer-events-none z-0 bg-(--deep-charcoal) overflow-hidden">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none z-0 bg-(--deep-charcoal) overflow-hidden">
                 {/* Layer 1: Large Floating Copper Blob */}
                 <motion.div
                     animate={{
@@ -118,25 +118,33 @@ function ArtworkGallery() {
                         variant="ghost"
                         size="icon"
                         rounded="full"
+                        aria-label="Scroll left"
                         className="w-14 h-14 bg-(--parisian-stone)/10 hover:bg-(--parisian-stone)/30 border border-(--parisian-stone)/20 backdrop-blur-md text-(--vintage-sepia) pointer-events-auto"
                     >
-                        <ArrowLeft className="w-6 h-6" />
+                        <ArrowLeft className="w-6 h-6" aria-hidden="true" />
                     </Button>
                     <Button
                         onClick={() => scroll("right")}
                         variant="ghost"
                         size="icon"
                         rounded="full"
+                        aria-label="Scroll right"
                         className="w-14 h-14 bg-(--parisian-stone)/10 hover:bg-(--parisian-stone)/30 border border-(--parisian-stone)/20 backdrop-blur-md text-(--vintage-sepia) pointer-events-auto"
                     >
-                        <ArrowRight className="w-6 h-6" />
+                        <ArrowRight className="w-6 h-6" aria-hidden="true" />
                     </Button>
                 </div>
             </div>
 
-            <div
+            <section
+                aria-label="Artwork Gallery"
                 ref={scrollContainerRef}
-                className="relative z-10 h-[85vh] flex items-center overflow-x-auto overflow-y-hidden no-scrollbar gap-20 px-24"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === "ArrowLeft") scroll("left");
+                    if (e.key === "ArrowRight") scroll("right");
+                }}
+                className="relative z-10 h-[85vh] flex items-center overflow-x-auto overflow-y-hidden no-scrollbar gap-20 px-24 focus:outline-none"
             >
                 {artworks.map((art, index) => {
                     const borderColor = "bg-(--burnished-copper)";
@@ -172,9 +180,10 @@ function ArtworkGallery() {
                         aspectClasses[index % aspectClasses.length];
 
                     return (
-                        <motion.div
+                        <motion.button
                             key={art.id}
-                            className={`shrink-0 ${hClass} ${aspectClass} ${alignClass} transition-transform hover:scale-[1.05] duration-500 cursor-pointer group`}
+                            aria-label={`${art.title}, ${art.year}`}
+                            className={`shrink-0 ${hClass} ${aspectClass} ${alignClass} transition-transform hover:scale-[1.05] duration-500 cursor-pointer group text-left`}
                             onClick={() => {
                                 navigate({
                                     to: `/artworks/$id`,
@@ -212,12 +221,12 @@ function ArtworkGallery() {
                                 </div>
                                 <div className="absolute inset-0 rounded-[3.5rem] border border-(--inset-glint)/20 mix-blend-overlay pointer-events-none" />
                             </div>
-                        </motion.div>
+                        </motion.button>
                     );
                 })}
 
-                <div className="shrink-0 w-[20vw] h-full" />
-            </div>
+                <div className="shrink-0 w-[20vw] h-full" aria-hidden="true" />
+            </section>
 
             <style>{`
                 .no-scrollbar::-webkit-scrollbar { display: none; }

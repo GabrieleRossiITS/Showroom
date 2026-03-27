@@ -1,0 +1,77 @@
+{
+    "nav": {
+        "artworks": "Works",
+        "artist": "Artist",
+        "exhibitions": "Exhibitions",
+        "about": "Contacts"
+    },
+    "footer": {
+        "rights": "All rights reserved.",
+        "githubLabel": "Go to GitHub repository"
+    },
+    "home": {
+        "subtitle": "Pioneer of humanist photography, his images capture the poetry of everyday life on the streets of Paris.",
+        "exploreArtworks": "Explore the Works",
+        "exhibitions": "Exhibitions"
+    },
+    "about": {
+        "title": "The minds behind the project",
+        "info": "Information",
+        "schoolProject": "School Project",
+        "schoolProjectValue": "Exhibition on Robert Doisneau",
+        "devTeam": "Development Team",
+        "composedBy": "Composed of:"
+    },
+    "artist": {
+        "backHome": "Back to Home",
+        "interactiveTitle": "The Interactive Lens",
+        "interactiveDesc": "In this section, an interactive 3D model of the camera and the artist's workspace will be integrated.",
+        "bioSummary": "Biography summary",
+        "life": "Life",
+        "lifeValue": "1912 - 1994 (Gentilly, France)",
+        "nationality": "Nationality",
+        "nationalityValue": "French",
+        "movement": "Movement",
+        "movementValue": "Humanist photography",
+        "famousWork": "Most famous work",
+        "famousWorkValue": "Le Baiser de l'Hôtel de Ville (1950)",
+        "techDetails": "Technical Details",
+        "activity": "Activity",
+        "style": "Style",
+        "styleValue": "Humanist",
+        "subject": "Subject",
+        "subjectValue": "Paris, Everyday Life",
+        "humanistTag": "The Humanist of the Street",
+        "quote": "\"What I was trying to show was a world where I would feel good, where people would be kind, where I would find the tenderness I hoped to receive.\"",
+        "originsTitle": "Origins",
+        "originsP1": "Born in 1912 in Gentilly, Doisneau grew up in a petty-bourgeois environment that deeply marked his vision of the world. Orphaned at a young age, he found refuge in drawing.",
+        "originsP2": "His shyness led him to photograph objects first, then pebbles, and only later people, capturing \"the sought-after moment\".",
+        "renaultTitle": "Renault",
+        "renaultP1": "In 1934 he began working as an industrial photographer for Renault. This experience was fundamental for technical discipline.",
+        "renaultP2": "He was fired in 1939, an event he described as the beginning of his true freedom on the streets of Paris.",
+        "resistanceTitle": "Resistance and Liberation",
+        "resistanceP1": "During the occupation, Doisneau put his engraving skills at the service of the Resistance, forging identity documents to help the persecuted.",
+        "resistanceP2": "In 1944 he immortalized the Liberation of Paris, celebrating the rebirth of joy and stolen kisses among the barricades.",
+        "philosophyTitle": "The Philosophy of the Imperfect",
+        "graceTitle": "The Moment of Grace",
+        "graceDesc": "Doisneau sought the instant when the ordinary becomes extraordinary through a gesture, a glance, or a funny coincidence. He favoured the suburbs, the bistros, the children chased from their games.",
+        "iconTitle": "The Icon: Le Baiser",
+        "iconDesc": "Taken in 1950, this image is the global manifesto of romanticism. \"The truth of a photo lies not in the way it was taken, but in the feeling it evokes.\"",
+        "legacyTitle": "Spiritual Legacy",
+        "legacyP1": "Robert Doisneau left an archive of approximately 450,000 negatives, a goldmine of collective memory. He received the highest honours, including the Prix Niépce in 1956 and the Legion of Honour in 1984.",
+        "legacyP2": "Today his work continues to be displayed in the world's greatest museums, reminding us that beauty need not be sought far away, but hides just around the corner."
+    },
+    "artworkDetail": {
+        "backGallery": "Back to Gallery",
+        "originalWork": "Original Work",
+        "description": "Description",
+        "support": "Support",
+        "archive": "Archive"
+    },
+    "exhibitions": {
+        "title": "Exhibitions",
+        "ongoing": "Ongoing",
+        "past": "Past",
+        "upcoming": "Upcoming"
+    }
+}

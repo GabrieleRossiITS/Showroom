@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/about")({
     component: About,
@@ -9,6 +10,8 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="fixed inset-0 pointer-events-none z-0 bg-(--vintage-sepia)" />
@@ -21,33 +24,33 @@ function About() {
                     className="max-w-4xl"
                 >
                     <h1 className="text-4xl md:text-6xl font-black text-(--deep-charcoal) mb-12 font-serif drop-shadow-sm">
-                        Le menti dietro al progetto
+                        {t("about.title")}
                     </h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div>
                             <h2 className="text-2xl font-bold text-(--burnished-copper-deep) mb-6">
-                                Informazioni
+                                {t("about.info")}
                             </h2>
                             <div className="space-y-6">
                                 <div>
                                     <p className="text-sm font-mono text-(--parisian-stone-dark) uppercase tracking-widest mb-1">
-                                        Progetto Scolastico
+                                        {t("about.schoolProject")}
                                     </p>
                                     <p className="text-xl text-(--deep-charcoal) font-medium">
-                                        Mostra su Robert Doisneau
+                                        {t("about.schoolProjectValue")}
                                     </p>
                                 </div>
                                 <div>
                                     <p className="text-sm font-mono text-(--parisian-stone-dark) uppercase tracking-widest mb-1">
-                                        Team di Sviluppo
+                                        {t("about.devTeam")}
                                     </p>
                                     <p className="text-xl text-(--deep-charcoal) font-medium">
-                                        Femoboys
+                                        Femboys
                                         <div className="my-2 pl-4">
-                                            <h5 className="text-sm font-mono text-(--parisian-stone-dark) uppercase tracking-widest">
-                                                Composto da:
-                                            </h5>
+                                            <h3 className="text-sm font-mono text-(--parisian-stone-dark) uppercase tracking-widest">
+                                                {t("about.composedBy")}
+                                            </h3>
                                             Gabriele Rossi, Navpreet Singh,
                                             Lorenzo Veneruzzo e Ruben Ranchiuc
                                         </div>

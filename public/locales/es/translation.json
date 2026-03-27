@@ -1,0 +1,77 @@
+{
+    "nav": {
+        "artworks": "Obras",
+        "artist": "Artista",
+        "exhibitions": "Exposiciones",
+        "about": "Contactos"
+    },
+    "footer": {
+        "rights": "Todos los derechos reservados.",
+        "githubLabel": "Ir al repositorio de GitHub"
+    },
+    "home": {
+        "subtitle": "Pionero de la fotografía humanista, sus imágenes capturan la poesía de la vida cotidiana en las calles de París.",
+        "exploreArtworks": "Explorar las Obras",
+        "exhibitions": "Las Exposiciones"
+    },
+    "about": {
+        "title": "Las mentes detrás del proyecto",
+        "info": "Información",
+        "schoolProject": "Proyecto Escolar",
+        "schoolProjectValue": "Exposición sobre Robert Doisneau",
+        "devTeam": "Equipo de Desarrollo",
+        "composedBy": "Compuesto por:"
+    },
+    "artist": {
+        "backHome": "Volver al Inicio",
+        "interactiveTitle": "El Objetivo Interactivo",
+        "interactiveDesc": "En esta sección se integrará un modelo 3D interactivo de la cámara y del espacio de trabajo del artista.",
+        "bioSummary": "Resumen biográfico",
+        "life": "Vida",
+        "lifeValue": "1912 - 1994 (Gentilly, Francia)",
+        "nationality": "Nacionalidad",
+        "nationalityValue": "Francesa",
+        "movement": "Movimiento",
+        "movementValue": "Fotografía humanista",
+        "famousWork": "Obra más célebre",
+        "famousWorkValue": "Le Baiser de l'Hôtel de Ville (1950)",
+        "techDetails": "Detalles Técnicos",
+        "activity": "Actividad",
+        "style": "Estilo",
+        "styleValue": "Humanista",
+        "subject": "Sujeto",
+        "subjectValue": "París, Vida Cotidiana",
+        "humanistTag": "El Humanista de la Calle",
+        "quote": "\"Lo que intentaba mostrar era un mundo donde me sintiera bien, donde la gente fuera amable, donde encontrara la ternura que esperaba recibir.\"",
+        "originsTitle": "Orígenes",
+        "originsP1": "Nacido en 1912 en Gentilly, Doisneau creció en un entorno pequeñoburgués que marcó profundamente su visión del mundo. Huérfano a temprana edad, encontró refugio en el dibujo.",
+        "originsP2": "Su timidez le llevó a fotografiar primero objetos, luego guijarros, y solo más tarde personas, capturando \"el instante buscado\".",
+        "renaultTitle": "Renault",
+        "renaultP1": "En 1934 comenzó a trabajar como fotógrafo industrial para Renault. Esta experiencia fue fundamental para la disciplina técnica.",
+        "renaultP2": "Fue despedido en 1939, un evento que describió como el comienzo de su verdadera libertad en las calles de París.",
+        "resistanceTitle": "Resistencia y Liberación",
+        "resistanceP1": "Durante la ocupación, Doisneau puso sus habilidades de grabador al servicio de la Resistencia, falsificando documentos de identidad para ayudar a los perseguidos.",
+        "resistanceP2": "En 1944 inmortalizó la Liberación de París, celebrando el renacimiento de la alegría y los besos robados entre las barricadas.",
+        "philosophyTitle": "La Filosofía de lo Imperfecto",
+        "graceTitle": "El Momento de Gracia",
+        "graceDesc": "Doisneau buscaba el instante en que lo ordinario se vuelve extraordinario gracias a un gesto, una mirada o una coincidencia divertida. Prefería los suburbios, los bistrós, los niños ahuyentados de sus juegos.",
+        "iconTitle": "El Icono: Le Baiser",
+        "iconDesc": "Tomada en 1950, esta imagen es el manifiesto mundial del romanticismo. \"La verdad de una foto no reside en cómo fue tomada, sino en el sentimiento que evoca.\"",
+        "legacyTitle": "Legado Espiritual",
+        "legacyP1": "Robert Doisneau dejó un archivo de aproximadamente 450.000 negativos, una mina de oro de memoria colectiva. Recibió los más altos honores, incluido el Premio Niépce en 1956 y la Legión de Honor en 1984.",
+        "legacyP2": "Hoy su obra sigue exponiéndose en los museos más grandes del mundo, recordándonos que la belleza no debe buscarse lejos, sino que se esconde a la vuelta de la esquina."
+    },
+    "artworkDetail": {
+        "backGallery": "Volver a la Galería",
+        "originalWork": "Obra Original",
+        "description": "Descripción",
+        "support": "Soporte",
+        "archive": "Archivo"
+    },
+    "exhibitions": {
+        "title": "Exposiciones",
+        "ongoing": "En Curso",
+        "past": "Finalizada",
+        "upcoming": "Próximamente"
+    }
+}

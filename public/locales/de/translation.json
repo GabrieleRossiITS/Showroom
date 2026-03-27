@@ -1,0 +1,77 @@
+{
+    "nav": {
+        "artworks": "Werke",
+        "artist": "Künstler",
+        "exhibitions": "Ausstellungen",
+        "about": "Kontakte"
+    },
+    "footer": {
+        "rights": "Alle Rechte vorbehalten.",
+        "githubLabel": "Zum GitHub-Repository"
+    },
+    "home": {
+        "subtitle": "Als Pionier der humanistischen Fotografie fangen seine Bilder die Poesie des Alltags in den Straßen von Paris ein.",
+        "exploreArtworks": "Werke entdecken",
+        "exhibitions": "Die Ausstellungen"
+    },
+    "about": {
+        "title": "Die Köpfe hinter dem Projekt",
+        "info": "Informationen",
+        "schoolProject": "Schulprojekt",
+        "schoolProjectValue": "Ausstellung über Robert Doisneau",
+        "devTeam": "Entwicklungsteam",
+        "composedBy": "Bestehend aus:"
+    },
+    "artist": {
+        "backHome": "Zurück zur Startseite",
+        "interactiveTitle": "Das interaktive Objektiv",
+        "interactiveDesc": "In diesem Abschnitt wird ein interaktives 3D-Modell der Kamera und des Arbeitsbereichs des Künstlers integriert.",
+        "bioSummary": "Zusammenfassung der Biografie",
+        "life": "Leben",
+        "lifeValue": "1912 - 1994 (Gentilly, Frankreich)",
+        "nationality": "Nationalität",
+        "nationalityValue": "Französisch",
+        "movement": "Bewegung",
+        "movementValue": "Humanistische Fotografie",
+        "famousWork": "Berühmtestes Werk",
+        "famousWorkValue": "Le Baiser de l'Hôtel de Ville (1950)",
+        "techDetails": "Technische Details",
+        "activity": "Aktivität",
+        "style": "Stil",
+        "styleValue": "Humanistisch",
+        "subject": "Motiv",
+        "subjectValue": "Paris, Alltag",
+        "humanistTag": "Der Humanist der Straße",
+        "quote": "\"Was ich zu zeigen versuchte, war eine Welt, in der ich mich wohlgefühlt hätte, in der die Menschen freundlich gewesen wären, in der ich die Zärtlichkeit gefunden hätte, die ich zu empfangen hoffte.\"",
+        "originsTitle": "Ursprünge",
+        "originsP1": "Der 1912 in Gentilly geborene Doisneau wuchs in einem kleinbürgerlichen Umfeld auf, das seine Weltanschauung tief prägte. Früh verwaist, fand er Zuflucht im Zeichnen.",
+        "originsP2": "Seine Schüchternheit veranlasste ihn, zuerst Gegenstände, dann Kieselsteine und erst später Menschen zu fotografieren und so \"den gesuchten Moment\" einzufangen.",
+        "renaultTitle": "Renault",
+        "renaultP1": "1934 begann er als Industriefotograf für Renault zu arbeiten. Diese Erfahrung war grundlegend für seine technische Disziplin.",
+        "renaultP2": "1939 wurde er entlassen, ein Ereignis, das er als den Beginn seiner wahren Freiheit auf den Straßen von Paris beschrieb.",
+        "resistanceTitle": "Widerstand und Befreiung",
+        "resistanceP1": "Während der Besatzung stellte Doisneau seine Fähigkeiten als Graveur in den Dienst der Résistance und fälschte Ausweispapiere, um Verfolgten zu helfen.",
+        "resistanceP2": "1944 verewigte er die Befreiung von Paris und feierte die Wiedergeburt der Freude und die gestohlenen Küsse auf den Barrikaden.",
+        "philosophyTitle": "Die Philosophie des Unvollkommenen",
+        "graceTitle": "Der Moment der Gnade",
+        "graceDesc": "Doisneau suchte den Moment, in dem das Gewöhnliche durch eine Geste, einen Blick oder einen lustigen Zufall zum Außergewöhnlichen wird. Er bevorzugte die Vororte, die Bistros, die von ihren Spielen verjagten Kinder.",
+        "iconTitle": "Die Ikone: Le Baiser",
+        "iconDesc": "Dieses 1950 aufgenommene Bild ist das weltweite Manifest der Romantik. \"Die Wahrheit eines Fotos liegt nicht darin, wie es aufgenommen wurde, sondern in dem Gefühl, das es hervorruft.\"",
+        "legacyTitle": "Spirituelles Erbe",
+        "legacyP1": "Robert Doisneau hinterließ ein Archiv von rund 450.000 Negativen, eine Goldmine des kollektiven Gedächtnisses. Er erhielt höchste Auszeichnungen, darunter 1956 den Prix Niépce und 1984 die Ehrenlegion.",
+        "legacyP2": "Heute wird sein Werk weiterhin in den größten Museen der Welt ausgestellt und erinnert uns daran, dass die Schönheit nicht in der Ferne gesucht werden muss, sondern sich gleich um die Ecke verbirgt."
+    },
+    "artworkDetail": {
+        "backGallery": "Zurück zur Galerie",
+        "originalWork": "Originalwerk",
+        "description": "Beschreibung",
+        "support": "Trägermaterial",
+        "archive": "Archiv"
+    },
+    "exhibitions": {
+        "title": "Ausstellungen",
+        "ongoing": "Laufend",
+        "past": "Vergangen",
+        "upcoming": "Demnächst"
+    }
+}

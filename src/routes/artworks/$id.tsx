@@ -1,8 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2, ZoomIn, Info } from "lucide-react";
+import { ArrowLeft, Info } from "lucide-react";
 import Button from "#/components/ui/Button";
 import { getArtworkById } from "public/api/fetchers";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/artworks/$id")({
     loader: async ({ params }) => {
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/artworks/$id")({
 function ArtworkDetail() {
     const artwork = Route.useLoaderData();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
@@ -53,7 +55,7 @@ function ArtworkDetail() {
                         className="group gap-2 text-(--parisian-stone-dark) hover:text-(--deep-charcoal) bg-white/20 backdrop-blur-md border border-white/40 rounded-full px-6"
                     >
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        Torna alla Galleria
+                        {t("artworkDetail.backGallery")}
                     </Button>
                 </motion.div>
 
@@ -88,7 +90,7 @@ function ArtworkDetail() {
                         <motion.div {...fadeIn}>
                             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) text-[10px] font-bold uppercase tracking-[0.2em] mb-6 border border-(--burnished-copper)/20">
                                 <Info className="w-3 h-3" />
-                                Opera Originale
+                                {t("artworkDetail.originalWork")}
                             </div>
 
                             <h1 className="text-5xl md:text-7xl font-serif font-bold text-(--deep-charcoal) mb-4 leading-[1.1] tracking-tight italic">
@@ -110,7 +112,7 @@ function ArtworkDetail() {
                         >
                             <div className="bg-white/40 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/60 shadow-sm">
                                 <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-(--parisian-stone) mb-4">
-                                    Descrizione
+                                    {t("artworkDetail.description")}
                                 </h3>
                                 <p className="text-(--parisian-stone-dark) leading-relaxed text-lg font-serif">
                                     {artwork.description}
@@ -119,7 +121,7 @@ function ArtworkDetail() {
 
                             <div className="bg-(--vintage-sepia-light) p-6 rounded-4xl border border-(--line)">
                                 <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] text-(--parisian-stone) mb-2">
-                                    Supporto
+                                    {t("artworkDetail.support")}
                                 </h4>
                                 <p className="font-serif text-(--deep-charcoal) text-lg">
                                     {artwork.support}

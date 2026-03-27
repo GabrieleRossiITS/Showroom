@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { getExhibitions } from "public/api/fetchers";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/exhibitions/")({
     loader: () => getExhibitions(),
@@ -13,6 +14,7 @@ export const Route = createFileRoute("/exhibitions/")({
 
 function Expositions() {
     const exhibitions = Route.useLoaderData();
+    const { t } = useTranslation();
     return (
         <>
             <div className="fixed inset-0 pointer-events-none z-0 bg-(--vintage-sepia)" />
@@ -24,7 +26,7 @@ function Expositions() {
                     transition={{ duration: 0.8 }}
                 >
                     <h1 className="text-5xl md:text-7xl font-black text-(--deep-charcoal) mb-16 font-serif drop-shadow-sm">
-                        Mostre
+                        {t("exhibitions.title")}
                     </h1>
 
                     <div className="space-y-6">
@@ -65,7 +67,7 @@ function Expositions() {
                                                     : "bg-(--vintage-sepia)/10 text-(--vintage-sepia)/60"
                                             }`}
                                         >
-                                            {exp.status}
+                                            {t(`exhibitions.${exp.status}`)}
                                         </span>
                                     </div>
                                 </div>

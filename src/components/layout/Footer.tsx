@@ -1,7 +1,9 @@
 import { FaGithub } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
     const year = new Date().getFullYear();
+    const { t } = useTranslation();
 
     return (
         <footer
@@ -21,7 +23,7 @@ export default function Footer() {
                     Gabriele Rossi, Navpreet Singh, Lorenzo Veneruzzo, Ruben
                     Ranghiuc.
                 </span>{" "}
-                <span className="opacity-70">All rights reserved.</span>
+                <span className="opacity-70">{t("footer.rights")}</span>
             </p>
 
             <a
@@ -29,7 +31,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="text-(--vintage-sepia) transition-colors duration-300 hover:text-(--burnished-copper)"
-                aria-label="Vai alla repository GitHub"
+                aria-label={t("footer.githubLabel")}
                 title="GitHub"
             >
                 <FaGithub className="w-6 h-6" />

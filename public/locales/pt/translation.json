@@ -1,0 +1,77 @@
+{
+    "nav": {
+        "artworks": "Obras",
+        "artist": "Artista",
+        "exhibitions": "Exposições",
+        "about": "Contatos"
+    },
+    "footer": {
+        "rights": "Todos os direitos reservados.",
+        "githubLabel": "Ir para o repositório GitHub"
+    },
+    "home": {
+        "subtitle": "Pioneiro da fotografia humanista, suas imagens capturam a poesia da vida cotidiana nas ruas de Paris.",
+        "exploreArtworks": "Explorar as Obras",
+        "exhibitions": "As Exposições"
+    },
+    "about": {
+        "title": "As mentes por trás do projeto",
+        "info": "Informações",
+        "schoolProject": "Projeto Escolar",
+        "schoolProjectValue": "Exposição sobre Robert Doisneau",
+        "devTeam": "Equipe de Desenvolvimento",
+        "composedBy": "Composto por:"
+    },
+    "artist": {
+        "backHome": "Voltar ao Início",
+        "interactiveTitle": "A Lente Interativa",
+        "interactiveDesc": "Nesta seção, será integrado um modelo 3D interativo da câmera e do espaço de trabalho do artista.",
+        "bioSummary": "Resumo da biografia",
+        "life": "Vida",
+        "lifeValue": "1912 - 1994 (Gentilly, França)",
+        "nationality": "Nacionalidade",
+        "nationalityValue": "Francesa",
+        "movement": "Movimento",
+        "movementValue": "Fotografia humanista",
+        "famousWork": "Obra mais famosa",
+        "famousWorkValue": "Le Baiser de l'Hôtel de Ville (1950)",
+        "techDetails": "Detalhes Técnicos",
+        "activity": "Atividade",
+        "style": "Estilo",
+        "styleValue": "Humanista",
+        "subject": "Tema",
+        "subjectValue": "Paris, Vida Cotidiana",
+        "humanistTag": "O Humanista da Rua",
+        "quote": "\"O que eu tentava mostrar era um mundo onde eu me sentisse bem, onde as pessoas fossem gentis, onde eu encontrasse a ternura que esperava receber.\"",
+        "originsTitle": "Origens",
+        "originsP1": "Nascido em 1912 em Gentilly, Doisneau cresceu em um ambiente pequeno-burguês que marcou profundamente sua visão de mundo. Órfão em tenra idade, encontrou refúgio no desenho.",
+        "originsP2": "Sua timidez o levou a fotografar primeiro objetos, depois pedras e, só mais tarde, pessoas, capturando \"o instante procurado\".",
+        "renaultTitle": "Renault",
+        "renaultP1": "Em 1934, começou a trabalhar como fotógrafo industrial para a Renault. Essa experiência foi fundamental para sua disciplina técnica.",
+        "renaultP2": "Foi demitido em 1939, um evento que descreveu como o início de sua verdadeira liberdade nas ruas de Paris.",
+        "resistanceTitle": "Resistência e Libertação",
+        "resistanceP1": "Durante a ocupação, Doisneau colocou suas habilidades de gravador a serviço da Resistência, falsificando documentos de identidade para ajudar os perseguidos.",
+        "resistanceP2": "Em 1944, imortalizou a Libertação de Paris, celebrando o renascimento da alegria e os beijos roubados entre as barricadas.",
+        "philosophyTitle": "A Filosofia do Imperfeito",
+        "graceTitle": "O Momento de Graça",
+        "graceDesc": "Doisneau buscava o instante em que o comum se torna extraordinário por meio de um gesto, um olhar ou uma coincidência engraçada. Ele preferia os subúrbios, os bistrôs, as crianças expulsas de suas brincadeiras.",
+        "iconTitle": "O Ícone: Le Baiser",
+        "iconDesc": "Tirada em 1950, esta imagem é o manifesto global do romantismo. \"A verdade de uma foto não está na forma como foi tirada, mas no sentimento que evoca.\"",
+        "legacyTitle": "Legado Espiritual",
+        "legacyP1": "Robert Doisneau deixou um arquivo de aproximadamente 450.000 negativos, uma mina de ouro de memória coletiva. Recebeu as maiores honras, incluindo o Prêmio Niépce em 1956 e a Legião de Honra em 1984.",
+        "legacyP2": "Hoje, seu trabalho continua a ser exibido nos maiores museus do mundo, lembrando-nos de que a beleza não precisa ser procurada longe, mas se esconde logo ali na esquina."
+    },
+    "artworkDetail": {
+        "backGallery": "Voltar à Galeria",
+        "originalWork": "Obra Original",
+        "description": "Descrição",
+        "support": "Suporte",
+        "archive": "Arquivo"
+    },
+    "exhibitions": {
+        "title": "Exposições",
+        "ongoing": "Em Andamento",
+        "past": "Encerrada",
+        "upcoming": "Em Breve"
+    }
+}

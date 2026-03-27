@@ -3,6 +3,8 @@ export interface Artwork {
     title: string;
     year: number;
     image: string;
+    support: string;
+    description: string;
 }
 
 export interface Exhibition {

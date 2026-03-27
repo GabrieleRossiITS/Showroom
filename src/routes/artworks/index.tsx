@@ -1,9 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Button from "#/components/ui/Button";
 import { getArtworks } from "public/api/fetchers";
+import { createArtworkSlug } from "#/components/utlis";
 
 export const Route = createFileRoute("/artworks/")({
     loader: () => getArtworks(),
@@ -16,6 +17,8 @@ export const Route = createFileRoute("/artworks/")({
 function ArtworkGallery() {
     const artworks = Route.useLoaderData();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const el = scrollContainerRef.current;
@@ -113,6 +116,17 @@ function ArtworkGallery() {
                         <motion.div
                             key={art.id}
                             className={`shrink-0 ${hClass} ${aspectClass} ${alignClass} transition-transform hover:scale-[1.05] duration-500 cursor-pointer group`}
+                            onClick={() => {
+                                navigate({
+                                    to: `/artworks/$id`,
+                                    params: {
+                                        id: createArtworkSlug(
+                                            art.id,
+                                            art.title,
+                                        ),
+                                    },
+                                });
+                            }}
                         >
                             <div
                                 className={`w-full h-full rounded-[3.5rem] p-3 ${borderColor} shadow-2xl ${shadowColor} relative overflow-hidden flex items-center justify-center`}

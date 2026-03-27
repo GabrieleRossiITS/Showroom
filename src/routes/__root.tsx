@@ -50,7 +50,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <head>
                 <HeadContent />
             </head>
-            <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(196,132,100,0.24)] ">
+            <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(161,86,48,0.24)] ">
                 <Header />
                 <main className="relative page-wrap pt-24 min-h-screen overflow-hidden">
                     {children}

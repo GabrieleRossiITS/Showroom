@@ -17,7 +17,7 @@ function Expositions() {
         <>
             <div className="fixed inset-0 pointer-events-none z-0 bg-(--vintage-sepia)" />
 
-            <div className="relative z-10 flex flex-col min-h-screen px-6 md:px-12 pt-32 pb-16 max-w-5xl mx-auto">
+            <div className="relative z-10 flex flex-col px-6 md:px-12 pt-32 pb-16 max-w-5xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

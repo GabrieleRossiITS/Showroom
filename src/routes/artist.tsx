@@ -90,19 +90,38 @@ function Artist() {
                                 Riassunto biografia
                             </h4>
                             <div className="space-y-4 text-sm font-medium">
-                                <div className="flex justify-between border-b border-white/10 pb-2">
-                                    <span className="opacity-60">Attività</span>
-                                    <span>1912 - 1994 (Gentilly, Francia)</span>
+                                <div className="flex justify-between border-b border-white/10 pb-2 gap-4">
+                                    <span className="opacity-60 shrink-0">
+                                        Vita
+                                    </span>
+                                    <span className="text-right">
+                                        1912 - 1994 (Gentilly, Francia)
+                                    </span>
                                 </div>
-                                <div className="flex justify-between border-b border-white/10 pb-2">
-                                    <span className="opacity-60">
+
+                                <div className="flex justify-between border-b border-white/10 pb-2 gap-4">
+                                    <span className="opacity-60 shrink-0">
                                         Nazionalità
                                     </span>
-                                    <span>Francese</span>
+                                    <span className="text-right">Francese</span>
                                 </div>
-                                <div className="flex justify-between">
-                                    <span className="opacity-60"></span>
-                                    <span></span>
+
+                                <div className="flex justify-between border-b border-white/10 pb-2 gap-4">
+                                    <span className="opacity-60 shrink-0">
+                                        Movimento
+                                    </span>
+                                    <span className="text-right">
+                                        Fotografia umanista
+                                    </span>
+                                </div>
+
+                                <div className="flex justify-between gap-4">
+                                    <span className="opacity-60 shrink-0">
+                                        Opera più celebre
+                                    </span>
+                                    <span className="text-right">
+                                        Le Baiser de l'Hôtel de Ville (1950)
+                                    </span>
                                 </div>
                             </div>
                         </motion.div>

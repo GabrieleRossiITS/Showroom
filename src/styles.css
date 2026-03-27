@@ -172,19 +172,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-    color: var(--burnished-copper-deep);
-    text-decoration-color: rgba(196, 132, 100, 0.4);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--burnished-copper);
-}
-
 @keyframes rise-in {
     from {
         opacity: 0;

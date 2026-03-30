@@ -26,7 +26,7 @@ function Artist() {
 
     return (
         <main className="page-wrap px-6 md:px-12 relative min-h-screen pb-32">
-            {/* Ambient Background Elements */}
+
             <div aria-hidden="true" className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-(--burnished-copper)/5 blur-[120px] pointer-events-none z-0" />
             <div aria-hidden="true" className="fixed bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-(--parisian-stone)/5 blur-[120px] pointer-events-none z-0" />
 
@@ -44,7 +44,7 @@ function Artist() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_2fr] gap-12 lg:gap-20 items-start">
-                    {/* Left Column: 3D Workspace / Portrait Placeholder */}
+
                     <div className="lg:sticky lg:top-32 space-y-8">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
@@ -52,7 +52,7 @@ function Artist() {
                             transition={{ duration: 1 }}
                             className="relative group aspect-square lg:aspect-4/5 w-full rounded-[3rem] bg-(--vintage-sepia-light)/40 backdrop-blur-3xl border border-(--line) shadow-2xl overflow-hidden flex flex-col items-center justify-center p-8 text-center"
                         >
-                            {/* Inner Glow/Glint effect */}
+
                             <div className="absolute inset-0 rounded-[3rem] border border-white/40 pointer-events-none mix-blend-overlay" aria-hidden="true" />
 
                             <div className="relative w-48 h-48 mb-12" aria-hidden="true">
@@ -154,7 +154,6 @@ function Artist() {
                         </motion.div>
                     </div>
 
-                    {/* Right Column: Content Sections */}
                     <div className="space-y-12 lg:space-y-20">
                         <motion.section
                             initial={{ opacity: 0, x: 20 }}
@@ -253,9 +252,9 @@ function Artist() {
 
                         <motion.section
                             {...fadeIn}
-                            className="relative rounded-[4rem] overflow-hidden group shadow-2xl"
+                            className="backdrop-blur-2xl rounded-[4rem] overflow-hidden group shadow-2xl"
                         >
-                            <div className="absolute inset-0 bg-(--burnished-copper) p-1 pr-1.5 pb-1.5 rounded-[4rem]">
+                            <div className="inset-0 bg-(--burnished-copper) p-1 pr-1.5 pb-1.5 rounded-[4rem]">
                                 <div className="w-full h-full bg-white/10 backdrop-blur-3xl rounded-[3.8rem] p-12 md:p-20">
                                     <h2 className="text-4xl font-serif font-bold text-(--deep-charcoal) mb-8">
                                         {t("artist.iconTitle")}
@@ -273,7 +272,7 @@ function Artist() {
 
                         <motion.section
                             {...fadeIn}
-                            className="p-10 md:p-14 bg-white/30 backdrop-blur-2xl border border-white/50 rounded-[4rem] shadow-sm mb-20"
+                            className="p-10 md:p-14 bg-white/30 backdrop-blur-2xl border border-white/50 rounded-[4rem] shadow-sm"
                         >
                             <h2 className="text-4xl md:text-5xl font-serif font-bold text-(--deep-charcoal) mb-8">
                                 {t("artist.legacyTitle")}

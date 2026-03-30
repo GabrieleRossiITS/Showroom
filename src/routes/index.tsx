@@ -1,3 +1,4 @@
+import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -5,6 +6,8 @@ import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/")({
     component: App,
+    pendingComponent: GlobalLoader,
+    pendingMs: 0,
     staticData: {
         title: "Robert Doisneau",
     },

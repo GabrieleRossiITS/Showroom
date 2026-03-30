@@ -5,8 +5,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Button from "#/components/ui/Button";
 import { getArtworks } from "public/api/fetchers";
 import { createArtworkSlug } from "#/components/utlis";
+import { GlobalLoader } from "#/components/GlobalLoader";
 
 export const Route = createFileRoute("/artworks/")({
+    pendingComponent: GlobalLoader,
+    pendingMs: 0,
     loader: () => getArtworks(),
     component: ArtworkGallery,
     staticData: {

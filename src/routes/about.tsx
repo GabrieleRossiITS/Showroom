@@ -1,9 +1,18 @@
+import { GlobalLoader } from "#/components/GlobalLoader";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/about")({
     component: About,
+
+    pendingComponent: GlobalLoader,
+    pendingMs: 0,
+
+    loader: async () => {
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+    },
+
     staticData: {
         title: "Contatti",
     },

@@ -3,9 +3,12 @@ import { motion } from "framer-motion";
 import Button from "#/components/ui/Button";
 import { MoveLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { GlobalLoader } from "#/components/GlobalLoader";
 
 export const Route = createFileRoute("/artist")({
     component: Artist,
+    pendingComponent: GlobalLoader,
+    pendingMs: 0,
     staticData: {
         title: "L'Artista - Robert Doisneau",
     },

@@ -8,7 +8,7 @@ i18n.use(HttpApi)
     .use(initReactI18next)
     .init({
         fallbackLng: "en",
-        debug: true, // ! FALSE IN PRODUZIONE
+        debug: false,
         backend: {
             loadPath: "/locales/{{lng}}/{{ns}}.json",
         },

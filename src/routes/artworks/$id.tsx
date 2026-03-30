@@ -4,8 +4,11 @@ import { ArrowLeft, Info } from "lucide-react";
 import Button from "#/components/ui/Button";
 import { getArtworkById } from "public/api/fetchers";
 import { useTranslation } from "react-i18next";
+import { GlobalLoader } from "#/components/GlobalLoader";
 
 export const Route = createFileRoute("/artworks/$id")({
+    pendingComponent: GlobalLoader,
+    pendingMs: 0,
     loader: async ({ params }) => {
         const artworkId = parseInt(params.id.split("-")[0], 10);
         return getArtworkById(artworkId);

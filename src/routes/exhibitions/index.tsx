@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { getExhibitions } from "public/api/fetchers";
 import { useTranslation } from "react-i18next";
+import { GlobalLoader } from "#/components/GlobalLoader";
 
 export const Route = createFileRoute("/exhibitions/")({
+    pendingComponent: GlobalLoader,
+    pendingMs: 0,
     loader: () => getExhibitions(),
     component: Expositions,
     staticData: {
@@ -61,11 +64,10 @@ function Expositions() {
                                     </div>
                                     <div className="shrink-0 flex self-start md:self-auto">
                                         <span
-                                            className={`px-5 py-2 rounded-full text-sm font-bold tracking-widest uppercase ${
-                                                exp.status === "ongoing"
+                                            className={`px-5 py-2 rounded-full text-sm font-bold tracking-widest uppercase ${exp.status === "ongoing"
                                                     ? "bg-(--burnished-copper) text-(--vintage-sepia)"
                                                     : "bg-(--vintage-sepia)/10 text-(--vintage-sepia)/60"
-                                            }`}
+                                                }`}
                                         >
                                             {t(`exhibitions.${exp.status}`)}
                                         </span>

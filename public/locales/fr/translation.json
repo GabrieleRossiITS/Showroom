@@ -16,12 +16,23 @@
         "exhibitions": "Les Expositions"
     },
     "about": {
-        "title": "Les esprits derrière le projet",
-        "info": "Informations",
-        "schoolProject": "Projet Scolaire",
-        "schoolProjectValue": "Exposition sur Robert Doisneau",
-        "devTeam": "Équipe de Développement",
-        "composedBy": "Composée de :"
+        "title": "L'Agence",
+        "agencyInfo": "Qui sommes-nous",
+        "missionTitle": "Notre Mission",
+        "missionValue": "Digitaliser l'art, préserver l'émotion.",
+        "hqTitle": "Siège",
+        "hqValue": "Milan / Paris",
+        "agencyDescription": "PyTech Exhibitions est une agence de pointe spécialisée dans la création et la gestion d'expositions d'art numérique interactives. Nous allions des compétences avancées en ingénierie logicielle à une profonde sensibilité curatoriale pour transformer les archives historiques et les collections physiques en expériences immersives accessibles dans le monde entier.",
+        "contactUs": "Collaborez avec nous",
+        "formName": "Nom ou Entreprise",
+        "formEmail": "Adresse E-mail",
+        "formSubject": "Motif du contact",
+        "subject1": "Demande d'organisation d'exposition",
+        "subject2": "Partenariat technique / Logiciel",
+        "subject3": "Informations générales",
+        "formMessage": "Comment pouvons-nous vous aider ?",
+        "formPlaceholder": "Écrivez ici les détails de votre projet...",
+        "formSubmit": "Envoyer la Demande"
     },
     "artist": {
         "backHome": "Retour à l'accueil",

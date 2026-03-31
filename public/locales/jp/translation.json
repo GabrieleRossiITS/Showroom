@@ -16,12 +16,23 @@
         "exhibitions": "展覧会"
     },
     "about": {
-        "title": "プロジェクトの背景",
-        "info": "情報",
-        "schoolProject": "学校プロジェクト",
-        "schoolProjectValue": "ロベール・ドアノー展",
-        "devTeam": "開発チーム",
-        "composedBy": "メンバー："
+        "title": "エージェンシー",
+        "agencyInfo": "私たちについて",
+        "missionTitle": "ミッション",
+        "missionValue": "アートをデジタル化し、感情を保存する。",
+        "hqTitle": "本社",
+        "hqValue": "ミラノ / パリ",
+        "agencyDescription": "PyTech Exhibitionsは、インタラクティブなデジタルアート展の企画・運営を専門とする最先端のエージェンシーです。高度なソフトウェアエンジニアリング技術と深いキュレーションの感性を融合させ、歴史的アーカイブや物理的なコレクションを、世界中でアクセス可能な没入型の体験へと変容させます。",
+        "contactUs": "協業のお問い合わせ",
+        "formName": "氏名または企業名",
+        "formEmail": "メールアドレス",
+        "formSubject": "お問い合わせ内容",
+        "subject1": "展示会企画のご依頼",
+        "subject2": "技術・ソフトウェアパートナーシップ",
+        "subject3": "一般的なお問い合わせ",
+        "formMessage": "どのようなご用件でしょうか？",
+        "formPlaceholder": "プロジェクトの詳細をこちらにご記入ください...",
+        "formSubmit": "送信する"
     },
     "artist": {
         "backHome": "ホームに戻る",

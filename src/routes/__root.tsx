@@ -8,7 +8,7 @@ import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 
 import appCss from "../styles.css?url";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import "../i18n";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "../components/GlobalLoader";
@@ -38,7 +38,7 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
     const matches = useMatches();
-    const { i18n } = useTranslation();
+    const { i18n } = useTranslation(undefined, { useSuspense: false });
 
     const currentMatch = matches[matches.length - 1];
     const pageTitle = currentMatch.staticData.title ?? "Robert Doisneau";
@@ -56,15 +56,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <HeadContent />
             </head>
             <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(161,86,48,0.24)] ">
-
-                <a href="#main-content" className="skip-link">
-                    {i18n.language === "it" ? "Passa al contenuto principale" : "Skip to main content"}
-                </a>
-                <Header />
-                <main id="main-content" className="relative page-wrap pt-24 min-h-screen overflow-hidden">
-                    {children}
-                </main>
-                <Footer />
+                <Suspense fallback={<GlobalLoader />}>
+                    <a href="#main-content" className="skip-link">
+                        {i18n.language === "it" ? "Passa al contenuto principale" : "Skip to main content"}
+                    </a>
+                    <Header />
+                    <main id="main-content" className="relative page-wrap pt-24 min-h-screen overflow-hidden">
+                        {children}
+                    </main>
+                    <Footer />
+                </Suspense>
                 <Scripts />
             </body>
         </html>

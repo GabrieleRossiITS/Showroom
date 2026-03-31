@@ -12,10 +12,11 @@ i18n.use(HttpApi)
         backend: {
             loadPath: "/locales/{{lng}}/{{ns}}.json",
         },
-
         interpolation: {
             escapeValue: false,
         },
+    }).catch((error) => {
+        console.error("i18n initialization failed", error);
     });
 
 export default i18n;

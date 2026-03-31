@@ -9,10 +9,6 @@ export const Route = createFileRoute("/about")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
 
-    loader: async () => {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-    },
-
     staticData: {
         title: "Contatti",
     },

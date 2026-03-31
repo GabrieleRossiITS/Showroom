@@ -10,29 +10,35 @@ export default function Footer() {
             className="
                 fixed bottom-0 left-0 right-0 
                 z-50 
-                py-4 px-10 md:px-14
-                bg-black/40 border-t border-white/10 
+                py-4 px-6 md:px-14
+                bg-black/60 border-t border-white/10 
                 backdrop-blur-md shadow-lg
                 flex flex-col md:flex-row justify-between items-center gap-4
                 text-(--vintage-sepia)
             "
         >
-            <p className="text-sm tracking-wide text-center md:text-left">
-                &copy; {year}{" "}
-                <span className="font-medium text-white/90">
-                    Gabriele Rossi, Navpreet Singh, Lorenzo Veneruzzo, Ruben
-                    Ranghiuc.
-                </span>{" "}
-                <span className="opacity-70">{t("footer.rights")}</span>
-            </p>
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <p className="text-sm tracking-wide">
+                    &copy; {year}{" "}
+                    <span className="font-semibold text-white/90">
+                        PyTech Exhibitions
+                    </span>
+                    . <span className="opacity-80">{t("footer.rights")}</span>
+                </p>
+
+                <p className="text-xs text-white mt-1 font-mono tracking-wider">
+                    Engineering & Digital Curation: G. Rossi, N. Singh, L.
+                    Veneruzzo, R. Ranghiuc
+                </p>
+            </div>
 
             <a
                 href="https://github.com/GabrieleRossiITS/Showroom"
                 target="_blank"
                 rel="noreferrer"
-                className="text-(--vintage-sepia) transition-colors duration-300 hover:text-(--burnished-copper)"
+                className="text-(--vintage-sepia) transition-colors duration-300 hover:text-(--burnished-copper) p-2"
                 aria-label={t("footer.githubLabel")}
-                title="GitHub"
+                title="GitHub Repository"
             >
                 <FaGithub className="w-6 h-6" />
             </a>

@@ -3,7 +3,8 @@
         "artworks": "作品",
         "artist": "アーティスト",
         "exhibitions": "展覧会",
-        "about": "お問い合わせ"
+        "about": "お問い合わせ",
+        "shop": "ショップ"
     },
     "footer": {
         "rights": "無断複写・転載を禁じます。",
@@ -73,5 +74,31 @@
         "ongoing": "開催中",
         "past": "終了",
         "upcoming": "近日開催"
+    },
+    "shop": {
+        "title": "スーベニアショップ",
+        "subtitle": "ヒューマニスト写真の作品をご自宅に。",
+        "buyNow": "今すぐ購入",
+        "all": "すべて",
+        "print": "プリント",
+        "book": "書籍",
+        "postcard": "ポストカード",
+        "accessory": "アクセサリー",
+        "success": "購入が完了しました！ご支援ありがとうございます。"
+    },
+    "exhibitionDetail": {
+        "back": "展覧会に戻る",
+        "bookingTitle": "チケットの予約",
+        "chooseTime": "時間帯を選択",
+        "ticketsLeft": "残りチケット",
+        "selectTier": "チケットの種類を選択",
+        "confirmBooking": "予約を確定",
+        "bookingSuccess": "予約が確定しました！ご来場をお待ちしております。",
+        "standard": "一般チケット",
+        "standardDesc": "展覧会へのフルアクセス。",
+        "reduced": "割引チケット",
+        "reducedDesc": "学生、シニア、および団体向け。",
+        "premium": "プレミアム（ガイド付き）",
+        "premiumDesc": "ガイドツアーと限定カタログが含まれています。"
     }
 }

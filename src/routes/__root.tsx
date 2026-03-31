@@ -12,6 +12,7 @@ import { Suspense, useEffect } from "react";
 import "../i18n";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "../components/GlobalLoader";
+import Breadcrumbs from "../components/layout/Breadcrumbs";
 
 export const Route = createRootRoute({
     head: () => ({
@@ -35,7 +36,6 @@ export const Route = createRootRoute({
     pendingMs: 50,
 });
 
-
 function RootDocument({ children }: { children: React.ReactNode }) {
     const matches = useMatches();
     const { i18n } = useTranslation(undefined, { useSuspense: false });
@@ -58,10 +58,20 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(161,86,48,0.24)] ">
                 <Suspense fallback={<GlobalLoader />}>
                     <a href="#main-content" className="skip-link">
-                        {i18n.language === "it" ? "Passa al contenuto principale" : "Skip to main content"}
+                        {i18n.language === "it"
+                            ? "Passa al contenuto principale"
+                            : "Skip to main content"}
                     </a>
                     <Header />
-                    <main id="main-content" className="relative page-wrap pt-24 min-h-screen overflow-hidden">
+                    <main
+                        id="main-content"
+                        className="relative page-wrap pt-24 min-h-screen overflow-hidden"
+                    >
+                        <div className="max-w-7xl mx-auto md:px-12 pt-8 absolute top-24 left-0 right-0 pointer-events-none">
+                            <div className="pointer-events-auto">
+                                <Breadcrumbs />
+                            </div>
+                        </div>
                         {children}
                     </main>
                     <Footer />

@@ -3,7 +3,8 @@
         "artworks": "Œuvres",
         "artist": "Artiste",
         "exhibitions": "Expositions",
-        "about": "Contacts"
+        "about": "Contacts",
+        "shop": "Boutique"
     },
     "footer": {
         "rights": "Tous droits réservés.",
@@ -73,5 +74,31 @@
         "ongoing": "En Cours",
         "past": "Terminée",
         "upcoming": "À Venir"
+    },
+    "shop": {
+        "title": "Boutique de Souvenirs",
+        "subtitle": "Ramenez chez vous un morceau de photographie humaniste.",
+        "buyNow": "Acheter Maintenant",
+        "all": "Tous",
+        "print": "Tirages",
+        "book": "Livres",
+        "postcard": "Cartes Postales",
+        "accessory": "Accessoires",
+        "success": "Achat terminé ! Merci pour votre soutien."
+    },
+    "exhibitionDetail": {
+        "back": "Retour aux Expositions",
+        "bookingTitle": "Réservez votre visite",
+        "chooseTime": "Choisissez un créneau horaire",
+        "ticketsLeft": "billets restants",
+        "selectTier": "Sélectionnez le type de billet",
+        "confirmBooking": "Confirmer la Réservation",
+        "bookingSuccess": "Réservation confirmée ! Nous vous attendons.",
+        "standard": "Entrée Standard",
+        "standardDesc": "Accès complet à l'exposition.",
+        "reduced": "Tarif Réduit",
+        "reducedDesc": "Étudiants, seniors et groupes.",
+        "premium": "Premium (Visite Guidée)",
+        "premiumDesc": "Comprend une visite guidée et le catalogue exclusif."
     }
 }

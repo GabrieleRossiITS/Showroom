@@ -3,45 +3,141 @@
         "id": 1,
         "title": "Henri Cartier-Bresson: L'istante decisivo",
         "location": "MUDEC - Museo delle Culture, Milano",
-        "coordinates": {
-            "lat": 45.4526,
-            "lng": 9.1614
-        },
+        "coordinates": { "lat": 45.4526, "lng": 9.1614 },
         "maps_url": "https://maps.app.goo.gl/MUDEC_Milano",
         "status": "past",
         "start_date": "2025-09-15",
         "end_date": "2026-01-28",
-        "description": "Una grande retrospettiva dedicata al maestro francese, fondatore dell'agenzia Magnum Photos. In esposizione oltre 100 stampe vintage che raccontano il suo incredibile viaggio attraverso il Novecento.",
-        "artworks_included": [1, 2, 5, 8]
+        "image": "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop",
+        "description": "Una grande retrospettiva dedicata al maestro francese, fondatore dell'agenzia Magnum Photos. Oltre 100 stampe vintage che raccontano il Novecento.",
+        "artworks_included": [1, 2, 5, 8],
+        "ticket_info": {
+            "tiers": [
+                { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 15, "descKey": "exhibitionDetail.standardDesc" },
+                { "id": "reduced", "nameKey": "exhibitionDetail.reduced", "price": 10, "descKey": "exhibitionDetail.reducedDesc" }
+            ],
+            "slots": [
+                { "time": "09:00", "ticketsLeft": 0 },
+                { "time": "11:00", "ticketsLeft": 0 },
+                { "time": "14:00", "ticketsLeft": 0 }
+            ]
+        }
     },
     {
         "id": 2,
         "title": "Sebastião Salgado: Amazônia",
         "location": "Fabbrica del Vapore, Milano",
-        "coordinates": {
-            "lat": 45.4844,
-            "lng": 9.1772
-        },
+        "coordinates": { "lat": 45.4844, "lng": 9.1772 },
         "maps_url": "https://maps.app.goo.gl/FabbricaVapore_Milano",
         "status": "ongoing",
         "start_date": "2026-02-10",
         "end_date": "2026-05-30",
-        "description": "Un'immersione visiva e sonora nella foresta amazzonica. Salgado documenta la bellezza della natura incontaminata e delle popolazioni indigene per sensibilizzare sulla crisi climatica.",
-        "artworks_included": [3, 4, 9, 12, 15]
+        "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop",
+        "description": "Un'immersione visiva e sonora nella foresta amazzonica. Salgado documenta la bellezza della natura e delle popolazioni indigene.",
+        "artworks_included": [3, 4, 9, 12, 15],
+        "ticket_info": {
+            "tiers": [
+                { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 18, "descKey": "exhibitionDetail.standardDesc" },
+                { "id": "reduced", "nameKey": "exhibitionDetail.reduced", "price": 12, "descKey": "exhibitionDetail.reducedDesc" },
+                { "id": "premium", "nameKey": "exhibitionDetail.premium", "price": 40, "descKey": "exhibitionDetail.premiumDesc" }
+            ],
+            "slots": [
+                { "time": "10:00", "ticketsLeft": 15 },
+                { "time": "12:00", "ticketsLeft": 8 },
+                { "time": "15:00", "ticketsLeft": 20 },
+                { "time": "17:00", "ticketsLeft": 5 }
+            ]
+        }
     },
     {
         "id": 3,
         "title": "Steve McCurry: Icons",
         "location": "Palazzo Reale, Milano",
-        "coordinates": {
-            "lat": 45.4633,
-            "lng": 9.191
-        },
+        "coordinates": { "lat": 45.4633, "lng": 9.191 },
         "maps_url": "https://maps.app.goo.gl/PalazzoReale_Milano",
         "status": "upcoming",
         "start_date": "2026-06-15",
         "end_date": "2026-10-10",
-        "description": "Le immagini più iconiche del celebre fotografo americano, inclusa la famosa 'Ragazza Afgana'. Un viaggio attraverso i colori dell'India, del Sud-est asiatico e del Medio Oriente.",
-        "artworks_included": [6, 7, 10, 11]
+        "image": "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?q=80&w=800&auto=format&fit=crop",
+        "description": "Le immagini più iconiche di McCurry, inclusa la 'Ragazza Afgana'. Un viaggio attraverso i colori dell'India e del Medio Oriente.",
+        "artworks_included": [6, 7, 10, 11],
+        "ticket_info": {
+            "tiers": [
+                { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 16, "descKey": "exhibitionDetail.standardDesc" },
+                { "id": "reduced", "nameKey": "exhibitionDetail.reduced", "price": 11, "descKey": "exhibitionDetail.reducedDesc" }
+            ],
+            "slots": [
+                { "time": "09:30", "ticketsLeft": 30 },
+                { "time": "11:30", "ticketsLeft": 30 },
+                { "time": "14:30", "ticketsLeft": 30 }
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "title": "Vivian Maier: Anthology",
+        "location": "Palazzo Reale, Milano",
+        "coordinates": { "lat": 45.4633, "lng": 9.191 },
+        "maps_url": "https://maps.app.goo.gl/PalazzoReale_Milano",
+        "status": "ongoing",
+        "start_date": "2026-03-01",
+        "end_date": "2026-06-20",
+        "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop",
+        "description": "Una scoperta straordinaria della street photography. Vivian Maier cattura la vita americana con uno sguardo onesto e misterioso.",
+        "artworks_included": [16, 17, 18],
+        "ticket_info": {
+            "tiers": [
+                { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 14, "descKey": "exhibitionDetail.standardDesc" },
+                { "id": "reduced", "nameKey": "exhibitionDetail.reduced", "price": 9, "descKey": "exhibitionDetail.reducedDesc" }
+            ],
+            "slots": [
+                { "time": "10:30", "ticketsLeft": 12 },
+                { "time": "13:30", "ticketsLeft": 4 },
+                { "time": "16:30", "ticketsLeft": 18 }
+            ]
+        }
+    },
+    {
+        "id": 5,
+        "title": "Richard Avedon: Relationships",
+        "location": "Palazzo Reale, Milano",
+        "coordinates": { "lat": 45.4633, "lng": 9.191 },
+        "maps_url": "https://maps.app.goo.gl/PalazzoReale_Milano",
+        "status": "upcoming",
+        "start_date": "2026-11-23",
+        "end_date": "2027-02-15",
+        "image": "https://images.unsplash.com/photo-1518998053502-53cc83e9ce78?q=80&w=800&auto=format&fit=crop",
+        "description": "Il ritratto come forma d'arte. Avedon esplora le connessioni umane attraverso soggetti celebri e persone comuni.",
+        "artworks_included": [19, 20],
+        "ticket_info": {
+            "tiers": [
+                { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 20, "descKey": "exhibitionDetail.standardDesc" },
+                { "id": "premium", "nameKey": "exhibitionDetail.premium", "price": 45, "descKey": "exhibitionDetail.premiumDesc" }
+            ],
+            "slots": [
+                { "time": "09:00", "ticketsLeft": 25 },
+                { "time": "12:00", "ticketsLeft": 25 },
+                { "time": "15:00", "ticketsLeft": 25 }
+            ]
+        }
+    },
+    {
+        "id": 6,
+        "title": "Elliott Erwitt: Personae",
+        "location": "Triennale Milano",
+        "coordinates": { "lat": 45.4744, "lng": 9.172 },
+        "maps_url": "https://maps.app.goo.gl/TriennaleMilano",
+        "status": "past",
+        "start_date": "2025-05-10",
+        "end_date": "2025-09-01",
+        "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop",
+        "description": "Ironia e malinconia si fondono negli scatti di Erwitt. Un'antologica che celebra il suo sguardo unico sul mondo.",
+        "artworks_included": [21, 22, 23],
+        "ticket_info": {
+            "tiers": [
+                { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 12, "descKey": "exhibitionDetail.standardDesc" }
+            ],
+            "slots": []
+        }
     }
 ]

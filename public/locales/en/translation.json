@@ -3,7 +3,8 @@
         "artworks": "Works",
         "artist": "Artist",
         "exhibitions": "Exhibitions",
-        "about": "Contacts"
+        "about": "Contacts",
+        "shop": "Shop"
     },
     "footer": {
         "rights": "All rights reserved.",
@@ -73,5 +74,31 @@
         "ongoing": "Ongoing",
         "past": "Past",
         "upcoming": "Upcoming"
+    },
+    "shop": {
+        "title": "Souvenir Shop",
+        "subtitle": "Bring a piece of humanist photography home.",
+        "buyNow": "Buy Now",
+        "all": "All",
+        "print": "Prints",
+        "book": "Books",
+        "postcard": "Postcards",
+        "accessory": "Accessories",
+        "success": "Purchase successful! Thank you for your support."
+    },
+    "exhibitionDetail": {
+        "back": "Back to Exhibitions",
+        "bookingTitle": "Book your visit",
+        "chooseTime": "Choose a time slot",
+        "ticketsLeft": "tickets left",
+        "selectTier": "Select ticket type",
+        "confirmBooking": "Confirm Booking",
+        "bookingSuccess": "Booking confirmed! We look forward to seeing you.",
+        "standard": "Standard Admission",
+        "standardDesc": "Full access to the exhibition.",
+        "reduced": "Reduced price",
+        "reducedDesc": "Students, seniors, and groups.",
+        "premium": "Premium (Guided)",
+        "premiumDesc": "Includes a guided tour and exclusive catalog."
     }
 }

@@ -1,0 +1,14 @@
+{
+    "tiers": [
+        { "id": "standard", "nameKey": "exhibitionDetail.standard", "price": 15, "descKey": "exhibitionDetail.standardDesc" },
+        { "id": "reduced", "nameKey": "exhibitionDetail.reduced", "price": 10, "descKey": "exhibitionDetail.reducedDesc" },
+        { "id": "premium", "nameKey": "exhibitionDetail.premium", "price": 35, "descKey": "exhibitionDetail.premiumDesc" }
+    ],
+    "slots": [
+        { "time": "09:00", "ticketsLeft": 12 },
+        { "time": "11:00", "ticketsLeft": 5 },
+        { "time": "14:00", "ticketsLeft": 24 },
+        { "time": "16:00", "ticketsLeft": 0 },
+        { "time": "18:00", "ticketsLeft": 8 }
+    ]
+}

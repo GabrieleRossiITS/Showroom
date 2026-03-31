@@ -1,6 +1,6 @@
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -10,12 +10,13 @@ export const Route = createFileRoute("/")({
     pendingMs: 0,
     staticData: {
         title: "Robert Doisneau",
+        breadcrumb: "home",
     },
 });
 
 function App() {
     const { t } = useTranslation();
-
+    const navigate = useNavigate();
     return (
         <>
             <div className="relative top-[50%] translate-y-[50%] flex flex-col justify-center h-full max-w-7xl m-auto gap-24">
@@ -34,7 +35,7 @@ function App() {
                     <div className="flex flex-wrap gap-6">
                         <Button
                             onClick={() => {
-                                window.location.href = "/artworks";
+                                navigate({ to: "/artworks" });
                             }}
                             variant="primary"
                             rounded="full"
@@ -45,7 +46,7 @@ function App() {
                         </Button>
                         <Button
                             onClick={() => {
-                                window.location.href = "/expositions";
+                                navigate({ to: "/exhibitions" });
                             }}
                             variant="outline"
                             rounded="full"

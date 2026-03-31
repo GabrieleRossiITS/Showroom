@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ArtistRouteImport } from './routes/artist'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as ArtworksIndexRouteImport } from './routes/artworks/index'
 import { Route as ExhibitionsIdRouteImport } from './routes/exhibitions/$id'
 import { Route as ArtworksIdRouteImport } from './routes/artworks/$id'
 
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArtistRoute = ArtistRouteImport.update({
   id: '/artist',
   path: '/artist',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/artist': typeof ArtistRoute
+  '/shop': typeof ShopRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
   '/artworks/': typeof ArtworksIndexRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/artist': typeof ArtistRoute
+  '/shop': typeof ShopRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
   '/artworks': typeof ArtworksIndexRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/artist': typeof ArtistRoute
+  '/shop': typeof ShopRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
   '/artworks/': typeof ArtworksIndexRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/artist'
+    | '/shop'
     | '/artworks/$id'
     | '/exhibitions/$id'
     | '/artworks/'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/artist'
+    | '/shop'
     | '/artworks/$id'
     | '/exhibitions/$id'
     | '/artworks'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/artist'
+    | '/shop'
     | '/artworks/$id'
     | '/exhibitions/$id'
     | '/artworks/'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ArtistRoute: typeof ArtistRoute
+  ShopRoute: typeof ShopRoute
   ArtworksIdRoute: typeof ArtworksIdRoute
   ExhibitionsIdRoute: typeof ExhibitionsIdRoute
   ArtworksIndexRoute: typeof ArtworksIndexRoute
@@ -123,6 +136,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/artist': {
       id: '/artist'
       path: '/artist'
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ArtistRoute: ArtistRoute,
+  ShopRoute: ShopRoute,
   ArtworksIdRoute: ArtworksIdRoute,
   ExhibitionsIdRoute: ExhibitionsIdRoute,
   ArtworksIndexRoute: ArtworksIndexRoute,

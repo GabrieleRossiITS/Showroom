@@ -25,6 +25,7 @@ export default function Header() {
         { to: "/artworks", label: t("nav.artworks") },
         { to: "/artist", label: t("nav.artist") },
         { to: "/exhibitions", label: t("nav.exhibitions") },
+        { to: "/shop", label: t("nav.shop") },
         { to: "/about", label: t("nav.about") },
     ];
 

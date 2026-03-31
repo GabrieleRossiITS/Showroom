@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Le Baiser de l'Hôtel de Ville (Large Print)",
+        "price": 45.00,
+        "category": "print",
+        "image": "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop",
+        "description": "Premium black and white print on archival paper. Captured in 1950, this iconic image is the global manifesto of romanticism."
+    },
+    {
+        "id": 2,
+        "title": "Robert Doisneau: Paris (Monograph)",
+        "price": 60.00,
+        "category": "book",
+        "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop",
+        "description": "A comprehensive collection of Doisneau's finest works, celebrating the poetry of everyday Parisian life."
+    },
+    {
+        "id": 3,
+        "title": "Vintage Street Scene (Postcard Set)",
+        "price": 15.00,
+        "category": "postcard",
+        "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop",
+        "description": "A set of 12 postcards featuring rare and candid moments from the streets of Paris in the 1950s."
+    },
+    {
+        "id": 4,
+        "title": "Retro Canvas Camera Bag",
+        "price": 85.00,
+        "category": "accessory",
+        "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop",
+        "description": "Durable and stylish camera bag inspired by the 1950s aesthetic. Perfect for the modern street photographer."
+    },
+    {
+        "id": 5,
+        "title": "Le Remorqueur du Pont des Arts (Print)",
+        "price": 35.00,
+        "category": "print",
+        "image": "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=800&auto=format&fit=crop",
+        "description": "High-quality reproduction of the famous tugboat scene by the Seine."
+    },
+    {
+        "id": 6,
+        "title": "Classic Leather Camera Strap",
+        "price": 25.00,
+        "category": "accessory",
+        "image": "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?q=80&w=800&auto=format&fit=crop",
+        "description": "Genuine leather strap designed for comfort and timeless elegance. Fits most classic and digital cameras."
+    }
+]

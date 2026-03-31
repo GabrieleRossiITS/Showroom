@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import Button from "#/components/ui/Button";
 import { MoveLeft } from "lucide-react";
@@ -11,11 +11,13 @@ export const Route = createFileRoute("/artist")({
     pendingMs: 0,
     staticData: {
         title: "L'Artista - Robert Doisneau",
+        breadcrumb: "nav.artist",
     },
 });
 
 function Artist() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
@@ -26,15 +28,20 @@ function Artist() {
 
     return (
         <main className="page-wrap px-6 md:px-12 relative min-h-screen pb-32">
-
-            <div aria-hidden="true" className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-(--burnished-copper)/5 blur-[120px] pointer-events-none z-0" />
-            <div aria-hidden="true" className="fixed bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-(--parisian-stone)/5 blur-[120px] pointer-events-none z-0" />
+            <div
+                aria-hidden="true"
+                className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-(--burnished-copper)/5 blur-[120px] pointer-events-none z-0"
+            />
+            <div
+                aria-hidden="true"
+                className="fixed bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-(--parisian-stone)/5 blur-[120px] pointer-events-none z-0"
+            />
 
             <div className="relative z-10 w-full max-w-7xl mx-auto pt-24 lg:pt-32">
                 <div className="mb-12">
                     <Button
-                        onClick={() => (window.location.href = "/")}
-                        variant="ghost"
+                        onClick={() => navigate({ to: "/" })}
+                        variant="outline"
                         size="sm"
                         className="gap-2 text-(--parisian-stone-dark) hover:text-(--deep-charcoal)"
                     >
@@ -44,7 +51,6 @@ function Artist() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_2fr] gap-12 lg:gap-20 items-start">
-
                     <div className="lg:sticky lg:top-32 space-y-8">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
@@ -52,10 +58,15 @@ function Artist() {
                             transition={{ duration: 1 }}
                             className="relative group aspect-square lg:aspect-4/5 w-full rounded-[3rem] bg-(--vintage-sepia-light)/40 backdrop-blur-3xl border border-(--line) shadow-2xl overflow-hidden flex flex-col items-center justify-center p-8 text-center"
                         >
+                            <div
+                                className="absolute inset-0 rounded-[3rem] border border-white/40 pointer-events-none mix-blend-overlay"
+                                aria-hidden="true"
+                            />
 
-                            <div className="absolute inset-0 rounded-[3rem] border border-white/40 pointer-events-none mix-blend-overlay" aria-hidden="true" />
-
-                            <div className="relative w-48 h-48 mb-12" aria-hidden="true">
+                            <div
+                                className="relative w-48 h-48 mb-12"
+                                aria-hidden="true"
+                            >
                                 <div className="absolute inset-0 border-4 border-dashed border-(--burnished-copper)/20 rounded-full animate-[spin_20s_linear_infinite]" />
                                 <div className="absolute inset-4 border-2 border-solid border-(--deep-charcoal)/10 rounded-full animate-[spin_10s_linear_infinite_reverse] flex items-center justify-center bg-white/5 backdrop-blur-sm">
                                     <div className="text-3xl font-serif italic text-(--deep-charcoal) opacity-40">
@@ -107,7 +118,9 @@ function Artist() {
                                     <span className="opacity-60 shrink-0">
                                         {t("artist.nationality")}
                                     </span>
-                                    <span className="text-right">{t("artist.nationalityValue")}</span>
+                                    <span className="text-right">
+                                        {t("artist.nationalityValue")}
+                                    </span>
                                 </div>
 
                                 <div className="flex justify-between border-b border-white/10 pb-2 gap-4">
@@ -139,15 +152,21 @@ function Artist() {
                             </h4>
                             <div className="space-y-4 text-sm font-medium">
                                 <div className="flex justify-between border-b border-white/10 pb-2">
-                                    <span className="opacity-60">{t("artist.activity")}</span>
+                                    <span className="opacity-60">
+                                        {t("artist.activity")}
+                                    </span>
                                     <span>1930 - 1994</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/10 pb-2">
-                                    <span className="opacity-60">{t("artist.style")}</span>
+                                    <span className="opacity-60">
+                                        {t("artist.style")}
+                                    </span>
                                     <span>{t("artist.styleValue")}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="opacity-60">{t("artist.subject")}</span>
+                                    <span className="opacity-60">
+                                        {t("artist.subject")}
+                                    </span>
                                     <span>{t("artist.subjectValue")}</span>
                                 </div>
                             </div>

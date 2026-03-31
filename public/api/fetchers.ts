@@ -1,4 +1,4 @@
-import type { Artwork, Exhibition } from "../types";
+import type { Artwork, Exhibition, ShopItem } from "../types";
 
 export const getExhibitions = async (): Promise<Exhibition[]> => {
     const response = await fetch("http://localhost:3000/api/exhibitions.json");
@@ -92,4 +92,16 @@ export const getExhibitionById = async (id: number): Promise<Exhibition> => {
     }
 
     return exhibitionData;
+};
+
+export const getShopItems = async (): Promise<ShopItem[]> => {
+    const response = await fetch("http://localhost:3000/api/shop.json");
+    if (!response.ok) throw new Error("Error while fetching shop items");
+    return response.json();
+};
+
+export const getTicketOptions = async (): Promise<{ tiers: any[]; slots: any[] }> => {
+    const response = await fetch("http://localhost:3000/api/ticket-options.json");
+    if (!response.ok) throw new Error("Error while fetching ticket options");
+    return response.json();
 };

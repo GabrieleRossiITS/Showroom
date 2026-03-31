@@ -3,7 +3,8 @@
         "artworks": "Opere",
         "artist": "Artista",
         "exhibitions": "Mostre",
-        "about": "Contatti"
+        "about": "Contatti",
+        "shop": "Negozio"
     },
     "footer": {
         "rights": "Tutti i diritti riservati.",
@@ -73,5 +74,31 @@
         "ongoing": "In Corso",
         "past": "Conclusa",
         "upcoming": "Prossimamente"
+    },
+    "shop": {
+        "title": "Negozio di Souvenir",
+        "subtitle": "Porta a casa un pezzo di fotografia umanista.",
+        "buyNow": "Acquista Ora",
+        "all": "Tutti",
+        "print": "Stampe",
+        "book": "Libri",
+        "postcard": "Cartoline",
+        "accessory": "Accessori",
+        "success": "Acquisto completato! Grazie per il tuo supporto."
+    },
+    "exhibitionDetail": {
+        "back": "Torna alle Mostre",
+        "bookingTitle": "Prenota la tua visita",
+        "chooseTime": "Scegli una fascia oraria",
+        "ticketsLeft": "biglietti rimasti",
+        "selectTier": "Seleziona il tipo di biglietto",
+        "confirmBooking": "Conferma Prenotazione",
+        "bookingSuccess": "Prenotazione confermata! Ti aspettiamo.",
+        "standard": "Ingresso Standard",
+        "standardDesc": "Accesso completo alla mostra.",
+        "reduced": "Ingresso Ridotto",
+        "reducedDesc": "Studenti, anziani e gruppi.",
+        "premium": "Premium (Guidata)",
+        "premiumDesc": "Include una visita guidata e il catalogo esclusivo."
     }
 }

@@ -20,5 +20,31 @@ export interface Exhibition {
     start_date: string;
     end_date: string;
     description: string;
+    image: string;
     artworks_included: number[];
+    ticket_info: {
+        tiers: TicketTier[];
+        slots: TimeSlot[];
+    };
+}
+
+export interface TicketTier {
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+}
+
+export interface TimeSlot {
+    time: string;
+    ticketsLeft: number;
+}
+
+export interface ShopItem {
+    id: number;
+    title: string;
+    price: number;
+    category: "print" | "book" | "postcard" | "accessory";
+    image: string;
+    description: string;
 }

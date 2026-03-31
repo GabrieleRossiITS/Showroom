@@ -15,9 +15,10 @@ export const Route = createFileRoute("/")({
 
 function App() {
     const { t } = useTranslation();
+
     return (
         <>
-            <div className="flex flex-col h-full max-w-7xl m-auto">
+            <div className="relative top-[50%] translate-y-[50%] flex flex-col justify-center h-full max-w-7xl m-auto gap-24">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -60,7 +61,6 @@ function App() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 1 }}
-                    className="mt-16"
                 >
                     <div className="w-full h-px bg-(--line) mb-8" />
                     <div className="flex justify-between items-center text-(--parisian-stone-dark) text-sm font-mono tracking-widest uppercase">

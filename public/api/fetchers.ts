@@ -22,6 +22,44 @@ export const getArtworks = async (): Promise<Artwork[]> => {
     return data;
 };
 
+/*
+useEffect(() => {
+        let currentUrl: string | null = null;
+
+        fetch("https://localhost:7036/api/images/1.jpeg", {
+            method: "GET",
+            headers: {
+                "X-API-KEY": "ui4gPw6tyvohq8jc?w4uoyrbtGHhdjl!",
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Errore HTTP: ${res.status}`);
+                }
+                return res.blob();
+            })
+            .then((blob) => {
+                // Crea l'URL temporaneo
+                currentUrl = URL.createObjectURL(blob);
+                // Salvalo nello stato (questo farà aggiornare l'interfaccia)
+                setImageUrl(currentUrl);
+            })
+            .catch((error) => {
+                console.error("Impossibile caricare l'immagine:", error);
+            });
+
+        // Cleanup: distrugge l'URL temporaneo quando esci dalla pagina 
+        // per liberare memoria (ottima pratica in React)
+        return () => {
+            if (currentUrl) {
+                URL.revokeObjectURL(currentUrl);
+            }
+        };
+    }, []);
+
+
+*/
+
 export const getArtworkById = async (id: number): Promise<Artwork> => {
     const response = await fetch("http://localhost:3000/api/artworks.json");
 

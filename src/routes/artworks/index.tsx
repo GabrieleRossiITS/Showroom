@@ -49,9 +49,8 @@ function ArtworkGallery() {
 
     return (
         <>
-            {/* Complex Animated Background */}
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none z-0 bg-(--deep-charcoal) overflow-hidden">
-                {/* Layer 1: Large Floating Copper Blob */}
+
                 <motion.div
                     animate={{
                         x: [0, 50, -30, 0],
@@ -66,7 +65,6 @@ function ArtworkGallery() {
                     className="absolute top-[-15%] left-[-10%] w-[130vw] h-[80vh] bg-(--burnished-copper-deep)/80 rounded-[40%_60%_70%_30%/40%_40%_60%_50%] blur-[120px]"
                 />
 
-                {/* Layer 2: Deep Bottom Wave */}
                 <motion.div
                     animate={{
                         x: [0, -60, 40, 0],
@@ -81,7 +79,6 @@ function ArtworkGallery() {
                     className="absolute bottom-[-20%] left-[20vw] w-[140vw] h-[90vh] bg-(--burnished-copper)/60 rounded-[30%_70%_50%_50%/50%_30%_70%_50%] blur-[150px] mix-blend-overlay"
                 />
 
-                {/* Layer 3: Parisian Stone Accent Blob */}
                 <motion.div
                     animate={{
                         opacity: [0.2, 0.5, 0.2],
@@ -96,7 +93,6 @@ function ArtworkGallery() {
                     className="absolute top-[20%] right-[-10%] w-[80vw] h-[80vh] bg-(--parisian-stone)/50 rounded-[50%_50%_30%_70%/60%_40%_60%_40%] blur-[180px]"
                 />
 
-                {/* Layer 4: Smaller Bright Copper Highlights */}
                 <motion.div
                     animate={{
                         y: [0, 100, 0],
@@ -110,7 +106,6 @@ function ArtworkGallery() {
                     className="absolute top-[10%] left-[40vw] w-[40vw] h-[40vh] bg-(--burnished-copper)/45 rounded-full blur-[100px] mix-blend-screen"
                 />
 
-                {/* Layer 5: Subtle Darker Overlay for Texture */}
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-(--deep-charcoal)/20 to-(--deep-charcoal)/40" />
             </div>
 

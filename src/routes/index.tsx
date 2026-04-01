@@ -21,7 +21,21 @@ export const Route = createFileRoute("/")({
 function App() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const [quote, setQuote] = useState<string>('');
+    const [quote, setQuote] = useState<string>("");
+
+    useEffect(() => {
+        const mainElement = document.getElementById("main-content");
+
+        if (mainElement) {
+            mainElement.style.padding = "0";
+        }
+
+        return () => {
+            if (mainElement) {
+                mainElement.style.padding = "";
+            }
+        };
+    }, []);
 
     useEffect(() => {
         fetch("http://localhost:3000/api/quotes.json")
@@ -42,47 +56,62 @@ function App() {
         show: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2
-            }
-        }
+                staggerChildren: 0.2,
+            },
+        },
     };
 
     const itemFadeUp: Variants = {
         hidden: { opacity: 0, y: 30 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } }
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: "easeOut" as const },
+        },
     };
 
     return (
         <main className="min-h-screen bg-background flex flex-col relative w-full overflow-x-hidden">
             {/* Immersive Hero Section */}
-            <section className="relative w-full h-[90vh] md:h-[95vh] flex flex-col justify-end pb-16 md:pb-24 overflow-hidden">
+            <section className="relative w-full h-[90vh] md:h-[80vh] flex flex-col justify-end pb-16 md:pb-24 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <img 
-                        src="/images/14.jpg" 
-                        alt="Robert Doisneau Photography" 
+                    <img
+                        src="/images/14.jpg"
+                        alt="Robert Doisneau Photography"
                         className="w-full h-full object-cover object-center"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-(--deep-charcoal) via-(--deep-charcoal)/60 to-transparent mix-blend-multiply" />
                     <div className="absolute inset-0 bg-linear-to-r from-(--deep-charcoal)/80 via-transparent to-transparent opacity-80" />
                 </div>
-                
+
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row justify-between items-end gap-12">
-                    <motion.div 
+                    <motion.div
                         variants={staggerContainer}
                         initial="hidden"
                         animate="show"
                         className="flex flex-col items-start max-w-3xl"
                     >
-                        <motion.span variants={itemFadeUp} className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-(--vintage-sepia) text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 border border-white/20">
+                        <motion.span
+                            variants={itemFadeUp}
+                            className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-(--vintage-sepia) text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 border border-white/20"
+                        >
                             Pixel Voyage &bull; {t("home.agencySubtitle")}
                         </motion.span>
-                        
-                        <motion.h1 variants={itemFadeUp} className="text-7xl md:text-9xl font-black text-white mb-8 font-serif leading-[0.85] tracking-tighter">
+
+                        <motion.h1
+                            variants={itemFadeUp}
+                            className="text-7xl md:text-9xl font-black text-white mb-8 font-serif leading-[0.85] tracking-tighter"
+                        >
                             Robert <br />
-                            <span className="text-(--burnished-copper) italic font-light drop-shadow-xl">Doisneau</span>
+                            <span className="text-(--burnished-copper) italic font-light drop-shadow-xl">
+                                Doisneau
+                            </span>
                         </motion.h1>
-                        
-                        <motion.div variants={itemFadeUp} className="flex flex-wrap gap-4 md:gap-6 mt-4">
+
+                        <motion.div
+                            variants={itemFadeUp}
+                            className="flex flex-wrap gap-4 md:gap-6 mt-4"
+                        >
                             <Button
                                 onClick={() => {
                                     /* navigate({ to: "/tickets" }); */
@@ -98,14 +127,16 @@ function App() {
                         </motion.div>
                     </motion.div>
 
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.6 }}
                         className="hidden lg:block w-full max-w-sm"
                     >
                         <div className="p-8 rounded-4xl bg-(--deep-charcoal)/40 backdrop-blur-2xl border border-white/10 relative">
-                            <div className="text-(--burnished-copper) text-6xl font-serif leading-none opacity-40 absolute top-4 left-4">"</div>
+                            <div className="text-(--burnished-copper) text-6xl font-serif leading-none opacity-40 absolute top-4 left-4">
+                                "
+                            </div>
                             <p className="relative z-10 text-xl text-white leading-relaxed font-serif italic pt-6">
                                 {quote || t("home.subtitle")}
                             </p>
@@ -116,29 +147,33 @@ function App() {
 
             {/* Structured Information Grid */}
             <section className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 -mt-8 md:-mt-12">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="grid grid-cols-1 lg:grid-cols-4 bg-white shadow-2xl rounded-4xl overflow-hidden border border-(--line) divide-y lg:divide-y-0 lg:divide-x divide-(--line)"
                 >
-                    {/* Dates */}
-                    <div className="p-8 md:p-10 flex flex-col justify-center bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
-                        <div className="w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <div className="relative p-8 md:p-10 flex flex-col justify-start bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
+                        <div className="absolute top-2 left-2 w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Calendar className="w-5 h-5" />
                         </div>
-                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-2">{t("home.ongoing")}</h3>
-                        <p className="font-mono text-(--deep-charcoal) font-medium text-lg leading-tight">{t("home.dates")}</p>
+                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-2 mt-6">
+                            {t("home.ongoing")}
+                        </h3>
+                        <p className="font-mono text-(--deep-charcoal) font-medium text-lg leading-tight">
+                            {t("home.dates")}
+                        </p>
                     </div>
 
-                    {/* Location */}
-                    <div className="p-8 md:p-10 flex flex-col justify-center bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
-                        <div className="w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <div className="relative p-8 md:p-10 flex flex-col justify-start bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
+                        <div className="absolute top-2 left-2 w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <MapPin className="w-5 h-5" />
                         </div>
-                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-2">{t("home.location")}</h3>
-                        <a 
+                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-2 mt-6">
+                            {t("home.location")}
+                        </h3>
+                        <a
                             href="https://www.google.it/maps/place/Galleria+Harry+Bertoia/@45.9545192,12.6576403,17z"
                             target="_blank"
                             rel="noreferrer"
@@ -148,41 +183,58 @@ function App() {
                         </a>
                     </div>
 
-                    {/* Hours */}
-                    <div className="p-8 md:p-10 flex flex-col justify-center bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
-                        <div className="w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <div className="relative p-8 md:p-10 flex flex-col justify-start bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
+                        <div className="absolute top-2 left-2 w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Clock className="w-5 h-5" />
                         </div>
-                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-4">{t("home.hoursAndTours")}</h3>
+                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-4 mt-6">
+                            {t("home.hoursAndTours")}
+                        </h3>
                         <ul className="font-mono text-sm text-(--deep-charcoal) space-y-2 mb-4">
                             <li className="flex flex-col">
-                                <span className="opacity-60 text-[10px]">{t("home.wedFri")}</span>
-                                <span className="font-semibold">15:00 - 19:00</span>
+                                <span className="opacity-60 text-[10px]">
+                                    {t("home.wedFri")}
+                                </span>
+                                <span className="font-semibold">
+                                    15:00 - 19:00
+                                </span>
                             </li>
                             <li className="flex flex-col">
-                                <span className="opacity-60 text-[10px]">{t("home.satSun")}</span>
-                                <span className="font-semibold">10:00 - 13:00 / 15:00 - 19:00</span>
+                                <span className="opacity-60 text-[10px]">
+                                    {t("home.satSun")}
+                                </span>
+                                <span className="font-semibold">
+                                    10:00 - 13:00 / 15:00 - 19:00
+                                </span>
                             </li>
                         </ul>
                     </div>
 
                     {/* Prices */}
-                    <div className="p-8 md:p-10 flex flex-col justify-center bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
-                        <div className="w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <div className="relative p-8 md:p-10 flex flex-col justify-start bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
+                        <div className="absolute top-2 left-2 w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Ticket className="w-5 h-5" />
                         </div>
-                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-4">{t("home.prices")}</h3>
+                        <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-4 mt-6">
+                            {t("home.prices")}
+                        </h3>
                         <div className="font-mono text-sm text-(--deep-charcoal) space-y-2 flex flex-col">
                             <div className="flex justify-between border-b border-(--line) pb-1">
-                                <span className="opacity-70">{t("home.fullPrice").split(':')[0]}</span>
+                                <span className="opacity-70">
+                                    {t("home.fullPrice").split(":")[0]}
+                                </span>
                                 <span className="font-bold">12€</span>
                             </div>
                             <div className="flex justify-between border-b border-(--line) pb-1">
-                                <span className="opacity-70">{t("home.reducedPrice").split(':')[0]}</span>
+                                <span className="opacity-70">
+                                    {t("home.reducedPrice").split(":")[0]}
+                                </span>
                                 <span className="font-bold">9€</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="opacity-70">{t("home.studentPrice").split(':')[0]}</span>
+                                <span className="opacity-70">
+                                    {t("home.studentPrice").split(":")[0]}
+                                </span>
                                 <span className="font-bold">5€</span>
                             </div>
                         </div>
@@ -192,7 +244,7 @@ function App() {
 
             {/* Navigation Banners */}
             <section className="w-full max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -206,7 +258,11 @@ function App() {
                                 {t("home.discoverArtist")}
                             </span>
                             <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight">
-                                {t("home.exploreUniverse")}<br/><span className="italic font-light text-(--burnished-copper)">{t("home.ofTheArtist")}</span>
+                                {t("home.exploreUniverse")}
+                                <br />
+                                <span className="italic font-light text-(--burnished-copper)">
+                                    {t("home.ofTheArtist")}
+                                </span>
                             </h2>
                         </div>
                         <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-(--burnished-copper) group-hover:border-transparent transition-all overflow-hidden">
@@ -215,7 +271,7 @@ function App() {
                     </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -229,9 +285,12 @@ function App() {
                                 {t("home.upcomingExhibitions")}
                             </span>
                             <h2 className="text-4xl md:text-5xl font-serif font-bold text-(--deep-charcoal) leading-tight">
-                                O. Arthur, <br/>
-                                <span className="opacity-40">S. Furuya, </span><br/>
-                                <span className="italic font-light text-(--burnished-copper)">S. Moshammer</span>
+                                O. Arthur, <br />
+                                <span className="opacity-40">S. Furuya, </span>
+                                <br />
+                                <span className="italic font-light text-(--burnished-copper)">
+                                    S. Moshammer
+                                </span>
                             </h2>
                         </div>
                         <div className="self-end w-14 h-14 rounded-full bg-(--deep-charcoal) border flex items-center justify-center group-hover:bg-(--burnished-copper) transition-colors text-white">

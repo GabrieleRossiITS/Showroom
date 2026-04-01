@@ -12,9 +12,28 @@
         "engineering": "PyTechによるエンジニアリングとデジタルキュレーション"
     },
     "home": {
+        "agencySubtitle": "今年の回顧展を開催します",
         "subtitle": "ヒューマニスト写真の先駆者。彼の写真は、パリの街角にある日常の詩を捉えています。",
         "exploreArtworks": "作品を見る",
-        "exhibitions": "展覧会"
+        "exhibitions": "展覧会",
+        "bookTickets": "チケット購入",
+        "discoverArtist": "アーティストを発見する",
+        "ongoing": "開催中",
+        "dates": "2024年10月12日 - 2025年1月15日",
+        "location": "会場",
+        "locationValue": "Galleria Harry Bertoia\nCorso Vittorio Emanuele II, Pordenone",
+        "ticketsAvailable": "チケット販売中",
+        "hoursAndTours": "開館時間",
+        "wedFri": "水曜日 - 金曜日",
+        "satSun": "土曜日 - 日曜日",
+        "specialOpenings": "12月26日と1月6日は特別開館。12月25日と1月1日は休館。",
+        "prices": "チケット料金",
+        "fullPrice": "一般: 12€",
+        "reducedPrice": "割引: 9€",
+        "studentPrice": "学生: 5€",
+        "exploreUniverse": "宇宙を探索する",
+        "ofTheArtist": "アーティストの",
+        "upcomingExhibitions": "今後の展覧会"
     },
     "about": {
         "title": "Pixel voyage",

@@ -35,6 +35,20 @@ function ExhibitionDetail() {
         desc: t(tier.descKey),
     }));
 
+    useEffect(() => {
+        const mainElement = document.getElementById("main-content");
+
+        if (mainElement) {
+            mainElement.style.padding = '0';
+        }
+
+        return () => {
+            if (mainElement) {
+                mainElement.style.padding = '';
+            }
+        };
+    }, []);
+
     const handleBooking = () => {
         if (!selectedSlot) return;
         setIsBooked(true);
@@ -42,7 +56,7 @@ function ExhibitionDetail() {
 
     if (isBooked) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-(--vintage-sepia) px-6">
+            <div key="success-view" className="min-h-screen flex items-center justify-center bg-(--vintage-sepia) px-6">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -78,22 +92,8 @@ function ExhibitionDetail() {
         );
     }
 
-    useEffect(() => {
-        const mainElement = document.getElementById("main-content");
-
-        if (mainElement) {
-            mainElement.style.padding = '0';
-        }
-
-        return () => {
-            if (mainElement) {
-                mainElement.style.padding = '';
-            }
-        };
-    }, []);
-
     return (
-        <div className="min-h-screen bg-(--vintage-sepia) pb-24 overflow-x-hidden">
+        <div key="booking-view" className="min-h-screen bg-(--vintage-sepia) pb-24 overflow-x-hidden">
             <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 z-10" />
                 <img

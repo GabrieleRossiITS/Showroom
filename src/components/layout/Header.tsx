@@ -22,8 +22,8 @@ export default function Header() {
     const menuRef = useRef<HTMLDivElement>(null);
 
     const navLinks = [
+        { to: "/artists", label: t("nav.artist") },
         { to: "/artworks", label: t("nav.artworks") },
-        { to: "/artist", label: t("nav.artist") },
         { to: "/exhibitions", label: t("nav.exhibitions") },
         { to: "/shop", label: t("nav.shop") },
         { to: "/about", label: t("nav.about") },
@@ -100,7 +100,7 @@ export default function Header() {
                 className="text-md font-bold tracking-widest uppercase cursor-pointer hover:text-(--burnished-copper) transition-colors duration-300"
                 onClick={redirectHome}
             >
-                Robert Doisneau
+                Pixel Voyage
             </button>
             <nav
                 className="flex items-center gap-8 lg:gap-12"

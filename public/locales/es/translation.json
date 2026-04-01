@@ -12,9 +12,28 @@
         "engineering": "Ingeniería y curación digital por PyTech"
     },
     "home": {
+        "agencySubtitle": "Presenta la retrospectiva del año",
         "subtitle": "Pionero de la fotografía humanista, sus imágenes capturan la poesía de la vida cotidiana en las calles de París.",
         "exploreArtworks": "Explorar las Obras",
-        "exhibitions": "Las Exposiciones"
+        "exhibitions": "Las Exposiciones",
+        "bookTickets": "Comprar Entradas",
+        "discoverArtist": "Descubre al artista",
+        "ongoing": "En curso",
+        "dates": "12 de Octubre de 2024 - 15 de Enero de 2025",
+        "location": "Ubicación",
+        "locationValue": "Gallería Harry Bertoia\nCorso Vittorio Emanuele II, Pordenone",
+        "ticketsAvailable": "Entradas Disponibles",
+        "hoursAndTours": "Horario de Visitas",
+        "wedFri": "Miércoles - Viernes",
+        "satSun": "Sábado - Domingo",
+        "specialOpenings": "Apertura extraordinaria el 26 de diciembre y el 6 de enero. Cerrado el 25 de diciembre y el 1 de enero.",
+        "prices": "Precios",
+        "fullPrice": "Precio general: 12€",
+        "reducedPrice": "Reducido: 9€",
+        "studentPrice": "Estudiantes: 5€",
+        "exploreUniverse": "Explora el universo",
+        "ofTheArtist": "del artista",
+        "upcomingExhibitions": "Próximas Exposiciones"
     },
     "about": {
         "title": "Pixel voyage",

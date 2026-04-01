@@ -7,16 +7,14 @@ export default function Breadcrumbs() {
     const { t } = useTranslation();
     const matches = useMatches();
 
-    // Filter out matches that shouldn't show up in breadcrumbs (like __root)
     const breadcrumbs = matches
         .filter((match) => match.pathname !== "/" && match.routeId !== "__root__")
         .map((match) => {
             const data = match.staticData as { breadcrumb?: string; title?: string };
             const loaderData = match.loaderData as any;
-            
-            // Try to get a dynamic label (e.g. exhibition title) from loaderData
+
             let label = data.breadcrumb ? t(data.breadcrumb) : data.title || match.routeId;
-            
+
             if (loaderData?.title) {
                 label = loaderData.title;
             } else if (loaderData?.exhibition?.title) {
@@ -32,9 +30,9 @@ export default function Breadcrumbs() {
     if (breadcrumbs.length === 0) return null;
 
     return (
-        <nav 
-            aria-label="Breadcrumb" 
-            className="relative z-20 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar py-2"
+        <nav
+            aria-label="Breadcrumb"
+            className="relative z-20 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar"
         >
             <motion.div
                 initial={{ opacity: 0, x: -10 }}
@@ -54,11 +52,10 @@ export default function Breadcrumbs() {
                         <ChevronRight className="w-3 h-3 text-(--parisian-stone-dark)/40" />
                         <Link
                             to={crumb.path}
-                            className={`text-xs font-bold uppercase tracking-widest transition-colors ${
-                                index === breadcrumbs.length - 1
-                                    ? "text-(--burnished-copper) pointer-events-none"
-                                    : "text-(--parisian-stone-dark) hover:text-(--burnished-copper)"
-                            }`}
+                            className={`text-xs font-bold uppercase tracking-widest transition-colors ${index === breadcrumbs.length - 1
+                                ? "text-(--burnished-copper) pointer-events-none"
+                                : "text-(--parisian-stone-dark) hover:text-(--burnished-copper)"
+                                }`}
                         >
                             {crumb.label}
                         </Link>

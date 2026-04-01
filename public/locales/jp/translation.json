@@ -8,7 +8,8 @@
     },
     "footer": {
         "rights": "無断複写・転載を禁じます。",
-        "githubLabel": "GitHubリポジトリへ"
+        "githubLabel": "GitHubリポジトリへ",
+        "engineering": "PyTechによるエンジニアリングとデジタルキュレーション"
     },
     "home": {
         "subtitle": "ヒューマニスト写真の先駆者。彼の写真は、パリの街角にある日常の詩を捉えています。",

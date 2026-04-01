@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Filter, CheckCircle2 } from "lucide-react";
+import { ShoppingBag, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useMemo } from "react";
 import { GlobalLoader } from "#/components/GlobalLoader";
@@ -12,6 +12,10 @@ export const Route = createFileRoute("/shop")({
     pendingMs: 0,
     loader: () => getShopItems(),
     component: ShopPage,
+    staticData: {
+        title: "Negozio",
+        breadcrumb: "nav.shop",
+    }
 });
 
 function ShopPage() {
@@ -35,8 +39,8 @@ function ShopPage() {
     return (
         <div className="min-h-screen bg-(--vintage-sepia) pt-32 pb-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto space-y-16">
-                {/* Header */}
-                <motion.div 
+
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
@@ -50,26 +54,24 @@ function ShopPage() {
                     </p>
                 </motion.div>
 
-                {/* Filters */}
                 <div className="flex flex-wrap justify-center gap-3">
                     {categories.map((cat) => (
-                        <button
+                        <Button
                             key={cat}
                             onClick={() => setFilter(cat)}
                             className={`
                                 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300
-                                ${filter === cat 
-                                    ? "bg-(--deep-charcoal) text-(--vintage-sepia) shadow-xl scale-105" 
+                                ${filter === cat
+                                    ? "bg-(--deep-charcoal) text-(--vintage-sepia) shadow-xl scale-105"
                                     : "bg-white/40 text-(--deep-charcoal)/60 hover:bg-white/60 hover:text-(--deep-charcoal)"}
                             `}
                         >
                             {t(`shop.${cat}`)}
-                        </button>
+                        </Button>
                     ))}
                 </div>
 
-                {/* Grid */}
-                <motion.div 
+                <motion.div
                     layout
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
                 >
@@ -84,10 +86,9 @@ function ShopPage() {
                                 transition={{ duration: 0.4, ease: "easeOut" }}
                                 className="group relative bg-(--deep-charcoal) p-4 rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-(--burnished-copper)/10 transition-all duration-500 hover:-translate-y-2"
                             >
-                                {/* Image Container */}
                                 <div className="relative aspect-4/5 overflow-hidden rounded-4xl bg-black/20">
-                                    <img 
-                                        src={item.image} 
+                                    <img
+                                        src={item.image}
                                         alt={item.title}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-90 group-hover:opacity-100"
                                     />
@@ -96,11 +97,10 @@ function ShopPage() {
                                             {t(`shop.${item.category}`)}
                                         </span>
                                     </div>
-                                    
-                                    {/* Purchase Overlay */}
+
                                     <AnimatePresence>
                                         {purchasedId === item.id && (
-                                            <motion.div 
+                                            <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 exit={{ opacity: 0 }}
@@ -113,7 +113,6 @@ function ShopPage() {
                                     </AnimatePresence>
                                 </div>
 
-                                {/* Content */}
                                 <div className="p-6 space-y-4">
                                     <div className="flex justify-between items-start gap-4">
                                         <h3 className="text-xl font-bold text-(--vintage-sepia-light) font-serif leading-tight group-hover:text-white transition-colors">

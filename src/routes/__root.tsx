@@ -67,7 +67,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                         id="main-content"
                         className="relative page-wrap pt-24 min-h-screen overflow-hidden"
                     >
-                        <div className="max-w-7xl mx-auto md:px-12 pt-8 absolute top-24 left-0 right-0 pointer-events-none">
+                        <div className="max-w-7xl mx-auto pt-4 absolute top-24 left-0 right-0 pointer-events-none">
                             <div className="pointer-events-auto">
                                 <Breadcrumbs />
                             </div>

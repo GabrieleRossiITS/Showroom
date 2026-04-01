@@ -8,7 +8,8 @@
     },
     "footer": {
         "rights": "Tous droits réservés.",
-        "githubLabel": "Aller au dépôt GitHub"
+        "githubLabel": "Aller au dépôt GitHub",
+        "engineering": "Ingénierie et conservation numérique par PyTech"
     },
     "home": {
         "subtitle": "Pionnier de la photographie humaniste, ses images capturent la poésie de la vie quotidienne dans les rues de Paris.",

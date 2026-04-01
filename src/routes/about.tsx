@@ -64,7 +64,7 @@ function About() {
             {i18n.language === "jp" && <CherryPetals />}
             <div className="fixed inset-0 pointer-events-none z-0 bg-(--vintage-sepia)" />
 
-            <div className="relative z-10 flex flex-col px-6 md:px-12 pt-32 pb-32 max-w-7xl mx-auto min-h-screen">
+            <div className="relative z-10 flex flex-col px-6 md:px-12 pt-32 pb-32 max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ function About() {
                                         <input
                                             type="text"
                                             id="name"
-                                            className="w-full bg-(--bg-base) border border-(--border) rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-(--ring) transition-all"
+                                            className="w-full bg-(--bg-base) border border-border rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                                             placeholder="Es. Museo del Louvre"
                                         />
                                     </div>
@@ -158,7 +158,7 @@ function About() {
                                         <input
                                             type="email"
                                             id="email"
-                                            className="w-full bg-(--bg-base) border border-(--border) rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-(--ring) transition-all"
+                                            className="w-full bg-(--bg-base) border border-border rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                                             placeholder="info@museo.fr"
                                         />
                                     </div>
@@ -176,7 +176,7 @@ function About() {
                                     </label>
                                     <select
                                         id="subject"
-                                        className="w-full bg-(--bg-base) border border-(--border) rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-(--ring) transition-all"
+                                        className="w-full bg-(--bg-base) border border-border rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                                     >
                                         <option>
                                             {t(

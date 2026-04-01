@@ -21,13 +21,13 @@ export default function Footer() {
                 <p className="text-sm tracking-wide">
                     &copy; {year}{" "}
                     <span className="font-semibold text-white/90">
-                        PyTech Exhibitions
+                        Pixel Voyage
                     </span>
                     . <span className="opacity-80">{t("footer.rights")}</span>
                 </p>
 
                 <p className="text-xs text-white mt-1 font-mono tracking-wider">
-                    Engineering & Digital Curation: G. Rossi, N. Singh, L.
+                    {t("footer.engineering")}: G. Rossi, N. Singh, L.
                     Veneruzzo, R. Ranghiuc
                 </p>
             </div>

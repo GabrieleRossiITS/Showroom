@@ -1,3 +1,8 @@
+export interface Quote {
+    id: number;
+    text: string;
+}
+
 export interface Artwork {
     id: number;
     title: string;

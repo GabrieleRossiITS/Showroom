@@ -8,7 +8,7 @@ const LANGUAGES = [
     { code: "fr", label: "Français", flag: "🇫🇷" },
     { code: "de", label: "Deutsch", flag: "🇩🇪" },
     { code: "es", label: "Español", flag: "🇪🇸" },
-    { code: "pt", label: "Português", flag: "🇧🇷" },
+    { code: "pt", label: "Português", flag: "🇵🇹" },
     { code: "jp", label: "日本語", flag: "🇯🇵" },
 ];
 
@@ -168,10 +168,9 @@ export default function Header() {
                                     className={`
                                         w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left
                                         transition-colors duration-200 cursor-pointer
-                                        ${
-                                            i18n.language === lang.code
-                                                ? "bg-(--burnished-copper)/30 text-(--burnished-copper) font-bold"
-                                                : "text-(--vintage-sepia) hover:bg-white/10"
+                                        ${i18n.language === lang.code
+                                            ? "bg-(--burnished-copper)/30 text-(--burnished-copper) font-bold"
+                                            : "text-(--vintage-sepia) hover:bg-white/10"
                                         }
                                     `}
                                 >

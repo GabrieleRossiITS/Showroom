@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { getExhibitionById } from "public/api/fetchers";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
@@ -78,6 +78,20 @@ function ExhibitionDetail() {
         );
     }
 
+    useEffect(() => {
+        const mainElement = document.getElementById("main-content");
+
+        if (mainElement) {
+            mainElement.style.padding = '0';
+        }
+
+        return () => {
+            if (mainElement) {
+                mainElement.style.padding = '';
+            }
+        };
+    }, []);
+
     return (
         <div className="min-h-screen bg-(--vintage-sepia) pb-24 overflow-x-hidden">
             <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
@@ -140,7 +154,7 @@ function ExhibitionDetail() {
                                                         ? "bg-(--deep-charcoal) border-(--deep-charcoal) text-white shadow-xl scale-[1.02]"
                                                         : "bg-white/40 border-black/5 hover:border-(--burnished-copper)/30",
                                                     isFull &&
-                                                        "opacity-50 cursor-not-allowed bg-black/5",
+                                                    "opacity-50 cursor-not-allowed bg-black/5",
                                                 )}
                                             >
                                                 <span className="block text-xl font-bold font-mono">
@@ -153,8 +167,8 @@ function ExhibitionDetail() {
                                                             ? "text-red-500"
                                                             : slot.ticketsLeft <
                                                                 10
-                                                              ? "text-(--burnished-copper)"
-                                                              : "text-(--parisian-stone)",
+                                                                ? "text-(--burnished-copper)"
+                                                                : "text-(--parisian-stone)",
                                                     )}
                                                 >
                                                     {isFull

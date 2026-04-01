@@ -1,4 +1,4 @@
-import { Link, useMatches } from "@tanstack/react-router";
+import { Link, useMatches, useLocation } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ChevronRight, Home } from "lucide-react";
@@ -6,26 +6,53 @@ import { ChevronRight, Home } from "lucide-react";
 export default function Breadcrumbs() {
     const { t } = useTranslation();
     const matches = useMatches();
+    const location = useLocation();
 
-    const breadcrumbs = matches
-        .filter((match) => match.pathname !== "/" && match.routeId !== "__root__")
-        .map((match) => {
-            const data = match.staticData as { breadcrumb?: string; title?: string };
-            const loaderData = match.loaderData as any;
+    const currentMatch = matches[matches.length - 1];
+    const data = currentMatch.staticData as { breadcrumb?: string; title?: string } | undefined;
+    const loaderData = currentMatch.loaderData as any;
 
-            let label = data.breadcrumb ? t(data.breadcrumb) : data.title || match.routeId;
+    let currentLabel: string = currentMatch.routeId;
+    if (data?.breadcrumb) {
+        currentLabel = t(data.breadcrumb);
+    } else if (data?.title) {
+        currentLabel = data.title;
+    }
 
-            if (loaderData?.title) {
-                label = loaderData.title;
-            } else if (loaderData?.exhibition?.title) {
-                label = loaderData.exhibition.title;
-            }
+    if (loaderData?.title) {
+        currentLabel = loaderData.title;
+    } else if (loaderData?.exhibition?.title) {
+        currentLabel = loaderData.exhibition.title;
+    }
 
+    const pathSegments = location.pathname.split("/").filter(Boolean);
+
+    const breadcrumbs = pathSegments.map((segment, index) => {
+        const path = "/" + pathSegments.slice(0, index + 1).join("/");
+        const isLast = index === pathSegments.length - 1;
+
+        if (isLast) {
             return {
-                label,
-                path: match.pathname,
+                label: currentLabel,
+                path,
             };
-        });
+        }
+
+        let label = segment;
+        const translationKey = `nav.${segment}`;
+        const translated = t(translationKey);
+
+        if (translated !== translationKey) {
+            label = translated;
+        } else {
+            label = segment.charAt(0).toUpperCase() + segment.slice(1);
+        }
+
+        return {
+            label,
+            path,
+        };
+    });
 
     if (breadcrumbs.length === 0) return null;
 

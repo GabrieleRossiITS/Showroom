@@ -157,10 +157,25 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    margin: 0 2px;
+    background-color: var(--deep-charcoal);
+    border-radius: 100px;
+}
+
 html,
 body,
 #app {
     min-height: 100%;
+}
+
+button {
+    cursor: pointer;
 }
 
 body {
@@ -200,7 +215,7 @@ body {
 
 /* Accessibility */
 .skip-link {
-    @apply absolute -top-40 left-0 bg-(--deep-charcoal) text-(--vintage-sepia) p-3 z-[1000] focus:top-0 font-bold transition-transform;
+    @apply absolute -top-40 left-0 bg-(--deep-charcoal) text-(--vintage-sepia) p-3 z-1000 focus:top-0 font-bold transition-transform;
 }
 
 *:focus-visible {

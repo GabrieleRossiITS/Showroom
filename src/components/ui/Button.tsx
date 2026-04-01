@@ -15,6 +15,8 @@ const buttonVariants = cva(
                     "bg-(--deep-charcoal) text-(--vintage-sepia) hover:bg-(--burnished-copper) shadow-lg hover:shadow-xl",
                 secondary:
                     "bg-(--parisian-stone) text-(--vintage-sepia) hover:bg-(--parisian-stone-dark)",
+                tertiary:
+                    "bg-white text-(--deep-charcoal)/50 hover:bg-gray-500/30 hover:text-(--deep-charcoal) shadow-md hover:shadow-lg",
                 outline:
                     "border-2 border-(--deep-charcoal) text-(--deep-charcoal) hover:bg-(--deep-charcoal)/5",
                 ghost: "text-(--deep-charcoal) hover:bg-(--deep-charcoal)/5",
@@ -43,8 +45,8 @@ const buttonVariants = cva(
 
 export interface ButtonProps
     extends
-        Omit<HTMLMotionProps<"button">, "variant">,
-        VariantProps<typeof buttonVariants> {
+    Omit<HTMLMotionProps<"button">, "variant">,
+    VariantProps<typeof buttonVariants> {
     asChild?: boolean;
 }
 

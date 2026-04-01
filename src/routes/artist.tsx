@@ -4,6 +4,8 @@ import Button from "#/components/ui/Button";
 import { MoveLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
+import { useEffect, useState } from "react";
+import type { Quote } from "public/types";
 
 export const Route = createFileRoute("/artist")({
     component: Artist,
@@ -18,6 +20,7 @@ export const Route = createFileRoute("/artist")({
 function Artist() {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const [quote, setQuote] = useState<string>('');
 
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
@@ -26,8 +29,22 @@ function Artist() {
         transition: { duration: 0.8 },
     };
 
+
+    useEffect(() => {
+        fetch("http://localhost:3000/api/quotes.json")
+            .then((res: Response) => res.json())
+            .then((data: Quote[]) => {
+                const randomIndex = Math.floor(Math.random() * data.length);
+
+                setQuote(data[randomIndex].text);
+            })
+            .catch((error) => {
+                console.error("Errore durante il recupero dei dati:", error);
+            });
+    }, []);
+
     return (
-        <main className="page-wrap px-6 md:px-12 relative min-h-screen pb-32">
+        <main className="page-wrap px-6 md:px-12 relative pb-32">
             <div
                 aria-hidden="true"
                 className="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-(--burnished-copper)/5 blur-[120px] pointer-events-none z-0"
@@ -37,12 +54,13 @@ function Artist() {
                 className="fixed bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-(--parisian-stone)/5 blur-[120px] pointer-events-none z-0"
             />
 
-            <div className="relative z-10 w-full max-w-7xl mx-auto pt-24 lg:pt-32">
+            <div className="relative z-10 w-full max-w-7xl mx-auto pt-24">
                 <div className="mb-12">
                     <Button
                         onClick={() => navigate({ to: "/" })}
-                        variant="outline"
+                        variant="ghost"
                         size="sm"
+                        rounded="full"
                         className="gap-2 text-(--parisian-stone-dark) hover:text-(--deep-charcoal)"
                     >
                         <MoveLeft className="w-4 h-4" />
@@ -190,7 +208,8 @@ function Artist() {
                                 </span>
                             </h1>
                             <p className="text-2xl md:text-3xl text-(--parisian-stone-dark) leading-relaxed font-serif italic opacity-90">
-                                {t("artist.quote")}
+                                {/* {t("artist.quote")} */}
+                                "{quote}"
                             </p>
                         </motion.section>
 

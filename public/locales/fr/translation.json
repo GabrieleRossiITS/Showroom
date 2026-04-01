@@ -17,13 +17,13 @@
         "exhibitions": "Les Expositions"
     },
     "about": {
-        "title": "L'Agence",
+        "title": "Pixel voyage",
         "agencyInfo": "Qui sommes-nous",
         "missionTitle": "Notre Mission",
         "missionValue": "Digitaliser l'art, préserver l'émotion.",
         "hqTitle": "Siège",
         "hqValue": "Milan / Paris",
-        "agencyDescription": "PyTech Exhibitions est une agence de pointe spécialisée dans la création et la gestion d'expositions d'art numérique interactives. Nous allions des compétences avancées en ingénierie logicielle à une profonde sensibilité curatoriale pour transformer les archives historiques et les collections physiques en expériences immersives accessibles dans le monde entier.",
+        "agencyDescription": "Pixel voyage est une agence de pointe spécialisée dans la création et la gestion d'expositions d'art numérique interactives. Nous allions des compétences avancées en ingénierie logicielle à une profonde sensibilité curatoriale pour transformer les archives historiques et les collections physiques en expériences immersives accessibles dans le monde entier.",
         "contactUs": "Collaborez avec nous",
         "formName": "Nom ou Entreprise",
         "formEmail": "Adresse E-mail",

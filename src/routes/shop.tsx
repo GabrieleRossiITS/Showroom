@@ -59,12 +59,8 @@ function ShopPage() {
                         <Button
                             key={cat}
                             onClick={() => setFilter(cat)}
-                            className={`
-                                px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300
-                                ${filter === cat
-                                    ? "bg-(--deep-charcoal) text-(--vintage-sepia) shadow-xl scale-105"
-                                    : "bg-white/40 text-(--deep-charcoal)/60 hover:bg-white/60 hover:text-(--deep-charcoal)"}
-                            `}
+                            rounded="full"
+                            variant={filter === cat ? "copper" : "tertiary"}
                         >
                             {t(`shop.${cat}`)}
                         </Button>
@@ -84,13 +80,22 @@ function ShopPage() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.4, ease: "easeOut" }}
-                                className="group relative bg-(--deep-charcoal) p-4 rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-(--burnished-copper)/10 transition-all duration-500 hover:-translate-y-2"
+                                className="
+                                    group relative bg-(--deep-charcoal) p-4 rounded-[2.5rem] 
+                                    overflow-hidden shadow-2xl hover:shadow-(--burnished-copper)/10 
+                                    transition-all duration-500 hover:-translate-y-2
+                                    "
                             >
                                 <div className="relative aspect-4/5 overflow-hidden rounded-4xl bg-black/20">
                                     <img
                                         src={item.image}
                                         alt={item.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-90 group-hover:opacity-100"
+                                        className="
+                                            w-full h-full object-cover 
+                                            transition-all duration-500 
+                                            group-hover:scale-110 
+                                            grayscale group-hover:grayscale-0 opacity-90 group-hover:opacity-100
+                                            "
                                     />
                                     <div className="absolute top-4 left-4">
                                         <span className="px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest border border-white/10">

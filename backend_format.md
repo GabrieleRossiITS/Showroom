@@ -1,158 +1,129 @@
-# Formattazione **BASE** proposta per il backend
+1. Architettura Generale e Database
 
-## Formattazione JSON delle Opere
+Il backend funzionerà come una RESTful API stateless. Poiché il sistema girerà in container Docker isolati (senza connessione internet), tutte le risorse (immagini incluse) dovranno essere servite localmente o i path nel DB dovranno puntare agli asset del frontend.
 
-```JSON
-[
-    {
-        "id": 1,
-        "title": "",
-        "year": 2026,
-        "image": ""
-    },
-    {
-        "id": 2,
-        "title": "",
-        "year": 2026,
-        "image": ""
-    }
-]
-```
+Scelte Architetturali (Dapper + PostgreSQL)
+Sicurezza SQL: Qualsiasi query al database DEVE essere fatta tramite Dapper usando query parametrizzate (es. new { Param = value }) per prevenire nativamente le SQL Injection.
 
-### Esempio Opere
+Gestione JSON: Sfrutteremo il tipo JSONB di PostgreSQL per dati molto variabili (come le specifiche tecniche dei souvenir), riducendo il numero di tabelle relazionali inutili.
 
-```JSON
-[
-    {
-        "id": 1,
-        "title": "Papà Rumeno",
-        "year": 1932,
-        "image": "https://femboy.com/images/ţigan.jpg"
-    },
-    {
-        "id": 2,
-        "title": "Lore San",
-        "year": 1954,
-        "image": "https://femboy.com/images/lore_san.jpg"
-    },
-    {
-        "id": 3,
-        "title": "Nevy Chan",
-        "year": 1986,
-        "image": "https://femboy.com/images/nevy_chan.jpg"
-    }
-]
-```
+Pattern Multilingua: Useremo il pattern "Entity Translation". Le entità principali (es. Artworks) avranno una tabella figlia associata (es. ArtworkTranslations) con le traduzioni.
 
-## Formattazione JSON delle Mostre
+1. Gestione Multilingua (Internazionalizzazione)
+   Il frontend in React gestisce 7 lingue tramite i18next. Il backend dovrà rispondere in base alla lingua richiesta.
+
+Come funziona: Il frontend invierà la lingua tramite l'header HTTP standard Accept-Language (es. it, fr, en).
+
+Fallback Logic: Se l'header manca o se una traduzione specifica non esiste nel DB, la query SQL restituirà di default il testo in Inglese ('en') e imposterà un flag booleano isFallback = true. Questo permetterà al frontend di avvisare l'utente.
+
+1. Specifiche degli Endpoint (API REST)
+   Tutte le API dovranno essere esposte sotto il prefisso /api/v1/.
+
+3.1. Opere d'Arte e Archivio (Artworks)
+
+**`GET /api/v1/artworks`**
+
+Descrizione: Restituisce la lista ridotta delle opere per la galleria principale.
+
+Input: Header Accept-Language
+
+Output (JSON):
 
 ```JSON
 [
     {
         "id": 1,
-        "title": "",
-        "location": "",
-        "coordinates": {
-            "lat": 0.0,
-            "lng": 0.0
-        },
-        "maps_url": "",
-        "status": "",
-        "start_date": "",
-        "end_date": "",
-        "description": "",
-        "artworks_included": []
+        "imageUrl": "/images/archive/rd-0001.jpg",
+        "title": "La première maîtresse",
+        "description": "Breve descrizione...",
+        "isFallback": false
     }
 ]
 ```
 
-### Esempio Mostre
+**`GET /api/v1/artworks/{id}`**
+
+Descrizione: Restituisce i dettagli completi di una singola opera. I dati tecnici e di contesto sono raggruppati in sotto-oggetti per pulizia del frontend.
+
+Output (JSON):
 
 ```JSON
-[
-    {
-        "id": 1,
-        "title": "I biscotti di Allen",
-        "location": "Museo del Louvre, Parigi",
-        "coordinates": {
-            "lat": 45.45262345,
-            "lng": 9.16123454
-        },
-        "maps_url": "https://maps.app.goo.gl/Louvre",
-        "status": "past",
-        "start_date": "2025-09-15",
-        "end_date": "2026-01-28",
-        "description": "",
-        "artworks_included": [1, 2, 5, 8]
+{
+    "archiveId": "RD-0001",
+    "title": "La première maîtresse",
+    "year": 1933,
+    "isOriginal": true,
+    "imageUrl": "/images/archive/rd-0001.jpg",
+    "description": "Descrizione completa tradotta...",
+    "context": {
+        "location": "Scuola elementare, Parigi",
+        "historicalPeriod": "Primi Reportage"
     },
-    {
-        "id": 2,
-        "title": "Mi piacciono le nere",
-        "location": "CDS, Pordenone",
-        "coordinates": {
-            "lat": 452.4844,
-            "lng": 9.2341772
-        },
-        "maps_url": "https://maps.app.goo.gl/CDS",
-        "status": "ongoing",
-        "start_date": "2026-02-10",
-        "end_date": "2026-05-30",
-        "description": "Tony mio amore artista bellissimo",
-        "artworks_included": [3, 4, 9, 12, 15]
-    },
-    {
-        "id": 3,
-        "title": "Non ho piu idee",
-        "location": "Via via via via",
-        "coordinates": {
-            "lat": 45.4654238906733,
-            "lng": 9675.1910
-        },
-        "maps_url": "https://maps.app.goo.gl/BOH",
-        "status": "upcoming",
-        "start_date": "2026-06-15",
-        "end_date": "2026-10-10",
-        "description": "sladhjvgbkasjrdvfblsadkfvblskdfvhoaisdfb",
-        "artworks_included": [6, 7, 10, 11]
+    "technicalInfo": {
+        "support": "Stampa vintage alla gelatina",
+        "camera": "Rolleiflex Standard",
+        "dimensions": "24 x 30 cm"
     }
-]
+}
 ```
 
-## Descrizione degli attributi
+3.2. Esposizioni e Biglietteria (Exhibitions)
+Per ottimizzare le prestazioni, i dati statici dell'esposizione sono separati dalla disponibilità dinamica dei biglietti.
 
-### Opere
+**`GET /api/v1/exhibitions/{id}`**
 
-- `id`: ID univoco dell'opera (**_number_**)
-- `title`: Titolo dell'opera (**_string_**)
-- `year`: Anno di creazione dell'opera (**_number_**)
-- `image`: URL dell'immagine dell'opera, che sia url da siti strani o proprio del backend (**_string_**)
+Descrizione: Dati statici e listino prezzi (Tier) dei biglietti.
 
-### Mostre
+Output (JSON):
 
-- `id`: ID univoco della mostra (**_number_**)
-- `title`: Titolo della mostra (**_string_**)
-- `location`: Luogo della mostra (**_string_**)
-- `coordinates`: Oggetto contenente latitudine (lat) e longitudine (lng) per l'integrazione con mappe interattive (**_object_**)
-    - `lat`: latitudine (**_number_**)
-    - `lon`: longitudine (**_number_**)
-- `maps_url`: Luogo della mostra (**_string_**)
-- `status`: Stato della mostra (**_upcoming, ongoing, past_**)
-- `start_date`: Data di inizio della mostra (**_date_**)
-- `end_date`: Data di fine della mostra (**_date_**)
-- `description`: Descrizione della mostra (**_string_**)
+```JSON
+{
+    "id": 101,
+    "title": "Robert Doisneau: Paris",
+    "location": "Galerie de la Photographie, Parigi",
+    "ticketTiers": [
+        { "id": "std_01", "name": "Entrée Standard", "price": 18.00 },
+        { "id": "red_01", "name": "Tarif Réduit", "price": 12.00 }
+    ]
+}
+```
 
-## Note per l'Implementazione Logica
+**`GET /api/v1/exhibitions/{id}/slots?date=YYYY-MM-DD`**
 
-Il backend dovrà gestire il campo status dinamicamente in base alla data odierna:
+Descrizione: Interroga il DB per calcolare quanti posti rimangono per una determinata giornata.
 
-- **_upcoming_**: La start_date è maggiore della data di oggi.
-- **_ongoing_**: La data di oggi è compresa tra start_date e end_date (incluse).
-- **_past_**: La end_date è minore della data di oggi.
+Output (JSON):
 
-## Endpoint API (REST)
+```JSON
+{
+    "requestedDate": "2026-04-01",
+    "slots": [
+        { "time": "10:00", "remainingTickets": 15, "isAvailable": true },
+        { "time": "19:00", "remainingTickets": 0, "isAvailable": false }
+    ]
+}
+```
 
-| Metodo | Endpoint              | Descrizione                                                                               |
-| ------ | --------------------- | ----------------------------------------------------------------------------------------- |
-| GET    | /api/artworks         | Recupera la lista di tutte le opere.                                                      |
-| GET    | /api/exhibitions      | Recupera tutte le mostre (possibilità di filtrare via query string, es. ?status=ongoing). |
-| GET    | /api/exhibitions/{id} | Recupera i dettagli di una singola mostra (inclusi i dati espansi delle opere collegate). |
+3.3. Negozio Souvenir (E-Commerce)
+**`GET /api/v1/souvenirs/{id}`**
+
+Descrizione: Dettaglio prodotto. Sfrutta il JSONB su PostgreSQL per il campo specifications, permettendo ad esempio di avere chiavi diverse se il prodotto è un "Libro" (Pagine, Lingua) o una "Stampa" (Cornice, Materiale).
+
+Output (JSON):
+
+```JSON
+{
+    "id": "sov_print_001",
+    "name": "Le Baiser de l'Hôtel de Ville (Large Print)",
+    "category": "STAMPE",
+    "price": 45.00,
+    "inventory": { "inStock": true, "quantityAvailable": 12 },
+    "images": ["/images/shop/main.jpg", "/images/shop/detail.jpg"],
+    "shortDescription": "Premium print...",
+    "specifications": {
+        "Dimensioni": "50 x 70 cm",
+        "Materiale": "Carta Fine Art"
+    },
+    "relatedItems": [ 1, 2, 3, 4, 5 ]
+}
+```

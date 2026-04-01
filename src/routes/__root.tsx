@@ -45,6 +45,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         document.title = `${pageTitle} | Robert Doisneau`;
+
+        console.warn(
+            "[PyTech-Auth] Production scenario detected. Admin dashboard hidden.",
+        );
+        console.info(
+            "Tip: run window.forceAdminOverride() to force the bypass of the offline token and access the admin console.",
+        );
+        (window as any).forceAdminOverride = () => {
+            window.location.href = "/admin";
+            return "Redirecting...";
+        };
     }, [pageTitle]);
 
     return (

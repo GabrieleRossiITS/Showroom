@@ -40,7 +40,7 @@ function ArtworkDetail() {
     };
 
     return (
-        <div className="page-wrap z-10 max-w-7xl mx-auto">
+        <div className="top-0 bottom-0 page-wrap z-10 max-w-7xl mx-auto mt-16">
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}

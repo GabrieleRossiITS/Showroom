@@ -5,51 +5,60 @@ export interface Quote {
 
 export interface Artwork {
     id: number;
+    archiveId: string;
     title: string;
-    year: number;
-    image: string;
-    support: string;
     description: string;
+    year: number;
+    historicalPeriod: string;
+    support: string;
+    camera: string;
+    dimensions: string;
+    imageUrl: string;
 }
 
-export interface Exhibition {
-    id: number;
-    title: string;
-    location: string;
-    coordinates: {
-        lat: number;
-        lng: number;
-    };
-    maps_url: string;
-    status: "ongoing" | "past" | "upcoming";
-    start_date: string;
-    end_date: string;
-    description: string;
-    image: string;
-    artworks_included: number[];
-    ticket_info: {
-        tiers: TicketTier[];
-        slots: TimeSlot[];
-    };
+export interface Ticket {
+    id: string;
+    price: number;
+    remainingTickets: number;
+    isAvailable: boolean;
+    dateTime: string;
+    tier: TicketTier;
 }
 
 export interface TicketTier {
     id: string;
     name: string;
-    price: number;
     description: string;
 }
 
-export interface TimeSlot {
-    time: string;
-    ticketsLeft: number;
-}
-
-export interface ShopItem {
+export interface Exhibition {
     id: number;
+    location: string;
+    mapsUrl: string;
+    status: "ongoing" | "past" | "upcoming";
+    startDate: string;
+    endDate: string;
     title: string;
-    price: number;
-    category: "print" | "book" | "postcard" | "accessory";
-    image: string;
     description: string;
+    imageUrl: string;
+    tickets: Ticket[];
+}
+
+export interface SouvenirsItem {
+    id: number;
+    name: string;
+    shortDescription: string;
+    fullDescription: string;
+    specifications: string;
+    category: string;
+    price: number;
+    inStock: boolean;
+    quantityAvailable: number;
+    imageUrl: string;
+}
+
+export interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
 }

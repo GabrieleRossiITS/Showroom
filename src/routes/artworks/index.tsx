@@ -11,16 +11,18 @@ import Button from "#/components/ui/Button";
 import { getArtworks } from "public/api/fetchers";
 import { createArtworkSlug } from "#/components/utlis";
 import { GlobalLoader } from "#/components/GlobalLoader";
+import { ProtectedImage } from "#/components/ui/ProtectedImage";
 
 export const Route = createFileRoute("/artworks/")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
-    loader: () => getArtworks(),
+    loader: ({ context }) => getArtworks(context.lang),
     component: AuthorsTimeline,
     staticData: {
         title: "Robert Doisneau - Timeline",
     },
 });
+
 
 const timelineEvents = [
     {
@@ -304,15 +306,9 @@ function AuthorsTimeline() {
                                     >
                                         <div className="w-full h-full rounded-4xl md:rounded-[3rem] bg-(--deep-charcoal) relative overflow-hidden border border-(--inset-glint)/20">
                                             <div className="absolute inset-0 bg-linear-to-t from-(--deep-charcoal)/90 via-transparent to-transparent z-10 opacity-70 group-hover:opacity-20 transition-opacity duration-500" />
-                                            <img
-                                                src={
-                                                    photo.image ||
-                                                    "https://via.placeholder.com/800x1000"
-                                                }
-                                                alt={
-                                                    photo.title ||
-                                                    `Event ${event.year}`
-                                                }
+                                            <ProtectedImage
+                                                src={photo.imageUrl}
+                                                alt={photo.title || `Event ${event.year}`}
                                                 className={`w-full h-full object-cover transition-all duration-700 pointer-events-none ${
                                                     event.isColor
                                                         ? "saturate-100 group-hover:saturate-150"

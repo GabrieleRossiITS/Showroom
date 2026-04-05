@@ -5,6 +5,9 @@ import { GlobalLoader } from './components/GlobalLoader'
 export function getRouter() {
     const router = createTanStackRouter({
         routeTree,
+        context: {
+            lang: "it", // Default language
+        },
         scrollRestoration: true,
         defaultPendingComponent: GlobalLoader,
         defaultPreload: 'intent',
@@ -23,4 +26,4 @@ declare module '@tanstack/react-router' {
         title?: string
         breadcrumb?: string
     }
-}
+}

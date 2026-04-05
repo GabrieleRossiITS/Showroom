@@ -1,21 +1,23 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Clock, ArrowRight } from "lucide-react";
+import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { getExhibitions } from "public/api/fetchers";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
+import { ProtectedImage } from "#/components/ui/ProtectedImage";
 
 export const Route = createFileRoute("/exhibitions/")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
-    loader: () => getExhibitions(),
+    loader: ({ context }) => getExhibitions(context.lang),
     component: Expositions,
     staticData: {
         title: "Mostre",
     },
 });
+
 
 function Expositions() {
     const exhibitions = Route.useLoaderData();
@@ -26,7 +28,7 @@ function Expositions() {
         if (a.status === "ongoing" && b.status !== "ongoing") return -1;
         if (a.status !== "ongoing" && b.status === "ongoing") return 1;
         return (
-            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+            new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
         );
     });
 
@@ -64,10 +66,10 @@ function Expositions() {
                         >
                             {/* Image Header */}
                             <div className="relative h-72 overflow-hidden">
-                                <img
-                                    src={exp.image}
+                                <ProtectedImage
+                                    src={exp.imageUrl}
                                     alt={exp.title}
-                                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                                    className="w-full h-full grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
@@ -86,7 +88,7 @@ function Expositions() {
 
                                 <div className="absolute bottom-6 left-8">
                                     <span className="text-5xl font-black text-white/90 font-mono tracking-tighter">
-                                        {new Date(exp.start_date).getFullYear()}
+                                        {new Date(exp.startDate).getFullYear()}
                                     </span>
                                 </div>
                             </div>
@@ -112,11 +114,11 @@ function Expositions() {
                                             <Calendar className="w-5 h-5 text-(--burnished-copper)" />
                                             <span>
                                                 {new Date(
-                                                    exp.start_date,
+                                                    exp.startDate,
                                                 ).toLocaleDateString()}{" "}
                                                 -{" "}
                                                 {new Date(
-                                                    exp.end_date,
+                                                    exp.endDate,
                                                 ).toLocaleDateString()}
                                             </span>
                                         </div>

@@ -9,12 +9,21 @@ import Header from "../components/layout/Header";
 
 import appCss from "../styles.css?url";
 import { Suspense, useEffect } from "react";
-import "../i18n";
+import i18nConfig from "../i18n";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "../components/GlobalLoader";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
+import { AuthProvider } from "../components/contexts/AuthContext";
 
 export const Route = createRootRoute({
+    context: () => ({
+        lang: i18nConfig.language || "it",
+    }),
+    beforeLoad: async () => {
+        return {
+            lang: i18nConfig.language || "it",
+        };
+    },
     head: () => ({
         meta: [
             { charSet: "utf-8" },
@@ -67,26 +76,28 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <HeadContent />
             </head>
             <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(161,86,48,0.24)] ">
-                <Suspense fallback={<GlobalLoader />}>
-                    <a href="#main-content" className="skip-link">
-                        {i18n.language === "it"
-                            ? "Passa al contenuto principale"
-                            : "Skip to main content"}
-                    </a>
-                    <Header />
-                    <main
-                        id="main-content"
-                        className="relative page-wrap pt-24 min-h-screen overflow-hidden"
-                    >
-                        <div className="max-w-7xl mx-auto pt-4 absolute top-24 left-0 right-0 pointer-events-none">
-                            <div className="pointer-events-auto">
-                                <Breadcrumbs />
+                <AuthProvider>
+                    <Suspense fallback={<GlobalLoader />}>
+                        <a href="#main-content" className="skip-link">
+                            {i18n.language === "it"
+                                ? "Passa al contenuto principale"
+                                : "Skip to main content"}
+                        </a>
+                        <Header />
+                        <main
+                            id="main-content"
+                            className="relative page-wrap pt-24 min-h-screen overflow-hidden"
+                        >
+                            <div className="max-w-7xl mx-auto pt-4 absolute top-24 left-0 right-0 pointer-events-none">
+                                <div className="pointer-events-auto">
+                                    <Breadcrumbs />
+                                </div>
                             </div>
-                        </div>
-                        {children}
-                    </main>
-                    <Footer />
-                </Suspense>
+                            {children}
+                        </main>
+                        <Footer />
+                    </Suspense>
+                </AuthProvider>
                 <Scripts />
             </body>
         </html>

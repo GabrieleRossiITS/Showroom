@@ -38,7 +38,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="text-(--vintage-sepia) transition-colors duration-300 hover:text-(--burnished-copper) p-2"
                 aria-label={t("footer.githubLabel")}
-                title="GitHub Repository"
+                title={t("footer.githubLabel")}
             >
                 <FaGithub className="w-6 h-6" />
             </a>

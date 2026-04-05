@@ -13,11 +13,16 @@ import { useEffect, useState } from "react";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
+import { ProtectedImage } from "#/components/ui/ProtectedImage";
+import type { Ticket } from "public/types";
+import { formatDate, formatTime } from "#/components/utlis";
 
 export const Route = createFileRoute("/exhibitions/$id")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
-    loader: ({ params }) => getExhibitionById(Number(params.id)),
+    loader: ({ params, context }) =>
+        getExhibitionById(Number(params.id), context.lang),
+
     component: ExhibitionDetail,
 });
 
@@ -25,38 +30,51 @@ function ExhibitionDetail() {
     const exhibition = Route.useLoaderData();
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
-    const [selectedTier, setSelectedTier] = useState<string>("standard");
+    const [selectedSlot, setSelectedSlot] = useState<string | null>(
+        exhibition.tickets.length > 0 ? exhibition.tickets[0].dateTime : null,
+    );
+    const [selectedTier, setSelectedTier] = useState<string>(
+        exhibition.tickets.length > 0 ? exhibition.tickets[0].id : "",
+    );
     const [isBooked, setIsBooked] = useState(false);
 
-    const ticketTiers = exhibition.ticket_info.tiers.map((tier: any) => ({
-        ...tier,
-        name: t(tier.nameKey),
-        desc: t(tier.descKey),
-    }));
+    const uniqueSlots = Array.from(
+        new Set(exhibition.tickets.map((tick: Ticket) => tick.dateTime)),
+    );
+
+    const availableTiers = exhibition.tickets.filter(
+        (tick: Ticket) => tick.dateTime === selectedSlot,
+    );
 
     useEffect(() => {
         const mainElement = document.getElementById("main-content");
 
         if (mainElement) {
-            mainElement.style.padding = '0';
+            mainElement.style.padding = "0";
         }
 
         return () => {
             if (mainElement) {
-                mainElement.style.padding = '';
+                mainElement.style.padding = "";
             }
         };
     }, []);
 
+    const selectedTicket = exhibition.tickets.find(
+        (tick: Ticket) => tick.id === selectedTier,
+    );
+
     const handleBooking = () => {
-        if (!selectedSlot) return;
+        if (!selectedSlot || !selectedTicket) return;
         setIsBooked(true);
     };
 
     if (isBooked) {
         return (
-            <div key="success-view" className="min-h-screen flex items-center justify-center bg-(--vintage-sepia) px-6">
+            <div
+                key="success-view"
+                className="min-h-screen flex items-center justify-center bg-(--vintage-sepia) px-6"
+            >
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -71,12 +89,8 @@ function ExhibitionDetail() {
                     <p className="text-(--parisian-stone) text-lg">
                         {exhibition.title} <br />
                         <span className="font-mono mt-2 block">
-                            {selectedSlot} |{" "}
-                            {
-                                ticketTiers.find(
-                                    (tier: any) => tier.id === selectedTier,
-                                )?.name
-                            }
+                            {selectedTicket?.dateTime} |{" "}
+                            {selectedTicket?.tier.name}
                         </span>
                     </p>
                     <Button
@@ -93,12 +107,15 @@ function ExhibitionDetail() {
     }
 
     return (
-        <div key="booking-view" className="min-h-screen bg-(--vintage-sepia) pb-24 overflow-x-hidden">
+        <div
+            key="booking-view"
+            className="min-h-screen bg-(--vintage-sepia) pb-24 overflow-x-hidden"
+        >
             <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 z-10" />
-                <img
-                    src={exhibition.image}
-                    className="w-full h-full object-cover grayscale brightness-[0.4]"
+                <ProtectedImage
+                    src={exhibition.imageUrl}
+                    className="w-full h-full grayscale brightness-[0.4]"
                     alt={exhibition.title}
                 />
                 <div className="absolute inset-0 z-20 flex flex-col justify-end p-6 md:p-12 max-w-5xl mx-auto mb-8">
@@ -136,49 +153,70 @@ function ExhibitionDetail() {
                             <Clock className="w-6 h-6 text-(--burnished-copper)" />
                             {t("exhibitionDetail.chooseTime")}
                         </h3>
-                        {exhibition.ticket_info.slots.length > 0 ? (
+                        {uniqueSlots.length > 0 ? (
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                {exhibition.ticket_info.slots.map(
-                                    (slot: any) => {
-                                        const isFull = slot.ticketsLeft === 0;
-                                        return (
-                                            <button
-                                                key={slot.time}
-                                                disabled={isFull}
-                                                onClick={() =>
-                                                    setSelectedSlot(slot.time)
+                                {uniqueSlots.map((slot: string) => {
+                                    const slotTickets =
+                                        exhibition.tickets.filter(
+                                            (tick: Ticket) =>
+                                                tick.dateTime === slot,
+                                        );
+                                    const totalRemaining = slotTickets.reduce(
+                                        (acc: number, tick: Ticket) =>
+                                            acc + tick.remainingTickets,
+                                        0,
+                                    );
+                                    const isFull = totalRemaining === 0;
+
+                                    return (
+                                        <button
+                                            key={slot}
+                                            disabled={isFull}
+                                            onClick={() => {
+                                                setSelectedSlot(slot);
+                                                const firstTier =
+                                                    slotTickets.find(
+                                                        (tick: Ticket) =>
+                                                            tick.remainingTickets >
+                                                            0,
+                                                    ) ?? slotTickets[0];
+                                                if (firstTier) {
+                                                    setSelectedTier(
+                                                        firstTier.id,
+                                                    );
                                                 }
-                                                className={cn(
-                                                    "relative p-4 rounded-3xl border-2 transition-all duration-300 text-left",
-                                                    selectedSlot === slot.time
-                                                        ? "bg-(--deep-charcoal) border-(--deep-charcoal) text-white shadow-xl scale-[1.02]"
-                                                        : "bg-white/40 border-black/5 hover:border-(--burnished-copper)/30",
-                                                    isFull &&
+                                            }}
+                                            className={cn(
+                                                "relative p-4 rounded-3xl border-2 transition-all duration-300 text-left",
+                                                selectedSlot === slot
+                                                    ? "bg-(--deep-charcoal) border-(--deep-charcoal) text-white shadow-xl scale-[1.02]"
+                                                    : "bg-white/40 border-black/5 hover:border-(--burnished-copper)/30",
+                                                isFull &&
                                                     "opacity-50 cursor-not-allowed bg-black/5",
+                                            )}
+                                        >
+                                            <span className="block text-xl font-bold font-mono">
+                                                {formatDate(slot)}
+                                                <br />
+                                                {formatTime(slot)}
+                                            </span>
+                                            <span
+                                                className={cn(
+                                                    "text-xs font-bold uppercase tracking-wider",
+                                                    isFull
+                                                        ? "text-red-500"
+                                                        : totalRemaining < 10
+                                                          ? "text-(--burnished-copper)"
+                                                          : "text-(--parisian-stone)",
                                                 )}
                                             >
-                                                <span className="block text-xl font-bold font-mono">
-                                                    {slot.time}
-                                                </span>
-                                                <span
-                                                    className={cn(
-                                                        "text-xs font-bold uppercase tracking-wider",
-                                                        isFull
-                                                            ? "text-red-500"
-                                                            : slot.ticketsLeft <
-                                                                10
-                                                                ? "text-(--burnished-copper)"
-                                                                : "text-(--parisian-stone)",
-                                                    )}
-                                                >
-                                                    {isFull
-                                                        ? "Full"
-                                                        : `${slot.ticketsLeft} ${t("exhibitionDetail.ticketsLeft")}`}
-                                                </span>
-                                            </button>
-                                        );
-                                    },
-                                )}
+                                                {isFull
+                                                    ? "Full"
+                                                    : `${totalRemaining} ${t("exhibitionDetail.ticketsLeft")}`}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
                             </div>
                         ) : (
                             <div className="p-10 rounded-4xl bg-black/5 border-2 border-dashed border-black/10 text-center flex flex-col items-center gap-3">
@@ -197,28 +235,31 @@ function ExhibitionDetail() {
                             {t("exhibitionDetail.selectTier")}
                         </h3>
                         <div className="space-y-4">
-                            {ticketTiers.map((tier: any) => (
+                            {availableTiers.map((ticket: Ticket) => (
                                 <button
-                                    key={tier.id}
-                                    onClick={() => setSelectedTier(tier.id)}
+                                    key={ticket.id}
+                                    disabled={ticket.remainingTickets === 0}
+                                    onClick={() => setSelectedTier(ticket.id)}
                                     className={cn(
                                         "w-full p-6 rounded-4xl border-2 flex items-center justify-between transition-all duration-300 group",
-                                        selectedTier === tier.id
+                                        selectedTier === ticket.id
                                             ? "bg-(--deep-charcoal)/5 border-(--deep-charcoal) ring-1 ring-(--deep-charcoal)/20"
                                             : "bg-black/5 border-transparent hover:bg-black/10",
+                                        ticket.remainingTickets === 0 &&
+                                            "opacity-40 grayscale pointer-events-none",
                                     )}
                                 >
                                     <div className="text-left">
                                         <span className="block text-lg font-bold text-(--deep-charcoal)">
-                                            {tier.name}
+                                            {ticket.tier.name}
                                         </span>
                                         <span className="text-sm text-(--parisian-stone-dark)">
-                                            {tier.desc}
+                                            {ticket.tier.description}
                                         </span>
                                     </div>
                                     <div className="text-right">
                                         <span className="text-2xl font-black text-(--burnished-copper) font-mono">
-                                            {tier.price}€
+                                            {ticket.price}€
                                         </span>
                                     </div>
                                 </button>
@@ -248,18 +289,15 @@ function ExhibitionDetail() {
                                         !selectedSlot && "text-white/30 italic",
                                     )}
                                 >
-                                    {selectedSlot || "Not selected"}
+                                    {selectedSlot
+                                        ? formatTime(selectedSlot)
+                                        : "Not selected"}
                                 </span>
                             </div>
                             <div className="flex justify-between uppercase">
                                 <span>Tier</span>
                                 <span className="font-mono">
-                                    {
-                                        ticketTiers.find(
-                                            (tier: any) =>
-                                                tier.id === selectedTier,
-                                        )?.name
-                                    }
+                                    {selectedTicket?.tier.name || "--"}
                                 </span>
                             </div>
                         </div>
@@ -268,12 +306,7 @@ function ExhibitionDetail() {
                                 Total
                             </span>
                             <span className="text-4xl font-black text-(--burnished-copper) font-mono">
-                                {
-                                    ticketTiers.find(
-                                        (tier: any) => tier.id === selectedTier,
-                                    )?.price
-                                }
-                                €
+                                {selectedTicket?.price || 0}€
                             </span>
                         </div>
                         <Button
@@ -286,13 +319,12 @@ function ExhibitionDetail() {
                         >
                             {t("exhibitionDetail.confirmBooking")}
                         </Button>
-                        {!selectedSlot &&
-                            exhibition.ticket_info.slots.length > 0 && (
-                                <div className="flex items-center gap-2 text-xs text-white/40 justify-center">
-                                    <AlertCircle className="w-3 h-3" />
-                                    Please select a time slot
-                                </div>
-                            )}
+                        {!selectedSlot && exhibition.tickets.length > 0 && (
+                            <div className="flex items-center gap-2 text-xs text-white/40 justify-center">
+                                <AlertCircle className="w-3 h-3" />
+                                Please select a time slot
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

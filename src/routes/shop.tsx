@@ -10,12 +10,13 @@ import { getShopItems } from "public/api/fetchers";
 export const Route = createFileRoute("/shop")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
-    loader: () => getShopItems(),
+    loader: ({ context }) => getShopItems(context.lang),
+
     component: ShopPage,
     staticData: {
         title: "Negozio",
         breadcrumb: "nav.shop",
-    }
+    },
 });
 
 function ShopPage() {
@@ -28,7 +29,7 @@ function ShopPage() {
 
     const filteredItems = useMemo(() => {
         if (filter === "all") return items;
-        return items.filter(item => item.category === filter);
+        return items.filter((item) => item.category === filter);
     }, [items, filter]);
 
     const handleBuyNow = (id: number) => {
@@ -39,7 +40,6 @@ function ShopPage() {
     return (
         <div className="min-h-screen bg-(--vintage-sepia) pt-32 pb-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto space-y-16">
-
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -88,8 +88,8 @@ function ShopPage() {
                             >
                                 <div className="relative aspect-4/5 overflow-hidden rounded-4xl bg-black/20">
                                     <img
-                                        src={item.image}
-                                        alt={item.title}
+                                        src={item.imageUrl}
+                                        alt={item.name}
                                         className="
                                             w-full h-full object-cover 
                                             transition-all duration-500 
@@ -112,7 +112,9 @@ function ShopPage() {
                                                 className="absolute inset-0 bg-(--burnished-copper)/90 backdrop-blur-sm z-20 flex flex-col items-center justify-center text-white px-8 text-center"
                                             >
                                                 <CheckCircle2 className="w-16 h-16 mb-4 animate-bounce" />
-                                                <span className="text-lg font-bold font-serif leading-tight">{t("shop.success")}</span>
+                                                <span className="text-lg font-bold font-serif leading-tight">
+                                                    {t("shop.success")}
+                                                </span>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -121,14 +123,14 @@ function ShopPage() {
                                 <div className="p-6 space-y-4">
                                     <div className="flex justify-between items-start gap-4">
                                         <h3 className="text-xl font-bold text-(--vintage-sepia-light) font-serif leading-tight group-hover:text-white transition-colors">
-                                            {item.title}
+                                            {item.name}
                                         </h3>
                                         <span className="text-2xl font-black text-(--burnished-copper) font-mono shrink-0">
                                             {item.price}€
                                         </span>
                                     </div>
                                     <p className="text-(--parisian-stone) text-sm line-clamp-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                                        {item.description}
+                                        {item.shortDescription}
                                     </p>
                                     <Button
                                         onClick={() => handleBuyNow(item.id)}
@@ -136,7 +138,9 @@ function ShopPage() {
                                         rounded="full"
                                         className="w-full mt-4 flex gap-3 font-bold tracking-widest text-xs py-4 group/btn overflow-hidden relative"
                                     >
-                                        <span className="relative z-10">{t("shop.buyNow")}</span>
+                                        <span className="relative z-10">
+                                            {t("shop.buyNow")}
+                                        </span>
                                         <ShoppingBag className="w-4 h-4 relative z-10 transition-transform group-hover/btn:rotate-12" />
                                         <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover/btn:translate-x-[0%] transition-transform duration-500" />
                                     </Button>

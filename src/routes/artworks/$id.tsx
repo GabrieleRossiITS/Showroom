@@ -5,14 +5,16 @@ import Button from "#/components/ui/Button";
 import { getArtworkById } from "public/api/fetchers";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
+import { ProtectedImage } from "#/components/ui/ProtectedImage";
 
 export const Route = createFileRoute("/artworks/$id")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
-    loader: async ({ params }) => {
+    loader: async ({ params, context }) => {
         const artworkId = parseInt(params.id.split("-")[0], 10);
-        return getArtworkById(artworkId);
+        return getArtworkById(artworkId, context.lang);
     },
+
     component: ArtworkDetail,
     staticData: {
         title: "Dettaglio Opera - Robert Doisneau",
@@ -62,10 +64,10 @@ function ArtworkDetail() {
 
                     <div className="relative z-10 p-4 md:p-6 bg-(--burnished-copper) rounded-[2.5rem] shadow-2xl shadow-(--deep-charcoal)/30 transform transition-transform duration-700 group-hover:scale-[1.02]">
                         <div className="relative bg-(--deep-charcoal) rounded-[1.8rem] overflow-hidden shadow-[inset_0_20px_60px_rgba(0,0,0,0.8)] border border-white/10 aspect-4/5 md:aspect-auto">
-                            <img
-                                src={artwork.image}
+                            <ProtectedImage
+                                src={artwork.imageUrl}
                                 alt={artwork.title}
-                                className="w-full h-auto object-contain max-h-[75vh] mx-auto"
+                                className="w-full h-auto max-h-[75vh]"
                             />
                             <div className="absolute inset-0 bg-linear-to-tr from-white/10 via-transparent to-transparent opacity-40 pointer-events-none" />
                         </div>
@@ -78,7 +80,7 @@ function ArtworkDetail() {
                             {t("artworkDetail.archive")}
                         </div>
                         <div className="text-sm font-bold">
-                            RD-{artwork.id.toString().padStart(4, "0")}
+                            {artwork.archiveId}
                         </div>
                     </div>
                 </motion.div>

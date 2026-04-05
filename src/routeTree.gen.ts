@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
@@ -22,6 +23,11 @@ import { Route as ArtworksIdRouteImport } from './routes/artworks/$id'
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtistsRoute = ArtistsRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/artists': typeof ArtistsRoute
+  '/login': typeof LoginRoute
   '/shop': typeof ShopRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/artists': typeof ArtistsRoute
+  '/login': typeof LoginRoute
   '/shop': typeof ShopRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/artists': typeof ArtistsRoute
+  '/login': typeof LoginRoute
   '/shop': typeof ShopRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/artists'
+    | '/login'
     | '/shop'
     | '/artworks/$id'
     | '/exhibitions/$id'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/artists'
+    | '/login'
     | '/shop'
     | '/artworks/$id'
     | '/exhibitions/$id'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/artists'
+    | '/login'
     | '/shop'
     | '/artworks/$id'
     | '/exhibitions/$id'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
   ArtistsRoute: typeof ArtistsRoute
+  LoginRoute: typeof LoginRoute
   ShopRoute: typeof ShopRoute
   ArtworksIdRoute: typeof ArtworksIdRoute
   ExhibitionsIdRoute: typeof ExhibitionsIdRoute
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/artists': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
   ArtistsRoute: ArtistsRoute,
+  LoginRoute: LoginRoute,
   ShopRoute: ShopRoute,
   ArtworksIdRoute: ArtworksIdRoute,
   ExhibitionsIdRoute: ExhibitionsIdRoute,

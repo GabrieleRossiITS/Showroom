@@ -61,7 +61,7 @@ function About() {
 
     return (
         <>
-            {i18n.language === "jp" && <CherryPetals />}
+            {i18n.language === "ja" && <CherryPetals />}
             <div className="fixed inset-0 pointer-events-none z-0 bg-(--vintage-sepia)" />
 
             <div className="relative z-10 flex flex-col px-6 md:px-12 pt-32 pb-32 max-w-7xl mx-auto">
@@ -79,7 +79,7 @@ function About() {
                         <div className="space-y-10">
                             <div>
                                 <h2 className="text-2xl font-bold text-(--burnished-copper-deep) mb-6">
-                                    {t("about.agencyInfo", "Chi Siamo")}
+                                    {t("about.agencyInfo", "About Us")}
                                 </h2>
 
                                 <div className="space-y-6">
@@ -87,25 +87,25 @@ function About() {
                                         <p className="text-sm font-mono text-(--parisian-stone-dark) uppercase tracking-widest mb-1">
                                             {t(
                                                 "about.missionTitle",
-                                                "La Nostra Missione",
+                                                "Our Mission",
                                             )}
                                         </p>
                                         <p className="text-lg text-(--deep-charcoal) font-medium">
                                             {t(
                                                 "about.missionValue",
-                                                "Digitalizzare l'arte, preservare l'emozione.",
+                                                "Digitizing art, preserving emotion.",
                                             )}
                                         </p>
                                     </div>
 
                                     <div className="border-l-2 border-(--burnished-copper) pl-4">
                                         <p className="text-sm font-mono text-(--parisian-stone-dark) uppercase tracking-widest mb-1">
-                                            {t("about.hqTitle", "Sedi")}
+                                            {t("about.hqTitle", "Headquarters")}
                                         </p>
                                         <p className="text-lg text-(--deep-charcoal) font-medium">
                                             {t(
                                                 "about.hqValue",
-                                                "Milano / Parigi",
+                                                "Milan / Paris",
                                             )}
                                         </p>
                                     </div>
@@ -116,7 +116,7 @@ function About() {
                                 <p className="text-(--parisian-stone-dark) leading-relaxed">
                                     {t(
                                         "about.agencyDescription",
-                                        "PyTech Exhibitions è un'agenzia all'avanguardia specializzata nella creazione e gestione di mostre d'arte digitali interattive. Uniamo competenze avanzate di ingegneria del software a una profonda sensibilità curatoriale per trasformare archivi storici e collezioni fisiche in esperienze immersive accessibili in tutto il mondo.",
+                                        "PyTech Exhibitions is a cutting-edge agency specialized in creating and managing interactive digital art exhibitions. We combine advanced software engineering skills with deep curatorial sensitivity to transform historical archives and physical collections into immersive experiences accessible worldwide.",
                                     )}
                                 </p>
                             </div>
@@ -124,7 +124,7 @@ function About() {
 
                         <div className="bg-(--surface-strong) p-8 md:p-10 border border-(--line) rounded-xl shadow-sm backdrop-blur-sm">
                             <h2 className="text-2xl font-bold text-(--deep-charcoal) mb-6">
-                                {t("about.contactUs", "Collabora con noi")}
+                                {t("about.contactUs", "Collaborate with us")}
                             </h2>
                             <form
                                 className="space-y-6"
@@ -138,14 +138,14 @@ function About() {
                                         >
                                             {t(
                                                 "about.formName",
-                                                "Nome o Azienda",
+                                                "Name or Company",
                                             )}
                                         </label>
                                         <input
                                             type="text"
                                             id="name"
                                             className="w-full bg-(--bg-base) border border-border rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-ring transition-all"
-                                            placeholder="Es. Museo del Louvre"
+                                            placeholder={t("about.formNamePlaceholder", "e.g. Louvre Museum")}
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -171,7 +171,7 @@ function About() {
                                     >
                                         {t(
                                             "about.formSubject",
-                                            "Motivo del contatto",
+                                            "Reason for contact",
                                         )}
                                     </label>
                                     <select
@@ -181,19 +181,19 @@ function About() {
                                         <option>
                                             {t(
                                                 "about.subject1",
-                                                "Richiesta organizzazione mostra",
+                                                "Exhibition organization request",
                                             )}
                                         </option>
                                         <option>
                                             {t(
                                                 "about.subject2",
-                                                "Partnership tecnica / Software",
+                                                "Technical / Software partnership",
                                             )}
                                         </option>
                                         <option>
                                             {t(
                                                 "about.subject3",
-                                                "Informazioni generali",
+                                                "General information",
                                             )}
                                         </option>
                                     </select>
@@ -206,7 +206,7 @@ function About() {
                                     >
                                         {t(
                                             "about.formMessage",
-                                            "Come possiamo aiutarti?",
+                                            "How can we help you?",
                                         )}
                                     </label>
                                     <textarea
@@ -215,7 +215,7 @@ function About() {
                                         className="w-full bg-(--bg-base) border border-border rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-ring transition-all resize-none"
                                         placeholder={t(
                                             "about.formPlaceholder",
-                                            "Scrivi qui i dettagli del tuo progetto...",
+                                            "Write the details of your project here...",
                                         )}
                                     ></textarea>
                                 </div>
@@ -224,7 +224,7 @@ function About() {
                                     type="submit"
                                     className="w-full bg-(--burnished-copper) hover:bg-(--burnished-copper-deep) text-(--vintage-sepia-light) font-bold py-4 rounded-md transition-colors duration-300 shadow-md"
                                 >
-                                    {t("about.formSubmit", "Invia Richiesta")}
+                                    {t("about.formSubmit", "Send Request")}
                                 </button>
                             </form>
                         </div>

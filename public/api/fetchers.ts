@@ -1,107 +1,127 @@
-import type { Artwork, Exhibition, ShopItem } from "../types";
+import type { Artwork, Exhibition, SouvenirsItem } from "../types";
 
-export const getExhibitions = async (): Promise<Exhibition[]> => {
-    const response = await fetch("http://localhost:3000/api/exhibitions.json");
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://localhost:7036/api/v1";
+const API_KEY = import.meta.env.VITE_API_KEY || "";
+
+/**
+ * Handle development SSL certificate issues in Node.js (SSR)
+ */
+if (typeof window === "undefined" && API_BASE_URL.includes("localhost")) {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
+
+/**
+ * Normalizes URLs to ensure they point to the correct API host
+ */
+const normalizeUrl = (url: string) => {
+    if (!url) return "";
+    if (url.startsWith("http")) return url;
+    // If it's a relative path starting with /images, point it to the API
+    if (url.startsWith("/images")) {
+        return `${API_BASE_URL.replace("/v1", "")}${url}`;
+    }
+    return url;
+};
+
+/**
+ * Helper to build consistent headers for API requests
+ */
+const getHeaders = (lang?: string) => {
+    const headers: Record<string, string> = {
+        "X-API-KEY": API_KEY,
+    };
+    if (lang) {
+        headers["Accept-Language"] = lang;
+    }
+    return headers;
+};
+
+export const getExhibitions = async (lang?: string): Promise<Exhibition[]> => {
+    const response = await fetch(`${API_BASE_URL}/exhibitions`, {
+        method: "GET",
+        headers: getHeaders(lang),
+    });
 
     if (!response.ok) {
         throw new Error("Error while fetching exhibitions");
     }
 
     const data: Exhibition[] = await response.json();
-    return data;
+    return data.map((exp) => ({
+        ...exp,
+        imageUrl: normalizeUrl(exp.imageUrl),
+    }));
 };
 
-export const getArtworks = async (): Promise<Artwork[]> => {
-    const response = await fetch("http://localhost:3000/api/artworks.json");
+export const getArtworks = async (lang?: string): Promise<Artwork[]> => {
+    const response = await fetch(`${API_BASE_URL}/artworks`, {
+        method: "GET",
+        headers: getHeaders(lang),
+    });
 
     if (!response.ok) {
         throw new Error("Error while fetching artworks");
     }
 
     const data: Artwork[] = await response.json();
-    return data;
+    return data.map((art) => ({
+        ...art,
+        imageUrl: normalizeUrl(art.imageUrl),
+    }));
 };
 
-/*
-useEffect(() => {
-        let currentUrl: string | null = null;
-
-        fetch("https://localhost:7036/api/images/1.jpeg", {
-            method: "GET",
-            headers: {
-                "X-API-KEY": "ui4gPw6tyvohq8jc?w4uoyrbtGHhdjl!",
-            },
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`Errore HTTP: ${res.status}`);
-                }
-                return res.blob();
-            })
-            .then((blob) => {
-                // Crea l'URL temporaneo
-                currentUrl = URL.createObjectURL(blob);
-                // Salvalo nello stato (questo farà aggiornare l'interfaccia)
-                setImageUrl(currentUrl);
-            })
-            .catch((error) => {
-                console.error("Impossibile caricare l'immagine:", error);
-            });
-
-        // Cleanup: distrugge l'URL temporaneo quando esci dalla pagina 
-        // per liberare memoria (ottima pratica in React)
-        return () => {
-            if (currentUrl) {
-                URL.revokeObjectURL(currentUrl);
-            }
-        };
-    }, []);
-
-
-*/
-
-export const getArtworkById = async (id: number): Promise<Artwork> => {
-    const response = await fetch("http://localhost:3000/api/artworks.json");
+export const getArtworkById = async (id: number, lang?: string): Promise<Artwork> => {
+    const response = await fetch(`${API_BASE_URL}/artworks/${id}`, {
+        method: "GET",
+        headers: getHeaders(lang),
+    });
 
     if (!response.ok) {
-        throw new Error("Error while fetching artworks");
+        if (response.status === 404) {
+            throw new Error("Artwork not found");
+        }
+        throw new Error("Error while fetching artwork detail");
     }
 
-    const data: Artwork[] = await response.json();
-    const artworkData = data.find((artwork) => artwork.id === id);
-
-    if (!artworkData) {
-        throw new Error("Artwork not found");
-    }
-
-    return artworkData;
+    const data: Artwork = await response.json();
+    return {
+        ...data,
+        imageUrl: normalizeUrl(data.imageUrl),
+    };
 };
 
-export const getExhibitionById = async (id: number): Promise<Exhibition> => {
-    const response = await fetch("http://localhost:3000/api/exhibitions.json");
+export const getExhibitionById = async (id: number, lang?: string): Promise<Exhibition> => {
+    const response = await fetch(`${API_BASE_URL}/exhibitions/${id}`, {
+        method: "GET",
+        headers: getHeaders(lang),
+    });
 
     if (!response.ok) {
-        throw new Error("Error while fetching exhibitions");
+        if (response.status === 404) {
+            throw new Error("Exhibition not found");
+        }
+        throw new Error("Error while fetching exhibition detail");
     }
 
-    const data: Exhibition[] = await response.json();
-    const exhibitionData = data.find((exhibition) => exhibition.id === id);
-
-    if (!exhibitionData) {
-        throw new Error("Exhibition not found");
-    }
-
-    return exhibitionData;
+    const data: Exhibition = await response.json();
+    return {
+        ...data,
+        imageUrl: normalizeUrl(data.imageUrl),
+    };
 };
 
-export const getShopItems = async (): Promise<ShopItem[]> => {
-    const response = await fetch("http://localhost:3000/api/shop.json");
-    if (!response.ok) throw new Error("Error while fetching shop items");
-    return response.json();
+export const getShopItems = async (lang?: string): Promise<SouvenirsItem[]> => {
+    const response = await fetch(`${API_BASE_URL}/souvenirs`, {
+        method: "GET",
+        headers: getHeaders(lang),
+    });
+
+    if (!response.ok) throw new Error("Error while fetching souvenirs");
+    const data: SouvenirsItem[] = await response.json();
+    return data.map((item) => ({
+        ...item,
+        imageUrl: normalizeUrl(item.imageUrl),
+    }));
 };
 
-export const getTicketOptions = async (): Promise<{ tiers: any[]; slots: any[] }> => {
-    const response = await fetch("http://localhost:3000/api/ticket-options.json");
-    if (!response.ok) throw new Error("Error while fetching ticket options");
-    return response.json();
-};
+

@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { LogOut, User as UserIcon } from "lucide-react";
 
 const LANGUAGES = [
     { code: "it", label: "Italiano", flag: "🇮🇹" },
@@ -9,7 +11,7 @@ const LANGUAGES = [
     { code: "de", label: "Deutsch", flag: "🇩🇪" },
     { code: "es", label: "Español", flag: "🇪🇸" },
     { code: "pt", label: "Português", flag: "🇵🇹" },
-    { code: "jp", label: "日本語", flag: "🇯🇵" },
+    { code: "ja", label: "日本語", flag: "🇯🇵" },
 ];
 
 function redirectHome() {
@@ -18,6 +20,7 @@ function redirectHome() {
 
 export default function Header() {
     const { t, i18n } = useTranslation();
+    const { user, logout, isAuthenticated } = useAuth();
     const [open, setOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +31,11 @@ export default function Header() {
         { to: "/shop", label: t("nav.shop") },
         { to: "/about", label: t("nav.about") },
     ];
+
+    // Se non è autenticato, aggiungiamo il link di login
+    if (!isAuthenticated) {
+        navLinks.push({ to: "/login", label: t("nav.login") });
+    }
 
     const currentLang =
         LANGUAGES.find((l) => l.code === i18n.language) ?? LANGUAGES[0];
@@ -128,6 +136,21 @@ export default function Header() {
                             </Link>
                         </li>
                     ))}
+                    {isAuthenticated && user && (
+                        <li className="flex items-center gap-4 ml-2 pl-6 border-l border-white/10">
+                            <div className="flex items-center gap-2 text-(--burnished-copper) font-bold italic tracking-tight">
+                                <UserIcon className="w-4 h-4" />
+                                <span>{user.firstName}</span>
+                            </div>
+                            <button
+                                onClick={logout}
+                                className="p-2 rounded-full bg-white/5 hover:bg-red-500/20 text-white/40 hover:text-red-400 transition-all duration-300 cursor-pointer"
+                                title={t("nav.logout", "Logout")}
+                            >
+                                <LogOut className="w-4 h-4" />
+                            </button>
+                        </li>
+                    )}
                 </ul>
 
                 {/* Language Selector Dropdown */}
@@ -137,7 +160,7 @@ export default function Header() {
                     onKeyDown={handleKeyDown}
                 >
                     <button
-                        aria-label="Select language"
+                        aria-label={t("nav.selectLanguage", "Select language")}
                         aria-haspopup="listbox"
                         aria-expanded={open}
                         onClick={() => setOpen(!open)}
@@ -168,9 +191,10 @@ export default function Header() {
                                     className={`
                                         w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left
                                         transition-colors duration-200 cursor-pointer
-                                        ${i18n.language === lang.code
-                                            ? "bg-(--burnished-copper)/30 text-(--burnished-copper) font-bold"
-                                            : "text-(--vintage-sepia) hover:bg-white/10"
+                                        ${
+                                            i18n.language === lang.code
+                                                ? "bg-(--burnished-copper)/30 text-(--burnished-copper) font-bold"
+                                                : "text-(--vintage-sepia) hover:bg-white/10"
                                         }
                                     `}
                                 >

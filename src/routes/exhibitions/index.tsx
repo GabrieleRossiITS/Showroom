@@ -1,23 +1,21 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
-import { getExhibitions } from "public/api/fetchers";
+import { getExhibitions } from "#/api/fetchers";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
-import { ProtectedImage } from "#/components/ui/ProtectedImage";
 
 export const Route = createFileRoute("/exhibitions/")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
-    loader: ({ context }) => getExhibitions(context.lang),
+    loader: ({ context }) => getExhibitions(context.lang.split("-")[0]),
     component: Expositions,
     staticData: {
         title: "Mostre",
     },
 });
-
 
 function Expositions() {
     const exhibitions = Route.useLoaderData();
@@ -66,10 +64,10 @@ function Expositions() {
                         >
                             {/* Image Header */}
                             <div className="relative h-72 overflow-hidden">
-                                <ProtectedImage
+                                <img
                                     src={exp.imageUrl}
                                     alt={exp.title}
-                                    className="w-full h-full grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                                    className="w-full translate-y-[-10%] grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 object-fit"
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 

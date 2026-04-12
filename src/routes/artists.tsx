@@ -5,7 +5,7 @@ import { MoveLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import { useEffect, useState } from "react";
-import type { Quote } from "public/types";
+import type { Quote } from "#/types";
 
 export const Route = createFileRoute("/artists")({
     component: Artists,
@@ -49,7 +49,7 @@ function Artists() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const artistsData = t("artists.data", { returnObjects: true }) as Artist[];
-    const [quote, setQuote] = useState<string>('');
+    const [quote, setQuote] = useState<string>("");
 
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
@@ -93,8 +93,10 @@ function Artists() {
 
                 <div className="space-y-10">
                     {artistsData.map((artist, index) => (
-                        <div key={artist.id} className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-12 lg:gap-24 items-start pb-10 border-b border-b-red-(--deep-charcoal)">
-
+                        <div
+                            key={artist.id}
+                            className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-12 lg:gap-24 items-start pb-10 border-b border-b-red-(--deep-charcoal)"
+                        >
                             <div className="lg:sticky lg:top-32 space-y-6">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -106,28 +108,74 @@ function Artists() {
                                         <div className="absolute inset-0 border-2 border-dashed border-(--burnished-copper)/30 rounded-full animate-[spin_15s_linear_infinite]" />
                                         <div className="absolute inset-3 border border-solid border-(--deep-charcoal)/10 rounded-full flex items-center justify-center">
                                             <span className="text-2xl font-serif italic text-(--deep-charcoal) opacity-50">
-                                                {artist.firstName[0]}{artist.lastName[0]}
+                                                {artist.firstName[0]}
+                                                {artist.lastName[0]}
                                             </span>
                                         </div>
                                     </div>
-                                    <h3 className="text-xl font-serif font-bold text-(--deep-charcoal) mb-2">Visual ID</h3>
-                                    <p className="text-(--parisian-stone-dark) text-xs uppercase tracking-widest">{artist.id.replace('-', ' ')}</p>
+                                    <h3 className="text-xl font-serif font-bold text-(--deep-charcoal) mb-2">
+                                        Visual ID
+                                    </h3>
+                                    <p className="text-(--parisian-stone-dark) text-xs uppercase tracking-widest">
+                                        {artist.id.replace("-", " ")}
+                                    </p>
                                 </motion.div>
 
-                                <motion.div {...fadeIn} className="p-8 rounded-[2.5rem] bg-(--deep-charcoal) text-(--vintage-sepia) shadow-lg">
-                                    <h4 className="text-[10px] font-mono uppercase tracking-[0.3em] mb-4 opacity-50">{t("artist.bioSummary")}</h4>
+                                <motion.div
+                                    {...fadeIn}
+                                    className="p-8 rounded-[2.5rem] bg-(--deep-charcoal) text-(--vintage-sepia) shadow-lg"
+                                >
+                                    <h4 className="text-[10px] font-mono uppercase tracking-[0.3em] mb-4 opacity-50">
+                                        {t("artists.titles.bioSummary")}
+                                    </h4>
                                     <div className="space-y-3 text-xs">
-                                        <div className="flex justify-between border-b border-white/5 pb-2"><span className="opacity-50">{t("artist.period", "Periodo")}</span><span>{artist.life}</span></div>
-                                        <div className="flex justify-between border-b border-white/5 pb-2"><span className="opacity-50">{t("artist.origin", "Origine")}</span><span>{artist.nationality}</span></div>
-                                        <div className="flex justify-between"><span className="opacity-50">{t("artist.work", "Opera")}</span><span className="text-right italic">{artist.famousWork}</span></div>
+                                        <div className="flex justify-between border-b border-white/5 pb-2">
+                                            <span className="opacity-50">
+                                                {t("artists.titles.period")}
+                                            </span>
+                                            <span>{artist.life}</span>
+                                        </div>
+                                        <div className="flex justify-between border-b border-white/5 pb-2">
+                                            <span className="opacity-50">
+                                                {t("artists.titles.origin")}
+                                            </span>
+                                            <span>{artist.nationality}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="opacity-50">
+                                                {t("artists.titles.work")}
+                                            </span>
+                                            <span className="text-right italic">
+                                                {artist.famousWork}
+                                            </span>
+                                        </div>
                                     </div>
                                 </motion.div>
 
-                                <motion.div {...fadeIn} className="p-8 rounded-[2.5rem] bg-white/50 backdrop-blur-md border border-(--line)">
-                                    <h4 className="text-[10px] font-mono uppercase tracking-[0.3em] mb-4 text-(--deep-charcoal)/50">{t("artist.techDetails", "Stile & Focus")}</h4>
+                                <motion.div
+                                    {...fadeIn}
+                                    className="p-8 rounded-[2.5rem] bg-white/50 backdrop-blur-md border border-(--line)"
+                                >
+                                    <h4 className="text-[10px] font-mono uppercase tracking-[0.3em] mb-4 text-(--deep-charcoal)/50">
+                                        {t("artists.titles.techDetails")}
+                                    </h4>
                                     <div className="space-y-3 text-xs text-(--deep-charcoal)">
-                                        <div className="flex justify-between border-b border-(--line) pb-2"><span>{t("artist.mood", "Mood")}</span><span className="font-bold text-right">{artist.style}</span></div>
-                                        <div className="flex justify-between"><span>{t("artist.subjects", "Soggetti")}</span><span className="font-bold text-right">{artist.subject}</span></div>
+                                        <div className="flex justify-between border-b border-(--line) pb-2">
+                                            <span>
+                                                {t("artists.titles.mood")}
+                                            </span>
+                                            <span className="font-bold text-right">
+                                                {artist.style}
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span>
+                                                {t("artists.titles.subjects")}
+                                            </span>
+                                            <span className="font-bold text-right">
+                                                {artist.subject}
+                                            </span>
+                                        </div>
                                     </div>
                                 </motion.div>
                             </div>
@@ -145,7 +193,9 @@ function Artists() {
                                     </span>
                                     <h1 className="text-5xl md:text-7xl font-serif font-bold text-(--deep-charcoal) mb-8 leading-[0.9]">
                                         {artist.firstName} <br />
-                                        <span className="text-(--burnished-copper)">{artist.lastName}</span>
+                                        <span className="text-(--burnished-copper)">
+                                            {artist.lastName}
+                                        </span>
                                     </h1>
                                     {index === 0 && quote && (
                                         <p className="text-xl md:text-2xl text-(--parisian-stone-dark) font-serif italic border-l-2 border-(--burnished-copper) pl-6 py-2">
@@ -155,33 +205,65 @@ function Artists() {
                                 </motion.section>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <motion.div {...fadeIn} className="p-10 rounded-[3rem] bg-white/40 border border-(--line)">
+                                    <motion.div
+                                        {...fadeIn}
+                                        className="p-10 rounded-[3rem] bg-white/40 border border-(--line)"
+                                    >
                                         <h2 className="text-xl font-serif font-bold text-(--deep-charcoal) mb-4 flex items-center gap-3">
-                                            <span className="text-(--burnished-copper) opacity-30 italic">01.</span> {artist.originsTitle}
+                                            <span className="text-(--burnished-copper) opacity-30 italic">
+                                                01.
+                                            </span>{" "}
+                                            {artist.originsTitle}
                                         </h2>
-                                        <p className="text-(--parisian-stone-dark) leading-relaxed text-sm">{artist.originsP1}</p>
+                                        <p className="text-(--parisian-stone-dark) leading-relaxed text-sm">
+                                            {artist.originsP1}
+                                        </p>
                                     </motion.div>
-                                    <motion.div {...fadeIn} className="p-10 rounded-[3rem] bg-white/40 border border-(--line)">
+                                    <motion.div
+                                        {...fadeIn}
+                                        className="p-10 rounded-[3rem] bg-white/40 border border-(--line)"
+                                    >
                                         <h2 className="text-xl font-serif font-bold text-(--deep-charcoal) mb-4 flex items-center gap-3">
-                                            <span className="text-(--burnished-copper) opacity-30 italic">02.</span> {artist.keyProjectTitle}
+                                            <span className="text-(--burnished-copper) opacity-30 italic">
+                                                02.
+                                            </span>{" "}
+                                            {artist.keyProjectTitle}
                                         </h2>
-                                        <p className="text-(--parisian-stone-dark) leading-relaxed text-sm">{artist.keyProjectP1}</p>
+                                        <p className="text-(--parisian-stone-dark) leading-relaxed text-sm">
+                                            {artist.keyProjectP1}
+                                        </p>
                                     </motion.div>
                                 </div>
 
-                                <motion.div {...fadeIn} className="relative overflow-hidden rounded-[3.5rem] bg-(--deep-charcoal) p-12 md:p-16 text-(--vintage-sepia)">
+                                <motion.div
+                                    {...fadeIn}
+                                    className="relative overflow-hidden rounded-[3.5rem] bg-(--deep-charcoal) p-12 md:p-16 text-(--vintage-sepia)"
+                                >
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-(--burnished-copper)/20 blur-3xl rounded-full" />
-                                    <h2 className="text-3xl font-serif font-bold mb-6 italic">{artist.philosophyTitle}</h2>
-                                    <p className="text-lg opacity-80 leading-relaxed max-w-2xl">{artist.philosophyDesc}</p>
+                                    <h2 className="text-3xl font-serif font-bold mb-6 italic">
+                                        {artist.philosophyTitle}
+                                    </h2>
+                                    <p className="text-lg opacity-80 leading-relaxed max-w-2xl">
+                                        {artist.philosophyDesc}
+                                    </p>
                                     <div className="mt-12 flex items-center gap-4">
                                         <div className="h-px w-12 bg-(--burnished-copper)" />
-                                        <span className="text-xs font-mono uppercase tracking-widest text-(--burnished-copper)">{artist.iconDate}</span>
+                                        <span className="text-xs font-mono uppercase tracking-widest text-(--burnished-copper)">
+                                            {artist.iconDate}
+                                        </span>
                                     </div>
                                 </motion.div>
 
-                                <motion.div {...fadeIn} className="p-10 md:p-14 bg-white/20 backdrop-blur-sm border border-white/40 rounded-[3.5rem]">
-                                    <h2 className="text-2xl font-serif font-bold text-(--deep-charcoal) mb-6">{artist.legacyTitle}</h2>
-                                    <p className="text-(--parisian-stone-dark) text-sm leading-relaxed">{artist.legacyP1}</p>
+                                <motion.div
+                                    {...fadeIn}
+                                    className="p-10 md:p-14 bg-white/20 backdrop-blur-sm border border-white/40 rounded-[3.5rem]"
+                                >
+                                    <h2 className="text-2xl font-serif font-bold text-(--deep-charcoal) mb-6">
+                                        {artist.legacyTitle}
+                                    </h2>
+                                    <p className="text-(--parisian-stone-dark) text-sm leading-relaxed">
+                                        {artist.legacyP1}
+                                    </p>
                                 </motion.div>
                             </div>
                         </div>

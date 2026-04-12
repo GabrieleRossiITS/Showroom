@@ -1,4 +1,3 @@
-import { FaGithub } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 export default function Footer() {
@@ -27,21 +26,10 @@ export default function Footer() {
                 </p>
 
                 <p className="text-xs text-white mt-1 font-mono tracking-wider">
-                    {t("footer.engineering")}: G. Rossi, N. Singh, L.
-                    Veneruzzo, R. Ranghiuc
+                    {t("footer.engineering")}: G. Rossi, N. Singh, L. Veneruzzo,
+                    R. Ranghiuc
                 </p>
             </div>
-
-            <a
-                href="https://github.com/GabrieleRossiITS/Showroom"
-                target="_blank"
-                rel="noreferrer"
-                className="text-(--vintage-sepia) transition-colors duration-300 hover:text-(--burnished-copper) p-2"
-                aria-label={t("footer.githubLabel")}
-                title={t("footer.githubLabel")}
-            >
-                <FaGithub className="w-6 h-6" />
-            </a>
         </footer>
     );
 }

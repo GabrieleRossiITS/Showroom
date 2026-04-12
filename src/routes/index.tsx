@@ -3,12 +3,29 @@ import Button from "#/components/ui/Button";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import type { Quote } from "public/types";
+import type { Quote } from "../types";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Calendar, MapPin, Ticket, Clock, ArrowRight } from "lucide-react";
+import {
+    getExhibitionById,
+    getExhibitionOpeningHours,
+    getExhibitionTiers,
+} from "../api/fetchers";
 
 export const Route = createFileRoute("/")({
+    loader: async ({ context }) => {
+        const lang = context.lang.split("-")[0];
+        const exhibitionId = 1;
+
+        const [exhibition, hours, tiers] = await Promise.all([
+            getExhibitionById(exhibitionId, lang),
+            getExhibitionOpeningHours(exhibitionId),
+            getExhibitionTiers(lang),
+        ]);
+
+        return { exhibition, hours, tiers };
+    },
     component: App,
     pendingComponent: GlobalLoader,
     pendingMs: 0,
@@ -19,7 +36,8 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const { exhibition, hours, tiers } = Route.useLoaderData();
     const navigate = useNavigate();
     const [quote, setQuote] = useState<string>("");
 
@@ -38,7 +56,7 @@ function App() {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/quotes.json")
+        fetch("/data/quotes.json")
             .then((res: Response) => res.json())
             .then((data: Quote[]) => {
                 if (data.length > 0) {
@@ -70,15 +88,19 @@ function App() {
         },
     };
 
+    const getDayName = (dayNum: number) => {
+        return t(`common.days.${dayNum}`);
+    };
+
     return (
         <main className="min-h-screen bg-background flex flex-col relative w-full overflow-x-hidden">
             {/* Immersive Hero Section */}
             <section className="relative w-full h-[90vh] md:h-[80vh] flex flex-col justify-end pb-16 md:pb-24 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/images/14.jpg"
-                        alt="Robert Doisneau Photography"
-                        className="w-full h-full object-cover object-center"
+                        src={exhibition.imageUrl}
+                        alt={exhibition.name}
+                        className="w-full h-full object-cover object-center filter grayscale"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-(--deep-charcoal) via-(--deep-charcoal)/60 to-transparent mix-blend-multiply" />
                     <div className="absolute inset-0 bg-linear-to-r from-(--deep-charcoal)/80 via-transparent to-transparent opacity-80" />
@@ -95,16 +117,18 @@ function App() {
                             variants={itemFadeUp}
                             className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-(--vintage-sepia) text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 border border-white/20"
                         >
-                            Pixel Voyage &bull; {t("home.agencySubtitle")}
+                            Pixel Voyage &bull;{" "}
+                            {t("home.subtitles.agencySubtitle", "")}
                         </motion.span>
 
                         <motion.h1
                             variants={itemFadeUp}
                             className="text-7xl md:text-9xl font-black text-white mb-8 font-serif leading-[0.85] tracking-tighter"
                         >
-                            Robert <br />
+                            {exhibition.name.split(" ").slice(0, -1).join(" ")}{" "}
+                            <br />
                             <span className="text-(--burnished-copper) italic font-light drop-shadow-xl">
-                                Doisneau
+                                {exhibition.name.split(" ").slice(-1)}
                             </span>
                         </motion.h1>
 
@@ -114,7 +138,7 @@ function App() {
                         >
                             <Button
                                 onClick={() => {
-                                    /* navigate({ to: "/tickets" }); */
+                                    navigate({ to: "/exhibitions" });
                                 }}
                                 variant="primary"
                                 rounded="full"
@@ -122,7 +146,7 @@ function App() {
                                 className="px-8 md:px-10 py-6 text-lg font-bold shadow-[0_0_40px_rgba(196,132,100,0.4)] hover:shadow-[0_0_60px_rgba(196,132,100,0.6)] hover:-translate-y-1 transition-all gap-3 bg-(--burnished-copper) text-white border-0"
                             >
                                 <Ticket className="w-6 h-6" />
-                                {t("home.bookTickets")}
+                                {t("home.subtitles.bookTickets", "")}
                             </Button>
                         </motion.div>
                     </motion.div>
@@ -138,7 +162,7 @@ function App() {
                                 "
                             </div>
                             <p className="relative z-10 text-xl text-white leading-relaxed font-serif italic pt-6">
-                                {quote || t("home.subtitle")}
+                                {quote || exhibition.description}
                             </p>
                         </div>
                     </motion.div>
@@ -159,10 +183,26 @@ function App() {
                             <Calendar className="w-5 h-5" />
                         </div>
                         <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-2 mt-6">
-                            {t("home.ongoing")}
+                            {t(`home.titles.${exhibition.status}`)}
                         </h3>
                         <p className="font-mono text-(--deep-charcoal) font-medium text-lg leading-tight">
-                            {t("home.dates")}
+                            {new Date(exhibition.startDate).toLocaleDateString(
+                                i18n.language,
+                                {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                },
+                            )}{" "}
+                            -{" "}
+                            {new Date(exhibition.endDate).toLocaleDateString(
+                                i18n.language,
+                                {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                },
+                            )}
                         </p>
                     </div>
 
@@ -171,15 +211,15 @@ function App() {
                             <MapPin className="w-5 h-5" />
                         </div>
                         <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-2 mt-6">
-                            {t("home.location")}
+                            {t("home.titles.location")}
                         </h3>
                         <a
-                            href="https://www.google.it/maps/place/Galleria+Harry+Bertoia/@45.9545192,12.6576403,17z"
+                            href={exhibition.mapsUrl}
                             target="_blank"
                             rel="noreferrer"
                             className="font-mono text-(--deep-charcoal) font-medium text-sm leading-relaxed hover:text-(--burnished-copper) transition-colors"
                         >
-                            {t("home.locationValue")}
+                            {exhibition.location}
                         </a>
                     </div>
 
@@ -188,55 +228,51 @@ function App() {
                             <Clock className="w-5 h-5" />
                         </div>
                         <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-4 mt-6">
-                            {t("home.hoursAndTours")}
+                            {t("home.titles.hoursAndTours")}
                         </h3>
                         <ul className="font-mono text-sm text-(--deep-charcoal) space-y-2 mb-4">
-                            <li className="flex flex-col">
-                                <span className="opacity-60 text-[10px]">
-                                    {t("home.wedFri")}
-                                </span>
-                                <span className="font-semibold">
-                                    15:00 - 19:00
-                                </span>
-                            </li>
-                            <li className="flex flex-col">
-                                <span className="opacity-60 text-[10px]">
-                                    {t("home.satSun")}
-                                </span>
-                                <span className="font-semibold">
-                                    10:00 - 13:00 / 15:00 - 19:00
-                                </span>
-                            </li>
+                            {hours.map((h) => (
+                                <li key={h.id} className="flex flex-col">
+                                    <span className="opacity-60 text-[10px]">
+                                        {h.daysOfWeek
+                                            .map((d) =>
+                                                getDayName(d).substring(0, 3),
+                                            )
+                                            .join(" - ")}
+                                    </span>
+                                    <span className="font-semibold">
+                                        {h.startTime.substring(0, 5)} —{" "}
+                                        {h.endTime.substring(0, 5)}
+                                    </span>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Prices */}
+                    {/* TARIFFE (TICKETS) */}
                     <div className="relative p-8 md:p-10 flex flex-col justify-start bg-(--vintage-sepia-light)/30 hover:bg-(--vintage-sepia-light)/80 transition-colors group">
                         <div className="absolute top-2 left-2 w-12 h-12 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Ticket className="w-5 h-5" />
                         </div>
                         <h3 className="text-xs uppercase tracking-widest text-(--parisian-stone) font-bold mb-4 mt-6">
-                            {t("home.prices")}
+                            {t("home.titles.prices")}
                         </h3>
                         <div className="font-mono text-sm text-(--deep-charcoal) space-y-2 flex flex-col">
-                            <div className="flex justify-between border-b border-(--line) pb-1">
-                                <span className="opacity-70">
-                                    {t("home.fullPrice").split(":")[0]}
-                                </span>
-                                <span className="font-bold">12€</span>
-                            </div>
-                            <div className="flex justify-between border-b border-(--line) pb-1">
-                                <span className="opacity-70">
-                                    {t("home.reducedPrice").split(":")[0]}
-                                </span>
-                                <span className="font-bold">9€</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="opacity-70">
-                                    {t("home.studentPrice").split(":")[0]}
-                                </span>
-                                <span className="font-bold">5€</span>
-                            </div>
+                            {tiers.map((tier) => (
+                                <div
+                                    key={tier.id}
+                                    className="flex justify-between border-b border-(--line) pb-1"
+                                >
+                                    <span className="font-medium text-(--deep-charcoal)">
+                                        {tier.name}
+                                    </span>
+                                    <span className="font-bold text-(--burnished-copper-deep)">
+                                        {tier.price === 0
+                                            ? ""
+                                            : `${tier.price.toFixed(2)}€`}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </motion.div>
@@ -255,13 +291,13 @@ function App() {
                     <div className="relative z-10 flex flex-col h-full justify-between gap-8">
                         <div>
                             <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-[10px] uppercase tracking-widest mb-6">
-                                {t("home.discoverArtist")}
+                                {t("home.titles.discoverArtist")}
                             </span>
                             <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight">
-                                {t("home.exploreUniverse")}
+                                {t("home.subtitles.exploreUniverse")}
                                 <br />
                                 <span className="italic font-light text-(--burnished-copper)">
-                                    {t("home.ofTheArtist")}
+                                    {t("home.subtitles.ofTheArtist")}
                                 </span>
                             </h2>
                         </div>
@@ -282,7 +318,7 @@ function App() {
                     <div className="relative z-10 flex flex-col h-full justify-between gap-8">
                         <div>
                             <span className="inline-block px-3 py-1 rounded-full bg-(--burnished-copper)/10 text-(--burnished-copper-deep) text-[10px] uppercase tracking-widest mb-6">
-                                {t("home.upcomingExhibitions")}
+                                {t("home.titles.upcomingExhibitions")}
                             </span>
                             <h2 className="text-4xl md:text-5xl font-serif font-bold text-(--deep-charcoal) leading-tight">
                                 O. Arthur, <br />
@@ -304,3 +340,6 @@ function App() {
 }
 
 export default App;
+
+// TODO: add a section with the artist's biography
+// TODO: fetch data of the exhibition for the tickets

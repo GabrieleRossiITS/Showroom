@@ -1,106 +1,63 @@
 {
     "nav": {
-        "artworks": "Opere",
         "artist": "Gli artisti",
+        "artworks": "Opere",
         "exhibitions": "Mostre",
-        "about": "Contatti",
         "shop": "Negozio",
+        "about": "Contatti",
         "login": "Login",
-        "logout": "Logout",
+        "logout": "Esci",
+        "cart": "Carrello",
         "selectLanguage": "Seleziona lingua"
     },
     "footer": {
         "rights": "Tutti i diritti riservati.",
-        "githubLabel": "Vai alla repository GitHub",
         "engineering": "Progettato & Sviluppato da PyTech"
     },
     "home": {
-        "digitalResidency": "Residenza Culturale Digitale",
-        "agencySubtitle": "Presenta la retrospettiva dell'anno",
-        "subtitle": "Pioniere della fotografia umanista, le sue immagini catturano la poesia della vita quotidiana nelle strade di Parigi.",
-        "exploreArtworks": "Esplora le Opere",
-        "exhibitions": "Mostre",
-        "bookTickets": "Acquista Biglietti",
-        "discoverArtist": "Scopri l'artista",
-        "ongoing": "In corso",
-        "dates": "12 Ottobre 2024 - 15 Gennaio 2025",
-        "location": "Sede",
-        "locationValue": "Galleria Harry Bertoia\nCorso Vittorio Emanuele II, Pordenone",
-        "ticketsAvailable": "Biglietti Disponibili",
-        "hoursAndTours": "Orari di Visita",
-        "wedFri": "Mercoledì - Venerdì",
-        "satSun": "Sabato - Domenica",
-        "specialOpenings": "Apertura straordinaria il 26 dicembre e 6 gennaio. Chiuso il 25 dicembre e 1 gennaio.",
-        "prices": "Tariffe",
-        "fullPrice": "Intero: 12€",
-        "reducedPrice": "Ridotto: 9€",
-        "studentPrice": "Studenti: 5€",
-        "exploreUniverse": "Esplora l'universo",
-        "ofTheArtist": "dell'artista",
-        "upcomingExhibitions": "Prossime Mostre"
+        "titles": {
+            "ongoing": "In corso",
+            "location": "Sede",
+            "hoursAndTours": "Orari di Visita",
+            "prices": "Tariffe",
+            "upcomingExhibitions": "Prossime Mostre",
+            "discoverArtist": "Scopri l'artista"
+        },
+        "subtitles": {
+            "agencySubtitle": "Presenta la retrospettiva dell'anno",
+            "bookTickets": "Acquista Biglietti",
+            "ticketsAvailable": "Biglietti Disponibili",
+            "specialOpenings": "Apertura straordinaria il 26 dicembre e 6 gennaio. Chiuso il 25 dicembre e 1 gennaio.",
+            "exploreUniverse": "Esplora l'universo",
+            "ofTheArtist": "dell'artista"
+        }
     },
     "about": {
         "title": "Pixel voyage",
-        "agencyInfo": "Chi Siamo",
-        "missionTitle": "La Nostra Missione",
-        "missionValue": "Digitalizzare l'arte, preservare l'emozione.",
-        "hqTitle": "Headquarters",
-        "hqValue": "Milano / Parigi",
+        "agencyInfo": {
+            "title": "Chi Siamo",
+            "missionTitle": "La Nostra Missione",
+            "missionValue": "Digitalizzare l'arte, preservare l'emozione.",
+            "hqTitle": "Sede",
+            "hqValue": "Pordenone / Tokyo"
+        },
         "agencyDescription": "Pixel voyage è un'agenzia all'avanguardia specializzata nella creazione e gestione di mostre d'arte digitali interattive. Uniamo competenze avanzate di ingegneria del software a una profonda sensibilità curatoriale per trasformare archivi storici e collezioni fisiche in esperienze immersive accessibili in tutto il mondo.",
-        "contactUs": "Collabora con noi",
-        "formName": "Nome o Azienda",
-        "formEmail": "Indirizzo Email",
-        "formSubject": "Motivo del contatto",
-        "subject1": "Richiesta organizzazione mostra",
-        "subject2": "Partnership tecnica / Software",
-        "subject3": "Informazioni generali",
-        "formMessage": "Come possiamo aiutarti?",
-        "formPlaceholder": "Scrivi qui i dettagli del tuo progetto...",
-        "formSubmit": "Invia Richiesta"
+        "form": {
+            "contactUs": "Collabora con noi",
+            "formName": "Nome o Azienda",
+            "formEmail": "Indirizzo Email",
+            "formSubject": "Motivo del contatto",
+            "subject1": "Richiesta organizzazione mostra",
+            "subject2": "Partnership tecnica / Software",
+            "subject3": "Informazioni generali",
+            "formMessage": "Come possiamo aiutarti?",
+            "formPlaceholder": "Scrivi qui i dettagli del tuo progetto...",
+            "formSubmit": "Invia Richiesta"
+        }
     },
-    "artist": {
-        "backHome": "Torna alla Home",
-        "interactiveTitle": "L'Obiettivo Interattivo",
-        "interactiveDesc": "In questa sezione verrà integrato un modello 3D interattivo della fotocamera e dello spazio di lavoro dell'artista.",
-        "bioSummary": "Riassunto biografia",
-        "period": "Periodo",
-        "origin": "Origine",
-        "work": "Opera",
-        "mood": "Mood",
-        "subjects": "Soggetti",
-        "life": "Vita",
-        "lifeValue": "1912 - 1994 (Gentilly, Francia)",
-        "nationality": "Nazionalità",
-        "nationalityValue": "Francese",
-        "movement": "Movimento",
-        "movementValue": "Fotografia umanista",
-        "famousWork": "Opera più celebre",
-        "famousWorkValue": "Le Baiser de l'Hôtel de Ville (1950)",
-        "techDetails": "Dettagli Tecnici",
-        "activity": "Attività",
-        "style": "Stile",
-        "styleValue": "Umanista",
-        "subject": "Soggetto",
-        "subjectValue": "Parigi, Vita Quotidiana",
-        "humanistTag": "L'Umanista della Strada",
-        "quote": "\"Quello che cercavo di mostrare era un mondo dove mi sarei sentito bene, dove le persone sarebbero state gentili, dove avrei trovato la tenerezza che speravo di ricevere.\"",
-        "originsTitle": "Origini",
-        "originsP1": "Nato nel 1912 a Gentilly, Doisneau crebbe in un ambiente piccolo-borghese che segnò profondamente la sua visione del mondo. Rimasto orfano in tenera età, trovò rifugio nel disegno.",
-        "originsP2": "La sua timidezza lo portò a fotografare prima gli oggetti, poi i ciottoli, e solo più tardi le persone, catturando \"l'attimo cercato\".",
-        "renaultTitle": "Renault",
-        "renaultP1": "Nel 1934 iniziò a lavorare come fotografo industriale per la Renault. Questa esperienza fu fondamentale per la disciplina tecnica.",
-        "renaultP2": "Fu licenziato nel 1939, evento che definì come l'inizio della sua vera libertà nelle strade di Parigi.",
-        "resistanceTitle": "Resistenza e Liberazione",
-        "resistanceP1": "Durante l'occupazione, Doisneau mise le sue abilità di incisore al servizio della Resistenza, falsificando documenti d'identità per aiutare i perseguitati.",
-        "resistanceP2": "Nel 1944 immortalò la Liberazione di Parigi, celebrando la rinascita della gioia e i baci rubati tra le barricate.",
-        "philosophyTitle": "La Filosofia dell'Imperfetto",
-        "graceTitle": "Il Momento di Grazia",
-        "graceDesc": "Doisneau cercava l'istante in cui l'ordinario diventa straordinario grazie a un gesto, uno sguardo o una coincidenza buffa. Prediligeva le periferie, i bistrot, i bambini scacciati dai loro giochi.",
-        "iconTitle": "L'Icona: Le Baiser",
-        "iconDesc": "Scattata nel 1950, questa immagine è il manifesto mondiale del romanticismo. \"La verità di una foto non sta nel modo in cui è stata scattata, ma nel sentimento che evoca.\"",
-        "legacyTitle": "Eredità Spirituale",
-        "legacyP1": "Robert Doisneau ha lasciato un archivio di circa 450.000 negativi, una miniera d'oro di memoria collettiva. Ha ricevuto i massimi onori, tra cui il Prix Niépce nel 1956 e la Legion d'Onore nel 1984.",
-        "legacyP2": "Oggi il suo lavoro continua ad essere esposto nei più grandi musei del mondo, ricordandoci che la bellezza non va cercata lontano, ma si nasconde proprio dietro l'angolo."
+    "artwork": {
+        "title": "Opere",
+        "pageTitle": "Il viaggio artistico"
     },
     "artworkDetail": {
         "backGallery": "Torna alla Galleria",
@@ -118,13 +75,58 @@
     "shop": {
         "title": "Negozio di Souvenir",
         "subtitle": "Porta a casa un pezzo di fotografia umanista.",
-        "buyNow": "Acquista Ora",
-        "all": "Tutti",
-        "print": "Stampe",
-        "book": "Libri",
-        "postcard": "Cartoline",
-        "accessory": "Accessori",
-        "success": "Acquisto completato! Grazie per il tuo supporto."
+        "adding": "Aggiunta...",
+        "added": "Aggiunto!",
+        "all": "Tutto",
+        "backToShop": "Torna al negozio",
+        "inStock": "Disponibile",
+        "outOfStock": "Esaurito",
+        "description": "Descrizione",
+        "specs": "Specifiche",
+        "qty": "Quantità",
+        "addToCart": "Aggiungi al carrello",
+        "safeNote": "Spedizione sicura · Resi entro 30 giorni",
+        "card": {
+            "only": "Solo",
+            "remaining": "rimasti",
+            "knowMore": "Scopri di più"
+        }
+    },
+    "cart": {
+        "label": "Shopping Bag",
+        "title": "Il Tuo Carrello",
+        "empty": "Il carrello è vuoto",
+        "emptySubtitle": "Non hai ancora aggiunto articoli al tuo carrello.",
+        "goToShop": "Inizia lo shopping",
+        "summary": "Riepilogo Ordine",
+        "subtotal": "Subtotale",
+        "shipping": "Spedizione",
+        "free": "Gratis",
+        "total": "Totale",
+        "checkout": "Procedi al Checkout",
+        "secureMessage": "Checkout sicuro · Pagamenti crittografati",
+        "loadingItems": "Caricamento articoli...",
+        "orderItemsError": "Errore nel caricamento degli articoli.",
+        "noItemsInOrder": "Nessun articolo trovato."
+    },
+    "checkout": {
+        "backToCart": "Torna al carrello",
+        "paymentMethod": "Metodo di Pagamento",
+        "secureNote": "Tutte le transazioni sono sicure e crittografate.",
+        "cardNumber": "Numero di Carta",
+        "expiry": "Scadenza",
+        "cvv": "CVV",
+        "payNow": "Paga",
+        "processing": "Elaborazione...",
+        "orderItems": "Articoli Ordine",
+        "total": "Totale",
+        "subtotal": "Subtotale"
+    },
+    "success": {
+        "title": "Grazie per l'ordine!",
+        "subtitle": "La tua richiesta è in fase di elaborazione. Riceverai una mail di conferma a breve con i dettagli della spedizione.",
+        "viewOrders": "I Miei Ordini",
+        "continue": "Continua lo Shopping"
     },
     "exhibitionDetail": {
         "back": "Torna alle Mostre",
@@ -162,7 +164,53 @@
         "hasAccount": "Hai già un account?",
         "signIn": "Accedi"
     },
+    "account": {
+        "loginRequired": "Accedi per visualizzare il tuo account.",
+        "myAccount": "Il Mio Account",
+        "profile": "Profilo",
+        "orders": "Ordini",
+        "tickets": "Biglietti",
+        "security": "Sicurezza",
+        "fullName": "Nome Completo",
+        "email": "Email",
+        "role": "Ruolo",
+        "profileInfo": "Informazioni del Profilo",
+        "passwordTab": {
+            "changePassword": "Cambia password",
+            "changePasswordError": "Errore durante il cambio della password",
+            "passwordChanged": "Password cambiata con successo",
+            "currentPassword": "Vecchia password",
+            "newPassword": "Nuova password",
+            "updatePassword": "Cambia password"
+        },
+        "ticketsTab": {
+            "noTickets": "Nessun biglietto",
+            "goExhibitions": "Vai alle mostre",
+            "exhibition": "Mostra",
+            "date": "Data",
+            "hour": "Ora",
+            "tier": "Tipo"
+        },
+        "ordersTab": {
+            "noOrders": "Nessun ordine",
+            "goShop": "Vai al negozio",
+            "order": "Ordine",
+            "loadingItems": "Caricamento articoli...",
+            "orderItemsError": "Errore nel caricamento degli articoli",
+            "noItemsInOrder": "Nessun articolo trovato"
+        }
+    },
     "artists": {
+        "titles": {
+            "backHome": "Torna alla Home",
+            "bioSummary": "Riassunto Biografia",
+            "period": "Periodo",
+            "origin": "Origine",
+            "work": "Opera",
+            "techDetails": "Dettagli Tecnici",
+            "mood": "Mood",
+            "subjects": "Soggetti"
+        },
         "data": [
             {
                 "id": "robert-doisneau",
@@ -275,6 +323,15 @@
         ]
     },
     "common": {
-        "loading": "Caricamento..."
+        "loading": "Caricamento...",
+        "days": {
+            "1": "Lunedì",
+            "2": "Martedì",
+            "3": "Mercoledì",
+            "4": "Giovedì",
+            "5": "Venerdì",
+            "6": "Sabato",
+            "7": "Domenica"
+        }
     }
 }

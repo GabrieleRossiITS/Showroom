@@ -9,25 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ShopRouteImport } from './routes/shop'
+import { Route as OrderSuccessRouteImport } from './routes/order-success'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShopIndexRouteImport } from './routes/shop/index'
 import { Route as ExhibitionsIndexRouteImport } from './routes/exhibitions/index'
 import { Route as ArtworksIndexRouteImport } from './routes/artworks/index'
+import { Route as ShopIdRouteImport } from './routes/shop/$id'
 import { Route as ExhibitionsIdRouteImport } from './routes/exhibitions/$id'
 import { Route as ArtworksIdRouteImport } from './routes/artworks/$id'
 
-const ShopRoute = ShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
+const OrderSuccessRoute = OrderSuccessRouteImport.update({
+  id: '/order-success',
+  path: '/order-success',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtistsRoute = ArtistsRouteImport.update({
@@ -40,6 +55,11 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -50,6 +70,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShopIndexRoute = ShopIndexRouteImport.update({
+  id: '/shop/',
+  path: '/shop/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExhibitionsIndexRoute = ExhibitionsIndexRouteImport.update({
   id: '/exhibitions/',
   path: '/exhibitions/',
@@ -58,6 +83,11 @@ const ExhibitionsIndexRoute = ExhibitionsIndexRouteImport.update({
 const ArtworksIndexRoute = ArtworksIndexRouteImport.update({
   id: '/artworks/',
   path: '/artworks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopIdRoute = ShopIdRouteImport.update({
+  id: '/shop/$id',
+  path: '/shop/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExhibitionsIdRoute = ExhibitionsIdRouteImport.update({
@@ -74,99 +104,134 @@ const ArtworksIdRoute = ArtworksIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
   '/artists': typeof ArtistsRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
-  '/shop': typeof ShopRoute
+  '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/shop/$id': typeof ShopIdRoute
   '/artworks/': typeof ArtworksIndexRoute
   '/exhibitions/': typeof ExhibitionsIndexRoute
+  '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
   '/artists': typeof ArtistsRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
-  '/shop': typeof ShopRoute
+  '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/shop/$id': typeof ShopIdRoute
   '/artworks': typeof ArtworksIndexRoute
   '/exhibitions': typeof ExhibitionsIndexRoute
+  '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
   '/artists': typeof ArtistsRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
-  '/shop': typeof ShopRoute
+  '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/shop/$id': typeof ShopIdRoute
   '/artworks/': typeof ArtworksIndexRoute
   '/exhibitions/': typeof ExhibitionsIndexRoute
+  '/shop/': typeof ShopIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/account'
     | '/admin'
     | '/artists'
+    | '/cart'
+    | '/checkout'
     | '/login'
-    | '/shop'
+    | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
+    | '/shop/$id'
     | '/artworks/'
     | '/exhibitions/'
+    | '/shop/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/account'
     | '/admin'
     | '/artists'
+    | '/cart'
+    | '/checkout'
     | '/login'
-    | '/shop'
+    | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
+    | '/shop/$id'
     | '/artworks'
     | '/exhibitions'
+    | '/shop'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/account'
     | '/admin'
     | '/artists'
+    | '/cart'
+    | '/checkout'
     | '/login'
-    | '/shop'
+    | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
+    | '/shop/$id'
     | '/artworks/'
     | '/exhibitions/'
+    | '/shop/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccountRoute: typeof AccountRoute
   AdminRoute: typeof AdminRoute
   ArtistsRoute: typeof ArtistsRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   LoginRoute: typeof LoginRoute
-  ShopRoute: typeof ShopRoute
+  OrderSuccessRoute: typeof OrderSuccessRoute
   ArtworksIdRoute: typeof ArtworksIdRoute
   ExhibitionsIdRoute: typeof ExhibitionsIdRoute
+  ShopIdRoute: typeof ShopIdRoute
   ArtworksIndexRoute: typeof ArtworksIndexRoute
   ExhibitionsIndexRoute: typeof ExhibitionsIndexRoute
+  ShopIndexRoute: typeof ShopIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/shop': {
-      id: '/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof ShopRouteImport
+    '/order-success': {
+      id: '/order-success'
+      path: '/order-success'
+      fullPath: '/order-success'
+      preLoaderRoute: typeof OrderSuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -174,6 +239,20 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/artists': {
@@ -190,6 +269,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -204,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shop/': {
+      id: '/shop/'
+      path: '/shop'
+      fullPath: '/shop/'
+      preLoaderRoute: typeof ShopIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/exhibitions/': {
       id: '/exhibitions/'
       path: '/exhibitions'
@@ -216,6 +309,13 @@ declare module '@tanstack/react-router' {
       path: '/artworks'
       fullPath: '/artworks/'
       preLoaderRoute: typeof ArtworksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/$id': {
+      id: '/shop/$id'
+      path: '/shop/$id'
+      fullPath: '/shop/$id'
+      preLoaderRoute: typeof ShopIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/exhibitions/$id': {
@@ -238,14 +338,19 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccountRoute: AccountRoute,
   AdminRoute: AdminRoute,
   ArtistsRoute: ArtistsRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   LoginRoute: LoginRoute,
-  ShopRoute: ShopRoute,
+  OrderSuccessRoute: OrderSuccessRoute,
   ArtworksIdRoute: ArtworksIdRoute,
   ExhibitionsIdRoute: ExhibitionsIdRoute,
+  ShopIdRoute: ShopIdRoute,
   ArtworksIndexRoute: ArtworksIndexRoute,
   ExhibitionsIndexRoute: ExhibitionsIndexRoute,
+  ShopIndexRoute: ShopIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

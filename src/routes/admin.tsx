@@ -16,7 +16,7 @@ function AdminPage() {
             <p className="text-gray">Bro... seriamente?</p>
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-enOFrnMSm8Fq32InwElG7ii_5qDeGaTwFw&s"
-                alt="Immagine Temporanea"
+                alt="Sei Serio?"
                 className="rounded-lg shadow-2xl"
             />
         </div>

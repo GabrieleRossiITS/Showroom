@@ -26,4 +26,4 @@ declare module '@tanstack/react-router' {
         title?: string
         breadcrumb?: string
     }
-}
+}

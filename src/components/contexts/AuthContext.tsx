@@ -1,25 +1,22 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export interface User {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-}
+import type { User } from "#/types";
+import { logout as apiLogout } from "#/api/fetchers";
 
 interface AuthContextType {
     user: User | null;
     setAuth: (user: User) => void;
-    logout: () => void;
+    logout: () => Promise<void>;
     isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+    children,
+}) => {
     const [user, setUser] = useState<User | null>(null);
 
-    // Carica l'utente dal localStorage all'avvio
     useEffect(() => {
         const savedUser = localStorage.getItem("showroom_user");
         if (savedUser) {
@@ -36,9 +33,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.setItem("showroom_user", JSON.stringify(userData));
     };
 
-    const logout = () => {
-        setUser(null);
-        localStorage.removeItem("showroom_user");
+    const logout = async () => {
+        try {
+            await apiLogout();
+        } catch (error) {
+            console.error("Logout API failed", error);
+        } finally {
+            setUser(null);
+            localStorage.removeItem("showroom_user");
+        }
     };
 
     return (

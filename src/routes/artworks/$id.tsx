@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, Info } from "lucide-react";
 import Button from "#/components/ui/Button";
-import { getArtworkById } from "public/api/fetchers";
+import { getArtworkById } from "#/api/fetchers";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import { ProtectedImage } from "#/components/ui/ProtectedImage";
@@ -12,12 +12,13 @@ export const Route = createFileRoute("/artworks/$id")({
     pendingMs: 0,
     loader: async ({ params, context }) => {
         const artworkId = parseInt(params.id.split("-")[0], 10);
-        return getArtworkById(artworkId, context.lang);
+        return getArtworkById(artworkId, context.lang.split("-")[0]);
     },
 
     component: ArtworkDetail,
     staticData: {
-        title: "Dettaglio Opera - Robert Doisneau",
+        title: "Dettaglio Opera",
+        breadcrumb: "nav.artworks",
     },
 });
 

@@ -47,22 +47,19 @@ function AuthPage() {
 
         try {
             if (isLogin) {
-                const userData = await authApi.login({
-                    email: email,
-                    password: password,
-                });
-
-                setAuth(userData);
+                // Backend sets HttpOnly JWT cookie; response is the User object
+                const user = await authApi.login({ email, password });
+                setAuth(user);
                 navigate({ to: "/" });
             } else {
-                const newUser = await authApi.register({
+                // Backend handles auto-login and sets HttpOnly cookie during registration
+                const user = await authApi.register({
                     firstName,
                     lastName,
                     email,
                     password,
                 });
-
-                setAuth(newUser);
+                setAuth(user);
                 navigate({ to: "/" });
             }
         } catch (err: any) {
@@ -102,16 +99,6 @@ function AuthPage() {
                 variants={containerVariants}
                 className="w-full max-w-lg relative z-10"
             >
-                {/* Header Badge */}
-                <motion.div
-                    variants={itemFadeUp}
-                    className="flex justify-center mb-10"
-                >
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-(--deep-charcoal) text-[10px] font-bold uppercase tracking-[0.3em] border border-white/30">
-                        {t("home.digitalResidency", "Digital Cultural Residency")}
-                    </span>
-                </motion.div>
-
                 {/* Auth Card */}
                 <motion.div
                     layout
@@ -126,23 +113,15 @@ function AuthPage() {
                             layout
                             className="text-5xl font-black text-(--deep-charcoal) font-serif italic tracking-tight"
                         >
-                            {isLogin
-                                ? t("login.title", "Welcome Back")
-                                : t("register.title", "Create Account")}
+                            {isLogin ? t("login.title") : t("register.title")}
                         </motion.h1>
                         <motion.p
                             layout
                             className="text-(--parisian-stone-dark) text-sm font-medium opacity-80 italic max-w-sm leading-relaxed"
                         >
                             {isLogin
-                                ? t(
-                                      "login.subtitle",
-                                      "Access your private collection and curated experiences.",
-                                  )
-                                : t(
-                                      "register.subtitle",
-                                      "Join our community and start your journey.",
-                                  )}
+                                ? t("login.subtitle")
+                                : t("register.subtitle")}
                         </motion.p>
                     </div>
 
@@ -173,7 +152,7 @@ function AuthPage() {
                                 >
                                     <div className="space-y-2 group">
                                         <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-(--parisian-stone) ml-2 transition-colors group-focus-within:text-(--burnished-copper)">
-                                            {t("register.firstName", "First Name")}
+                                            {t("register.firstName")}
                                         </label>
                                         <div className="relative">
                                             <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
@@ -191,7 +170,7 @@ function AuthPage() {
                                     </div>
                                     <div className="space-y-2 group">
                                         <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-(--parisian-stone) ml-2 transition-colors group-focus-within:text-(--burnished-copper)">
-                                            {t("register.lastName", "Last Name")}
+                                            {t("register.lastName")}
                                         </label>
                                         <div className="relative">
                                             <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
@@ -214,7 +193,7 @@ function AuthPage() {
                         {/* Email Field */}
                         <motion.div layout className="space-y-2 group">
                             <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-(--parisian-stone) ml-2 transition-colors group-focus-within:text-(--burnished-copper)">
-                                {t("login.email", "Email Address")}
+                                {t("login.email")}
                             </label>
                             <div className="relative">
                                 <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
@@ -232,7 +211,7 @@ function AuthPage() {
                         {/* Password Field */}
                         <motion.div layout className="space-y-2 group">
                             <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-(--parisian-stone) ml-2 transition-colors group-focus-within:text-(--burnished-copper)">
-                                {t("login.password", "Password")}
+                                {t("login.password")}
                             </label>
                             <div className="relative">
                                 <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
@@ -279,10 +258,7 @@ function AuthPage() {
                                             type="button"
                                             className="text-[10px] font-bold uppercase tracking-widest text-(--burnished-copper) hover:text-(--burnished-copper-deep) transition-colors cursor-pointer"
                                         >
-                                            {t(
-                                                "login.forgotPassword",
-                                                "Forgot Password?",
-                                            )}
+                                            {t("login.forgotPassword")}
                                         </button>
                                     </motion.div>
                                 )}
@@ -301,17 +277,12 @@ function AuthPage() {
                                 {isLoading ? (
                                     <div className="flex items-center justify-center gap-3">
                                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                        <span>
-                                            {t(
-                                                "common.loading",
-                                                "Loading...",
-                                            )}
-                                        </span>
+                                        <span>{t("common.loading")}</span>
                                     </div>
                                 ) : isLogin ? (
-                                    t("login.submit", "Sign In")
+                                    t("login.submit")
                                 ) : (
-                                    t("register.submit", "Sign Up")
+                                    t("register.submit")
                                 )}
                             </Button>
                         </motion.div>
@@ -323,18 +294,15 @@ function AuthPage() {
                     >
                         <p className="text-sm font-medium text-(--parisian-stone-dark)">
                             {isLogin
-                                ? t("login.noAccount", "Don't have an account?")
-                                : t(
-                                      "register.hasAccount",
-                                      "Already have an account?",
-                                  )}{" "}
+                                ? t("login.noAccount")
+                                : t("register.hasAccount")}{" "}
                             <button
                                 onClick={() => setIsLogin(!isLogin)}
                                 className="text-(--burnished-copper) font-bold hover:underline cursor-pointer ml-1"
                             >
                                 {isLogin
-                                    ? t("login.signUp", "Create one now")
-                                    : t("register.signIn", "Log In")}
+                                    ? t("login.signUp")
+                                    : t("register.signIn")}
                             </button>
                         </p>
 
@@ -343,7 +311,7 @@ function AuthPage() {
                             className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-(--parisian-stone)/60 hover:text-(--deep-charcoal) transition-colors group cursor-pointer"
                         >
                             <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
-                            {t("login.backHome", "Return to Home")}
+                            {t("login.backHome")}
                         </button>
                     </motion.div>
                 </motion.div>

@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "../components/GlobalLoader";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
 import { AuthProvider } from "../components/contexts/AuthContext";
+import { CartProvider } from "../components/contexts/CartContext";
 
 export const Route = createRootRoute({
     context: () => ({
@@ -77,26 +78,28 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             </head>
             <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(161,86,48,0.24)] ">
                 <AuthProvider>
-                    <Suspense fallback={<GlobalLoader />}>
-                        <a href="#main-content" className="skip-link">
-                            {i18n.language === "it"
-                                ? "Passa al contenuto principale"
-                                : "Skip to main content"}
-                        </a>
-                        <Header />
-                        <main
-                            id="main-content"
-                            className="relative page-wrap pt-24 min-h-screen overflow-hidden"
-                        >
-                            <div className="max-w-7xl mx-auto pt-4 absolute top-24 left-0 right-0 pointer-events-none">
-                                <div className="pointer-events-auto">
-                                    <Breadcrumbs />
+                    <CartProvider>
+                        <Suspense fallback={<GlobalLoader />}>
+                            <a href="#main-content" className="skip-link">
+                                {i18n.language === "it"
+                                    ? "Passa al contenuto principale"
+                                    : "Skip to main content"}
+                            </a>
+                            <Header />
+                            <main
+                                id="main-content"
+                                className="relative page-wrap pt-24 min-h-screen overflow-hidden"
+                            >
+                                <div className="max-w-7xl mx-auto pt-4 absolute top-24 left-0 right-0 pointer-events-none">
+                                    <div className="pointer-events-auto">
+                                        <Breadcrumbs />
+                                    </div>
                                 </div>
-                            </div>
-                            {children}
-                        </main>
-                        <Footer />
-                    </Suspense>
+                                {children}
+                            </main>
+                            <Footer />
+                        </Suspense>
+                    </CartProvider>
                 </AuthProvider>
                 <Scripts />
             </body>

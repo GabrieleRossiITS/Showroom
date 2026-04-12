@@ -6,10 +6,18 @@ interface ProtectedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
     fallback?: string;
 }
 
-export function ProtectedImage({ src, fallback, className, alt, ...props }: ProtectedImageProps) {
+export function ProtectedImage({
+    src,
+    fallback,
+    className,
+    alt,
+    ...props
+}: ProtectedImageProps) {
     const [imageUrl, setImageUrl] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
+
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
     useEffect(() => {
         if (!src) {
@@ -18,18 +26,15 @@ export function ProtectedImage({ src, fallback, className, alt, ...props }: Prot
             return;
         }
 
-        const API_KEY = import.meta.env.VITE_API_KEY || "";
         let objectUrl: string | null = null;
 
         const fetchImage = async () => {
             setIsLoading(true);
             setError(false);
             try {
-                const response = await fetch(src, {
-                    headers: {
-                        "X-API-KEY": API_KEY,
-                    },
-                });
+                const response = await fetch(
+                    API_BASE_URL.replace("/api", "") + src,
+                );
 
                 if (!response.ok) throw new Error("Failed to fetch image");
 
@@ -55,8 +60,17 @@ export function ProtectedImage({ src, fallback, className, alt, ...props }: Prot
 
     if (error || !src) {
         return (
-            <div className={cn("bg-black/10 flex items-center justify-center", className)}>
-                {fallback || <span className="text-[10px] uppercase font-bold opacity-30 px-4 text-center">{alt}</span>}
+            <div
+                className={cn(
+                    "bg-black/10 flex items-center justify-center",
+                    className,
+                )}
+            >
+                {fallback || (
+                    <span className="text-[10px] uppercase font-bold opacity-30 px-4 text-center">
+                        {alt}
+                    </span>
+                )}
             </div>
         );
     }

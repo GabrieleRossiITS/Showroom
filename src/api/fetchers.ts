@@ -10,7 +10,6 @@ import type {
     SouvenirsItem,
     Ticket,
     User,
-    ExhibitionOpeningHour,
     TicketTier,
 } from "../types";
 
@@ -216,15 +215,10 @@ export const getExhibitionById = async (
     return { ...data, imageUrl: normalizeUrl(data.imageUrl) };
 };
 
-/** GET /api/exhibitions/{id}/timeslots?culture={lang} */
-export const getExhibitionTimeSlots = async (
-    id: number,
-    lang?: string,
-): Promise<ExhibitionTimeSlot[]> => {
-    const url = lang
-        ? `${API_BASE_URL}/exhibitions/${id}/timeslots?culture=${lang}`
-        : `${API_BASE_URL}/exhibitions/${id}/timeslots`;
-    const res = await fetch(url, { headers: getHeaders(lang) });
+/** GET /api/exhibitions/{id}/timeslots */
+export const getExhibitionTimeSlots = async (id: number): Promise<ExhibitionTimeSlot[]> => {
+    const url = `${API_BASE_URL}/exhibitions/${id}/timeslots`;
+    const res = await fetch(url);
     if (!res.ok)
         throw new Error(
             "Errore nel recupero degli slot temporali della mostra",
@@ -247,20 +241,6 @@ export const getExhibitionArtworks = async (
 
     const data: Artwork[] = await res.json();
     return data.map((a) => ({ ...a, imageUrl: normalizeUrl(a.imageUrl) }));
-};
-
-/** GET /api/exhibitions/{id}/timeslots */
-export const getExhibitionOpeningHours = async (
-    exhibitionId: number,
-): Promise<ExhibitionOpeningHour[]> => {
-    const res = await fetch(
-        `${API_BASE_URL}/exhibitions/${exhibitionId}/timeslots`,
-        {
-            headers: getHeaders(),
-        },
-    );
-    if (!res.ok) throw new Error("Errore nel recupero degli orari");
-    return res.json();
 };
 
 /** GET /api/exhibitions/{id}/tiers?culture={lang} */
@@ -366,8 +346,8 @@ export const getUserById = async (id: number): Promise<User> => {
             res.status === 403
                 ? "Accesso negato"
                 : res.status === 404
-                  ? "Utente non trovato"
-                  : "Errore nel recupero dell'utente",
+                    ? "Utente non trovato"
+                    : "Errore nel recupero dell'utente",
         );
     return res.json();
 };
@@ -437,8 +417,8 @@ export const removeItemFromCart = async (
             res.status === 403
                 ? "Accesso negato"
                 : res.status === 404
-                  ? "Articolo non trovato nel carrello"
-                  : "Errore nella rimozione dell'articolo",
+                    ? "Articolo non trovato nel carrello"
+                    : "Errore nella rimozione dell'articolo",
         );
     return res.json();
 };
@@ -461,8 +441,8 @@ export const checkoutCart = async (
             res.status === 403
                 ? "Accesso negato"
                 : res.status === 400
-                  ? "Carrello vuoto o checkout non riuscito"
-                  : "Errore durante il checkout",
+                    ? "Carrello vuoto o checkout non riuscito"
+                    : "Errore durante il checkout",
         );
 };
 
@@ -507,8 +487,8 @@ export const getUserOrderById = async (
             res.status === 403
                 ? "Accesso negato"
                 : res.status === 404
-                  ? "Ordine non trovato"
-                  : "Errore nel recupero dell'ordine",
+                    ? "Ordine non trovato"
+                    : "Errore nel recupero dell'ordine",
         );
     return res.json();
 };

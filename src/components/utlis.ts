@@ -24,3 +24,9 @@ export const formatDate = (date: string) => {
     const [year, month, day] = s.split("-");
     return `${day}/${month}/${year}`;
 };
+
+export const formatDay = (dayNumber: number) => {
+    if (!dayNumber) return "";
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    return days[dayNumber];
+};

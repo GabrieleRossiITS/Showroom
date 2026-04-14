@@ -18,10 +18,11 @@ export interface Artwork {
 
 export interface ExhibitionTimeSlot {
     id: number;
-    dateTime: string; // ISO date string
-    price: number;
-    remainingTickets: number;
-    isAvailable: boolean;
+    exhibitionId: number;
+    daysOfWeek: number[];
+    startTime: string;
+    endTime: string;
+    maxCapacity: number;
 }
 
 export interface Exhibition {
@@ -35,15 +36,6 @@ export interface Exhibition {
     imageUrl: string;
     title: string;
     description: string;
-}
-
-export interface ExhibitionOpeningHour {
-    id: number;
-    exhibitionId: number;
-    daysOfWeek: number[]; // [1, 2, 3...] dove 1 è Lunedì
-    startTime: string;
-    endTime: string;
-    maxCapacity: number;
 }
 
 // ─── Category ────────────────────────────────────────────────────────────────
@@ -131,8 +123,10 @@ export interface Ticket {
 
 export interface TicketTier {
     id: number;
-    name: string;
+    type: string;
     price: number;
+    name: string;
+    description: string;
 }
 
 // ─── User ─────────────────────────────────────────────────────────────────────

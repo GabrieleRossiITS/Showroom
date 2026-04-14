@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 import { Calendar, MapPin, Ticket, Clock, ArrowRight } from "lucide-react";
 import {
     getExhibitionById,
-    getExhibitionOpeningHours,
     getExhibitionTiers,
+    getExhibitionTimeSlots,
 } from "../api/fetchers";
 
 export const Route = createFileRoute("/")({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 
         const [exhibition, hours, tiers] = await Promise.all([
             getExhibitionById(exhibitionId, lang),
-            getExhibitionOpeningHours(exhibitionId),
+            getExhibitionTimeSlots(exhibitionId),
             getExhibitionTiers(lang),
         ]);
 

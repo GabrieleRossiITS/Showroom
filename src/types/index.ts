@@ -78,6 +78,7 @@ export interface CartItem {
     souvenirName: string;
     souvenirPrice: number;
     quantity: number;
+    souvenirImageUrl: string;
 }
 
 export interface Cart {

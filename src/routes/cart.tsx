@@ -117,7 +117,7 @@ function CartPage() {
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                        item.quantity,
+                                                    item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}
@@ -141,7 +141,7 @@ function CartPage() {
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                        item.quantity,
+                                                    item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}
@@ -198,16 +198,14 @@ function CartItemRow({
             exit={{ opacity: 0, scale: 0.95, x: -20 }}
             className="group relative flex flex-col sm:flex-row items-center gap-6 p-6 md:p-8 bg-white/40 backdrop-blur-xl rounded-4xl border border-white/60 shadow-sm hover:shadow-md transition-all duration-500"
         >
-            {/* Image */}
             <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl overflow-hidden bg-(--vintage-sepia) shrink-0 shadow-inner">
-                {/* <ProtectedImage
-                    src={item.imageUrl}
+                <img
+                    src={item.souvenirImageUrl}
                     alt={item.souvenirName}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                /> */}
+                />
             </div>
 
-            {/* Info */}
             <div className="flex-1 space-y-1 text-center sm:text-left">
                 <h3 className="text-xl font-serif font-bold text-(--deep-charcoal) leading-tight">
                     {item.souvenirName}
@@ -217,7 +215,6 @@ function CartItemRow({
                 </p>
             </div>
 
-            {/* Price & Actions */}
             <div className="flex items-center gap-8">
                 <div className="text-right">
                     <p className="text-2xl font-black text-(--burnished-copper) font-mono">

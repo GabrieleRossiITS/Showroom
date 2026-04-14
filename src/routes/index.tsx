@@ -138,7 +138,7 @@ function App() {
                         >
                             <Button
                                 onClick={() => {
-                                    navigate({ to: "/exhibitions" });
+                                    navigate({ to: "/exhibitions/$id", params: { id: "1" } });  // exhibitions/1
                                 }}
                                 variant="primary"
                                 rounded="full"

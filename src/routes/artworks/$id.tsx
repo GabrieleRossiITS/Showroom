@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Info } from "lucide-react";
 import Button from "#/components/ui/Button";
@@ -6,6 +7,7 @@ import { getArtworkById } from "#/api/fetchers";
 import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import { ProtectedImage } from "#/components/ui/ProtectedImage";
+import ImageModal from "#/components/ui/ImageModal";
 
 export const Route = createFileRoute("/artworks/$id")({
     pendingComponent: GlobalLoader,
@@ -42,6 +44,16 @@ function ArtworkDetail() {
         },
     };
 
+    const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        if (showModal) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [showModal]);
+
     return (
         <div className="top-0 bottom-0 page-wrap z-10 max-w-7xl mx-auto mt-16">
             <motion.div
@@ -69,6 +81,7 @@ function ArtworkDetail() {
                                 src={artwork.imageUrl}
                                 alt={artwork.title}
                                 className="w-full h-auto max-h-[75vh]"
+                                onClick={() => setShowModal(true)}
                             />
                             <div className="absolute inset-0 bg-linear-to-tr from-white/10 via-transparent to-transparent opacity-40 pointer-events-none" />
                         </div>
@@ -130,6 +143,14 @@ function ArtworkDetail() {
                     </motion.div>
                 </div>
             </div>
+            {showModal && (
+                <ImageModal
+                    imageUrl={artwork.imageUrl}
+                    alt={artwork.title}
+                    onClose={() => setShowModal(false)}
+                />
+            )}
         </div>
+
     );
 }

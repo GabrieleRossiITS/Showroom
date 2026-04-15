@@ -39,13 +39,9 @@ function CartPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-12"
+                    className="mb-12 flex justify-between items-center"
                 >
                     <div>
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-(--burnished-copper)/10 border border-(--burnished-copper)/20 text-(--burnished-copper-deep) text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
-                            <ShoppingBag className="w-3 h-3" />
-                            {t("cart.label")}
-                        </span>
                         <h1 className="text-5xl md:text-7xl font-serif font-bold italic text-(--deep-charcoal) tracking-tight">
                             {t("cart.title")}
                         </h1>

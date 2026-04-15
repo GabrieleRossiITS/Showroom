@@ -87,12 +87,6 @@ function ShopPage() {
         <div className="min-h-screen bg-(--vintage-sepia) overflow-x-hidden mb-16">
             {/* ── Hero strip ─────────────────────────────────────────── */}
             <div className="relative pt-40 pb-24 px-6 md:px-16 overflow-hidden">
-                {/* Ambient glow */}
-                <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-(--burnished-copper)/8 rounded-full blur-[120px] animate-pulse" />
-                    <div className="absolute bottom-0 left-[-5%] w-[40vw] h-[40vw] bg-(--parisian-stone)/10 rounded-full blur-[100px]" />
-                </div>
-
                 <div className="relative max-w-7xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -100,18 +94,11 @@ function ShopPage() {
                         transition={{ duration: 0.9 }}
                         className="space-y-6 max-w-2xl"
                     >
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-(--burnished-copper)/10 border border-(--burnished-copper)/20 text-(--burnished-copper-deep) text-[10px] font-bold uppercase tracking-[0.3em]">
-                            <ShoppingBag className="w-3 h-3" />
-                            {t("shop.label")}
-                        </span>
                         <h1 className="text-6xl md:text-8xl font-black text-(--deep-charcoal) font-serif italic tracking-tight leading-[0.95]">
                             {t("shop.title")}
                         </h1>
                         <p className="text-lg text-(--parisian-stone-dark) font-medium opacity-75 leading-relaxed max-w-md">
-                            {t(
-                                "shop.subtitle",
-                                "Oggetti curati che prolungano l'esperienza della mostra nella vita quotidiana.",
-                            )}
+                            {t("shop.subtitle")}
                         </p>
                     </motion.div>
                 </div>

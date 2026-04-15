@@ -207,30 +207,21 @@ export default function Header() {
                                             icon: (
                                                 <Settings className="w-4 h-4" />
                                             ),
-                                            label: t(
-                                                "account.myAccount",
-                                                "Il mio account",
-                                            ),
+                                            label: t("account.myAccount"),
                                         },
                                         {
                                             to: "/account#orders",
                                             icon: (
                                                 <ShoppingBag className="w-4 h-4" />
                                             ),
-                                            label: t(
-                                                "account.orders",
-                                                "Ordini",
-                                            ),
+                                            label: t("account.orders"),
                                         },
                                         {
                                             to: "/account#tickets",
                                             icon: (
                                                 <Ticket className="w-4 h-4" />
                                             ),
-                                            label: t(
-                                                "account.tickets",
-                                                "Biglietti",
-                                            ),
+                                            label: t("account.tickets"),
                                         },
                                     ].map((item) => (
                                         <Link

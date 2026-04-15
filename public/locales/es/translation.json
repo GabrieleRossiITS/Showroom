@@ -1,13 +1,19 @@
 {
     "nav": {
+        "home": "Inicio",
         "artist": "Los artistas",
-        "artworks": "Obras",
+        "artworks": "Mini Tour",
         "exhibitions": "Exposiciones",
         "shop": "Tienda",
         "about": "Contacto",
         "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
         "cart": "Carrito",
+        "account": "Cuenta",
+        "checkout": "Pago",
+        "success": "Pedido Completado",
+        "forgotPassword": "Contraseña Olvidada",
+        "admin": "Panel Admin",
         "selectLanguage": "Seleccionar idioma"
     },
     "footer": {
@@ -39,9 +45,9 @@
             "missionTitle": "Nuestra Misión",
             "missionValue": "Digitalizar el arte, preservar la emoción.",
             "hqTitle": "Sede",
-            "hqValue": "Pordenone / Tokio"
+            "hqValue": "Pordenone / Tokyo"
         },
-        "agencyDescription": "Pixel voyage es una agencia de vanguardia especializada en la creación y gestión de exposiciones de arte digital interactivas. Combinamos habilidades avanzadas de ingeniería de software con una profunda sensibilidad curatorial para transformar archivos históricos y colecciones físicas en experiencias inmersivas accesibles en todo el mundo.",
+        "agencyDescription": "Pixel voyage es una agencia de vanguardia especializada en la creación y gestión de exposiciones de arte digital interactivas. Combinamos habilidades avanzadas de ingeniería de software con una profunda sensibilidad curatorial para transformar archivos históricos y colecciones físicas en experiencias inmersivas accessibles en todo el mundo.",
         "form": {
             "contactUs": "Colabora con nosotros",
             "formName": "Nombre o Empresa",
@@ -51,7 +57,8 @@
             "subject2": "Asociación técnica / Software",
             "subject3": "Información general",
             "formMessage": "¿Cómo podemos ayudarte?",
-            "formPlaceholder": "Escribe aquí los detalles de tu proyecto...",
+            "formNamePlaceholder": "Tu nombre o empresa",
+            "formMessagePlaceholder": "Escribe aquí los detalles de tu proyecto...",
             "formSubmit": "Enviar Solicitud"
         }
     },
@@ -74,7 +81,7 @@
     },
     "shop": {
         "title": "Tienda de Souvenirs",
-        "subtitle": "Llévate a casa un pedazo de fotografía humanista.",
+        "subtitle": "Objetos seleccionados que extienden la experiencia de la exposición a la vida cotidiana.",
         "adding": "Añadiendo...",
         "added": "¡Añadido!",
         "all": "Todo",
@@ -98,6 +105,7 @@
         "empty": "El carrito está vacío",
         "emptySubtitle": "Aún no has añadido artículos a tu carrito.",
         "goToShop": "Ir de compras",
+        "goToOrders": "Ir a tus pedidos",
         "summary": "Resumen del Pedido",
         "subtotal": "Subtotal",
         "shipping": "Envío",
@@ -132,6 +140,7 @@
         "back": "Volver a Exposiciones",
         "bookingTitle": "Reserva tu visita",
         "chooseTime": "Elige una franja horaria",
+        "chooseDate": "Elegir una fecha",
         "ticketsLeft": "entradas restantes",
         "selectTier": "Selecciona el tipo de entrada",
         "confirmBooking": "Confirmar Reserva",
@@ -148,11 +157,17 @@
         "subtitle": "Accede a tu colección privada y experiencias curadas.",
         "email": "Correo Electrónico",
         "password": "Contraseña",
+        "oldPassword": "Contraseña Antigua",
+        "newPassword": "Contraseña Nueva",
+        "confirmNewPassword": "Confirmar Contraseña Nueva",
         "submit": "Iniciar Sesión",
         "forgotPassword": "¿Olvidaste tu contraseña?",
         "noAccount": "¿No tienes una cuenta?",
         "signUp": "Crea una ahora",
         "backHome": "Volver al Inicio",
+        "backToLogin": "Volver al login",
+        "changePasswordTitle": "Cambiar la contraseña",
+        "changePasswordSubtitle": "Actualiza tus credenciales.",
         "error": "Correo o contraseña inválidos. Inténtalo de nuevo."
     },
     "register": {
@@ -179,9 +194,9 @@
             "changePassword": "Cambiar contraseña",
             "changePasswordError": "Error al cambiar la contraseña",
             "passwordChanged": "Contraseña cambiada con éxito",
-            "currentPassword": "Contraseña actual",
+            "currentPassword": "Contraseña antigua",
             "newPassword": "Nueva contraseña",
-            "updatePassword": "Actualizar contraseña"
+            "updatePassword": "Cambiar contraseña"
         },
         "ticketsTab": {
             "noTickets": "Sin entradas",
@@ -229,7 +244,7 @@
                 "originsP2": "Su capacidad para encontrar el encanto en lo ordinario lo convirtió en el pilar de la fotografía humanista francesa, celebrando la humanidad con una mirada benévola y nunca cínica.",
                 "keyProjectTitle": "París en el Corazón",
                 "keyProjectP1": "A través de miles de fotografías, documentó la transformación de París. Su obra no es solo crónica, sino una narrativa visual que fusiona la realidad con una sutil puesta en escena poética.",
-                "keyProjectP2": "La célebre fotografía 'El beso' se ha convertido en el símbolo universal del romanticismo parisino, encarnando la capacidad de Doisneau para cristalizar la emoción pura en un instante.",
+                "keyProjectP2": "La célebre fotografía 'El beso' se ha convertido en el símbolo universal del romanticismo parisino, encarnando la capacidad de Doisneau para cristalizar la emoción pura in un instante.",
                 "philosophyTitle": "La Mirada Curiosa",
                 "philosophyDesc": "Para Doisneau, fotografiar no era un acto mecánico, sino una búsqueda de 'pequeñas luces' en la oscuridad de la rutina. Creía que el mundo estaba lleno de milagros cotidianos listos para ser descubiertos.",
                 "iconTitle": "Un Legado Inmortal",
@@ -252,7 +267,7 @@
                 "style": "Íntimo, Conceptual",
                 "subject": "Identidad, Fronteras, Mujeres",
                 "originsTitle": "Más allá de las Fronteras",
-                "originsP1": "Matemática de formación, Arthur aplica un rigor analítico a narrativas profundamente humanas. Su trabajo explora las intersecciones entre culturas, con un enfoque particular en la vida privada de las mujeres.",
+                "originsP1": "Matemática de formación, Arthur aplica un rigor analítico a narrativas profundamente humanas. Su trabajo explora les intersecciones entre culturas, con un enfoque particular en la vida privada de las mujeres.",
                 "originsP2": "Su carrera la ha llevado desde Europa del Este hasta Arabia Saudita, buscando siempre superar las barreras visuales para mostrar mundos a menudo inaccesibles.",
                 "keyProjectTitle": "Jeddah Diary",
                 "keyProjectP1": "En 'Jeddah Diary', documenta la vida de jóvenes mujeres en Arabia Saudita. En un contexto donde la fotografía está a menudo prohibida, usa el flash y las sombras para proteger a los sujetos revelando su realidad.",
@@ -282,7 +297,7 @@
                 "originsP1": "Habiendo dejado Japón en 1973, Furuya atravesó Europa estableciéndose en Austria. Su trabajo es un puente entre la cultura oriental y la estética documental europea de la Guerra Fría.",
                 "originsP2": "Su fotografía se convirtió en un diario de vida en el momento en que comenzó a retratar obsesivamente a su esposa Christine, creando un archivo de amor y dolor.",
                 "keyProjectTitle": "Mémoires",
-                "keyProjectP1": "Tras la muerte de Christine, Furuya dedicó su vida a reelaborar las fotos tomadas juntos. 'Mémoires' no es solo un homenaje, sino un proceso catártico de reconstrucción de la memoria.",
+                "keyProjectP1": "Tras la muerte de Christine, Furuya dedicó su vida a reelaborar las fotos tomadas juntos. 'Mémoires' no es solo un homenaje, sino un processo catártico de reconstrucción de la memoria.",
                 "keyProjectP2": "Las imágenes mezclan la tragedia personal con los cambios históricos de Europa, haciendo del dolor individual una experiencia colectiva universal.",
                 "philosophyTitle": "El Tiempo que Queda",
                 "philosophyDesc": "La fotografía para Furuya es la única herramienta para combatir el olvido. Sus imágenes cambian de significado cada vez que se reorganizan, reflejando la naturaleza cambiante del recuerdo.",

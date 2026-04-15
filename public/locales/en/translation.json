@@ -1,13 +1,19 @@
 {
     "nav": {
+        "home": "Home",
         "artist": "Artists",
-        "artworks": "Artworks",
+        "artworks": "Mini Tour",
         "exhibitions": "Exhibitions",
         "shop": "Shop",
         "about": "Contact",
         "login": "Login",
         "logout": "Logout",
         "cart": "Cart",
+        "account": "Account",
+        "checkout": "Checkout",
+        "success": "Order Completed",
+        "forgotPassword": "Forgot Password",
+        "admin": "Admin Panel",
         "selectLanguage": "Select Language"
     },
     "footer": {
@@ -51,7 +57,8 @@
             "subject2": "Technical / Software Partnership",
             "subject3": "General information",
             "formMessage": "How can we help you?",
-            "formPlaceholder": "Write the details of your project here...",
+            "formNamePlaceholder": "Your name or company",
+            "formMessagePlaceholder": "Write the details of your project here...",
             "formSubmit": "Submit Request"
         }
     },
@@ -74,7 +81,7 @@
     },
     "shop": {
         "title": "Souvenir Shop",
-        "subtitle": "Take home a piece of humanist photography.",
+        "subtitle": "Curated objects that extend the exhibition experience into daily life.",
         "adding": "Adding...",
         "added": "Added!",
         "all": "All",
@@ -98,6 +105,7 @@
         "empty": "Your cart is empty",
         "emptySubtitle": "You haven't added any items to your cart yet.",
         "goToShop": "Start shopping",
+        "goToOrders": "Go to your orders",
         "summary": "Order Summary",
         "subtotal": "Subtotal",
         "shipping": "Shipping",
@@ -132,6 +140,7 @@
         "back": "Back to Exhibitions",
         "bookingTitle": "Book your visit",
         "chooseTime": "Choose a time slot",
+        "chooseDate": "Choose a date",
         "ticketsLeft": "tickets left",
         "selectTier": "Select ticket type",
         "confirmBooking": "Confirm Booking",
@@ -148,11 +157,17 @@
         "subtitle": "Access your private collection and curated experiences.",
         "email": "Email Address",
         "password": "Password",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "confirmNewPassword": "Confirm New Password",
         "submit": "Login",
         "forgotPassword": "Forgot password?",
         "noAccount": "Don't have an account?",
         "signUp": "Create one now",
         "backHome": "Back to Home",
+        "backToLogin": "Back to login",
+        "changePasswordTitle": "Change password",
+        "changePasswordSubtitle": "Update your credentials.",
         "error": "Invalid email or password. Try again."
     },
     "register": {
@@ -179,9 +194,9 @@
             "changePassword": "Change password",
             "changePasswordError": "Error changing password",
             "passwordChanged": "Password changed successfully",
-            "currentPassword": "Current password",
+            "currentPassword": "Old password",
             "newPassword": "New password",
-            "updatePassword": "Update password"
+            "updatePassword": "Change password"
         },
         "ticketsTab": {
             "noTickets": "No tickets",

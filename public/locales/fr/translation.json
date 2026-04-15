@@ -1,13 +1,19 @@
 {
     "nav": {
+        "home": "Accueil",
         "artist": "Les artistes",
-        "artworks": "Œuvres",
+        "artworks": "Mini Tour",
         "exhibitions": "Expositions",
         "shop": "Boutique",
         "about": "Contact",
         "login": "Connexion",
         "logout": "Déconnexion",
         "cart": "Panier",
+        "account": "Compte",
+        "checkout": "Paiement",
+        "success": "Commande Terminée",
+        "forgotPassword": "Mot de passe oublié",
+        "admin": "Panneau Admin",
         "selectLanguage": "Choisir la langue"
     },
     "footer": {
@@ -41,7 +47,7 @@
             "hqTitle": "Siège",
             "hqValue": "Pordenone / Tokyo"
         },
-        "agencyDescription": "Pixel voyage est une agence d'avant-garde spécialisée dans la création et la gestion d'expositions d'art numérique interactives. Nous allions des compétences avancées en ingénierie logicielle à une profonde sensibilité curatoriale pour transformer des archives historiques et des collections physiques en expériences immersives accessibles dans le monde entier.",
+        "agencyDescription": "Pixel voyage est une agence d'avant-garde spécialisée dans la création et la gestion d'expositions d'art numérique interactives. Nous allions des compétences avancées en ingénieri logicielle à une profonde sensibilité curatoriale pour transformer des archives historiques et des collections physiques en expériences immersives accessibles dans le monde entier.",
         "form": {
             "contactUs": "Collaborez avec nous",
             "formName": "Nom ou Entreprise",
@@ -51,7 +57,8 @@
             "subject2": "Partenariat technique / Logiciel",
             "subject3": "Informations générales",
             "formMessage": "Comment pouvons-nous vous aider ?",
-            "formPlaceholder": "Écrivez les détails de votre projet ici...",
+            "formNamePlaceholder": "Votre nom ou entreprise",
+            "formMessagePlaceholder": "Écrivez les détails de votre projet ici...",
             "formSubmit": "Envoyer la demande"
         }
     },
@@ -74,7 +81,7 @@
     },
     "shop": {
         "title": "Boutique de Souvenirs",
-        "subtitle": "Emportez chez vous un morceau de photographie humaniste.",
+        "subtitle": "Des objets sélectionnés qui prolongent l'expérience de l'exposition dans la vie quotidienne.",
         "adding": "Ajout...",
         "added": "Ajouté !",
         "all": "Tout",
@@ -98,6 +105,7 @@
         "empty": "Le panier est vide",
         "emptySubtitle": "Vous n'avez pas encore ajouté d'articles à votre panier.",
         "goToShop": "Commencer vos achats",
+        "goToOrders": "Voir vos commandes",
         "summary": "Résumé de la Commande",
         "subtotal": "Sous-total",
         "shipping": "Livraison",
@@ -132,6 +140,7 @@
         "back": "Retour aux Expositions",
         "bookingTitle": "Réservez votre visite",
         "chooseTime": "Choisissez un créneau horaire",
+        "chooseDate": "Choisir une date",
         "ticketsLeft": "billets restants",
         "selectTier": "Sélectionnez le type de billet",
         "confirmBooking": "Confirmer la Réservation",
@@ -148,11 +157,17 @@
         "subtitle": "Accédez à votre collection privée et à des expériences organisées.",
         "email": "Adresse E-mail",
         "password": "Mot de passe",
+        "oldPassword": "Ancien mot de passe",
+        "newPassword": "Nouveau mot de passe",
+        "confirmNewPassword": "Confirmer le nouveau mot de passe",
         "submit": "Se connecter",
         "forgotPassword": "Mot de passe oublié ?",
         "noAccount": "Vous n'avez pas de compte ?",
         "signUp": "Créez-en un maintenant",
         "backHome": "Retour à l'Accueil",
+        "backToLogin": "Retour à la connexion",
+        "changePasswordTitle": "Changer le mot de passe",
+        "changePasswordSubtitle": "Mettez à jour vos identifiants.",
         "error": "E-mail ou mot de passe invalide. Réessayez."
     },
     "register": {
@@ -228,7 +243,7 @@
                 "originsP1": "Né à Gentilly, Doisneau a transformé les rues de Paris en sa scène. Après une formation de lithographe, il a trouvé sa véritable voix en capturant les instants fugaces de beauté dans la vie quotidienne de la classe ouvrière.",
                 "originsP2": "Sa capacité à trouver l'enchantement dans l'ordinaire a fait de lui le pilier de la photographie humaniste française, célébrant l'humanité avec un regard bienveillant et jamais cynique.",
                 "keyProjectTitle": "Paris au Cœur",
-                "keyProjectP1": "À travers des milliers de clichés, il a documenté la transformation de Paris. Son œuvre n'est pas seulement une chronique, mais un récit visuel qui mêle réalité et subtile mise en scène poétique.",
+                "keyProjectP1": "À travers des milliers de clichés, il a documenté la transformation de Paris. Son œuvre n'est pas seulement une chronique, ma un récit visuel qui mêle réalité et subtile mise en scène poétique.",
                 "keyProjectP2": "Le célèbre cliché 'Le Baiser' est devenu le symbole universel du romantisme parisien, incarnant la capacité de Doisneau à cristalliser l'émotion pure en un instant.",
                 "philosophyTitle": "Le Regard Curieux",
                 "philosophyDesc": "Pour Doisneau, photographier n'était pas un acte mécanique, mais une recherche de 'petites lumières' dans l'obscurité de la routine. Il croyait que le monde regorgeait de miracles quotidiens prêts à être découverts.",
@@ -291,7 +306,7 @@
                 "iconDate": "Mémoires, 1989-2010",
                 "legacyTitle": "Gardien de la Mémoire",
                 "legacyP1": "Furuya a redéfini la photographie autobiographique, montrant comment l'archive personnelle peut devenir une forme d'art puissante et déchirante.",
-                "legacyP2": "Son travail enseigne que la photographie n'arrête pas le temps, mais nous permet de dialoguer avec ce que nous avons perdu."
+                "legacyP2": "Son travail enseigne que la photographie n'arrête pas le temps, ma nous permet de dialoguer avec ce que nous avons perdu."
             },
             {
                 "id": "stefanie-moshammer",
@@ -303,16 +318,16 @@
                 "movement": "Photographie Conceptuelle",
                 "famousWork": "Vegas and She",
                 "activity": "2013 - Présent",
-                "style": "Saturé, Graphique, Hybride",
+                "style": "Saturé, Graphique, Hybride",
                 "subject": "Sous-cultures, Illusions, Espace",
                 "originsTitle": "Visions Chromatiques",
                 "originsP1": "Avec une formation en design graphique, Moshammer crée des images qui explosent de couleur et de composition. Sa vision s'éloigne du réalisme pour explorer la surface et l'illusion.",
                 "originsP2": "Ses récits visuels sont hybrides, mêlant réalité capturée et construction esthétique pour remettre en question la façon dont nous percevons les lieux et les personnes.",
                 "keyProjectTitle": "Vegas and She",
-                "keyProjectP1": "Dans ce projet, Las Vegas n'est pas une ville, mais un mirage. Moshammer explore les promesses du rêve américain à travers des portraits vibrants et des détails urbains presque abstraits.",
+                "keyProjectP1": "Dans ce projet, Las Vegas n'est pas une ville, ma un mirage. Moshammer explore les promesses du rêve américain à travers des portraits vibrants et des détails urbains presque abstraits.",
                 "keyProjectP2": "Son utilisation de la couleur saturée transforme le quotidien en quelque chose d'étranger, révélant la solitude et la beauté artificielle des contextes marginaux.",
                 "philosophyTitle": "L'Esthétique de l'Incertitude",
-                "philosophyDesc": "Elle étudie comment l'environnement façonne l'identité. Pour elle, la photographie n'est pas une preuve de vérité, mais un moyen de créer de nouvelles réalités chargées de tension émotionnelle et graphique.",
+                "philosophyDesc": "Elle étudie comment l'environnement façonne l'identité. Pour elle, la photographie n'est pas une preuve de vérité, ma un moyen de créer de nouvelles réalités chargées de tension émotionnelle et graphique.",
                 "iconTitle": "Expérimentation Visuelle",
                 "iconDesc": "Récompensée comme FOAM Talent, elle représente la nouvelle avant-garde qui fusionne photographie, mode et critique sociale dans un langage visuel unique.",
                 "iconDate": "I Can Be Her, 2018",

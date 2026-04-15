@@ -1,13 +1,19 @@
 {
     "nav": {
+        "home": "Início",
         "artist": "Os artistas",
-        "artworks": "Obras",
+        "artworks": "Mini Tour",
         "exhibitions": "Exposições",
         "shop": "Loja",
         "about": "Contato",
         "login": "Entrar",
         "logout": "Sair",
         "cart": "Carrinho",
+        "account": "Conta",
+        "checkout": "Pagamento",
+        "success": "Pedido Concluído",
+        "forgotPassword": "Senha Esquecida",
+        "admin": "Painel Admin",
         "selectLanguage": "Selecionar idioma"
     },
     "footer": {
@@ -51,7 +57,8 @@
             "subject2": "Parceria técnica / Software",
             "subject3": "Informações gerais",
             "formMessage": "Como podemos ajudar?",
-            "formPlaceholder": "Escreva os detalhes do seu projeto aqui...",
+            "formNamePlaceholder": "Seu nome ou empresa",
+            "formMessagePlaceholder": "Escreva aqui os detalhes do seu projeto...",
             "formSubmit": "Enviar Solicitação"
         }
     },
@@ -74,7 +81,7 @@
     },
     "shop": {
         "title": "Loja de Souvenirs",
-        "subtitle": "Leve para casa um pedaço de fotografia humanista.",
+        "subtitle": "Objetos selecionados que estendem a experiência da exposição para a vida cotidiana.",
         "adding": "Adicionando...",
         "added": "Adicionado!",
         "all": "Tudo",
@@ -98,6 +105,7 @@
         "empty": "O carrinho está vazio",
         "emptySubtitle": "Você ainda não adicionou itens ao seu carrinho.",
         "goToShop": "Ir às compras",
+        "goToOrders": "Ir para seus pedidos",
         "summary": "Resumo do Pedido",
         "subtotal": "Subtotal",
         "shipping": "Frete",
@@ -132,6 +140,7 @@
         "back": "Voltar para Exposições",
         "bookingTitle": "Reserve sua visita",
         "chooseTime": "Escolha um horário",
+        "chooseDate": "Escolha uma data",
         "ticketsLeft": "ingressos restantes",
         "selectTier": "Selecione o tipo de ingresso",
         "confirmBooking": "Confirmar Reserva",
@@ -148,11 +157,17 @@
         "subtitle": "Acesse sua coleção privada e experiências selecionadas.",
         "email": "Endereço de E-mail",
         "password": "Senha",
+        "oldPassword": "Senha Antiga",
+        "newPassword": "Nova Senha",
+        "confirmNewPassword": "Confirmar Nova Senha",
         "submit": "Entrar",
         "forgotPassword": "Esqueceu sua senha?",
         "noAccount": "Não tem uma conta?",
         "signUp": "Crie uma agora",
         "backHome": "Voltar ao Início",
+        "backToLogin": "Voltar ao login",
+        "changePasswordTitle": "Alterar a senha",
+        "changePasswordSubtitle": "Atualize suas credenciais.",
         "error": "E-mail ou senha inválidos. Tente novamente."
     },
     "register": {
@@ -179,9 +194,9 @@
             "changePassword": "Alterar senha",
             "changePasswordError": "Erro ao alterar a senha",
             "passwordChanged": "Senha alterada com sucesso",
-            "currentPassword": "Senha atual",
+            "currentPassword": "Senha antiga",
             "newPassword": "Nova senha",
-            "updatePassword": "Atualizar senha"
+            "updatePassword": "Alterar senha"
         },
         "ticketsTab": {
             "noTickets": "Nenhum ingresso",
@@ -225,13 +240,13 @@
                 "style": "Espontâneo, Irônico, Romântico",
                 "subject": "Vida parisiense, Crianças, Amor",
                 "originsTitle": "O Poeta da Rua",
-                "originsP1": "Nascido em Gentilly, Doisneau transformou as ruas de Paris em seu palco. Após treinar como litógrafo, encontrou sua verdadeira voz capturando momentos fugazes de beleza na vida cotidiana da classe trabalhadora.",
+                "originsP1": "Nascido em Gentilly, Doisneau transformou as ruas de Paris em seu palco. Após treinar como litógrafo, encontrou sua verdadeira voce capturando momentos fugazes de beleza na vida cotidiana da classe trabalhadora.",
                 "originsP2": "Sua capacidade de encontrar encanto no comum fez dele o pilar da fotografia humanista francesa, celebrando a humanidade com um olhar benevolente e nunca cínico.",
                 "keyProjectTitle": "Paris no Coração",
                 "keyProjectP1": "Através de milhares de fotos, ele documentou a transformação de Paris. Sua obra não é apenas crônica, mas uma narrativa visual que mescla realidade com uma sutil encenação poética.",
                 "keyProjectP2": "A famosa foto 'O Beijo' tornou-se o símbolo universal do romantismo parisiense, incorporando a capacidade de Doisneau de cristalizar emoção pura em um instante.",
                 "philosophyTitle": "O Olhar Curioso",
-                "philosophyDesc": "Para Doisneau, fotografar não era um ato mecânico, mas uma busca por 'pequenas luzes' na escuridão da rotina. Ele acreditava que o mundo estava cheio de milagres diários prontos para serem descobertos.",
+                "philosophyDesc": "Para Doisneau, fotografar não era um acto mecânico, mas uma busca por 'pequenas luzes' na escuridão da rotina. Ele acreditava que o mondo estava cheio de milagres diários prontos para serem descobertos.",
                 "iconTitle": "Um Legado Imortal",
                 "iconDesc": "Deixou mais de 450.000 negativos que narram uma época de esperança e simplicidade, influenciando gerações de fotógrafos de rua em todo o mundo.",
                 "iconDate": "Hôtel de Ville, 1950",
@@ -257,14 +272,14 @@
                 "keyProjectTitle": "Jeddah Diary",
                 "keyProjectP1": "Em 'Jeddah Diary', documenta a vida de jovens mulheres na Arábia Saudita. Num contexto onde a fotografia é frequentemente proibida, usa flash e sombras para proteger os sujeitos, revelando sua realidade.",
                 "keyProjectP2": "O projeto é uma meditação sobre a visibilidade e o poder do não dito, redefinindo os cânones do fotojornalismo tradicional através de uma abordagem artística.",
-                "philosophyTitle": "Empatia e Estrutura",
+                "philosophyTitle": "Empatia e Estructura",
                 "philosophyDesc": "Seu trabalho preenche a lacuna entre documento e arte, focando nas implicações pessoais das fronteiras geográficas e culturais e na evolução tecnológica do corpo humano.",
                 "iconTitle": "Magnum Photos",
                 "iconDesc": "Membro da Magnum desde 2013, Arthur continua a impulsionar a mídia documental para novas formas expressivas, incluindo experimentos com IA e robótica.",
                 "iconDate": "Magnum Photos, 2013",
                 "legacyTitle": "Novas Narrativas",
                 "legacyP1": "Através de seu espaço 'Fishbar' em Londres e seus projetos globais, apoia uma visão da fotografia que é tanto analítica quanto vulnerável.",
-                "legacyP2": "Continua sendo uma voz fundamental na definição de como a imagem pode narrar a complexidade da identidade moderna na era da globalização."
+                "legacyP2": "Continua sendo uma voz fundamental na definição de como a imagem pode narrar a complexidade da identidade moderna na era da globalizzazione."
             },
             {
                 "id": "seiichi-furuya",
@@ -282,16 +297,16 @@
                 "originsP1": "Deixando o Japão em 1973, Furuya cruzou a Europa estabelecendo-se na Áustria. Seu trabalho é uma ponte entre a cultura oriental e a estética documental europeia da Guerra Fria.",
                 "originsP2": "Sua fotografia tornou-se um diário de vida no momento em que começou a retratar obsessivamente sua esposa Christine, criando um arquivo de amor e dor.",
                 "keyProjectTitle": "Mémoires",
-                "keyProjectP1": "Após a morte de Christine, Furuya dedicou sua vida a retrabalhar as fotos tiradas juntos. 'Mémoires' não é apenas uma homenagem, mas um processo catártico de reconstrução da memória.",
+                "keyProjectP1": "Após a morte de Christine, Furuya dedicou sua vida a retrabalhar as fotos tiradas juntos. 'Mémoires' não è apenas uma homenagem, mas um processo catártico de reconstrução da memória.",
                 "keyProjectP2": "As imagens misturam tragédia pessoal com as mudanças históricas da Europa, tornando a dor individual uma experiência coletiva universal.",
                 "philosophyTitle": "O Tempo que Resta",
-                "philosophyDesc": "A fotografia para Furuya é a única ferramenta para combater o esquecimento. Suas imagens mudam de significado a cada vez que são reorganizadas, refletindo a natureza mutável da memória.",
+                "philosophyDesc": "A fotografia para Furuya è a única ferramenta para combater o esquecimento. Suas imagens mudam de significado a cada vez que são reorganizadas, refletindo a natureza mutante da memória.",
                 "iconTitle": "A Arte do Livro",
                 "iconDesc": "Seus fotolivros são obras-primas de edição, onde cada justaposição entre passado e presente cria novas camadas de verdade emocional.",
                 "iconDate": "Mémoires, 1989-2010",
                 "legacyTitle": "Guardião da Lembrança",
                 "legacyP1": "Furuya redefiniu a fotografia autobiográfica, mostrando como o arquivo pessoal pode se tornar uma forma de arte poderosa e dolorosa.",
-                "legacyP2": "Seu trabalho ensina que a fotografia não para o tempo, mas nos permite dialogar com o que perdemos."
+                "legacyP2": "Seu lavoro ensina que a fotografia não pára o tempo, mas nos permite dialogar com o que perdemos."
             },
             {
                 "id": "stefanie-moshammer",
@@ -307,18 +322,18 @@
                 "subject": "Subculturas, Ilusões, Espaço",
                 "originsTitle": "Visões Cromáticas",
                 "originsP1": "Com formação em Design Gráfico, Moshammer cria imagens que explodem de cor e composição. Sua visão afasta-se do realismo para explorar a superfície e a ilusão.",
-                "originsP2": "Suas narrativas visuais são híbridas, misturando realidade capturada e construção estética para questionar a maneira como percebemos lugares e pessoas.",
+                "originsP2": "Suas narrativas visuais sont híbridas, misturando realidade capturada e construção estética para questionar a maneira como percebemos lugares e pessoas.",
                 "keyProjectTitle": "Vegas and She",
-                "keyProjectP1": "Neste projeto, Las Vegas não é uma cidade, mas uma miragem. Moshammer explora as promessas do sonho americano por meio de retratos vibrantes e detalhes urbanos quase abstratos.",
+                "keyProjectP1": "Neste projeto, Las Vegas não è uma cidade, mas uma miragem. Moshammer explora as promessas do sonho americano por meio de retratos vibrantes e detalhes urbanos quase abstratos.",
                 "keyProjectP2": "Seu uso de cores saturadas transforma o cotidiano em algo alienígena, revelando a solidão e a beleza artificial de contextos marginais.",
                 "philosophyTitle": "A Estética da Incerteza",
-                "philosophyDesc": "Investiga como o ambiente molda a identidade. Para ela, a fotografia não é uma prova da verdade, mas um meio para criar novas realidades carregadas de tensão emocional e gráfica.",
+                "philosophyDesc": "Investiga como o ambiente molda a identidade. Para ela, a fotografia não è uma prova da verdade, mas um meio para criar novas realidades carregadas de tensão emocional e gráfica.",
                 "iconTitle": "Experimentação Visual",
                 "iconDesc": "Premiada como FOAM Talent, ela representa a nova vanguarda que funde fotografia, moda e crítica social em uma linguagem visual única.",
                 "iconDate": "I Can Be Her, 2018",
                 "legacyTitle": "O Futuro da Imagem",
-                "legacyP1": "Moshammer desafia a natureza estática do gênero documental, convidando o espectador a se perder em um mundo onde a fronteira entre verdadeiro e falso é deliberadamente borrada.",
-                "legacyP2": "Sua obra é um testemunho da vitalidade da fotografia contemporânea em reinventar constantemente seu olhar sobre o mundo."
+                "legacyP1": "Moshammer desafia a natureza estática do gênero documental, convidando o espectador a se perder em um mundo onde a fronteira entre verdadeiro e falso è deliberadamente borrada.",
+                "legacyP2": "Sua obra è um testemunho da vitalidade da fotografia contemporânea em reinventar constantemente seu olhar sobre o mondo."
             }
         ]
     },

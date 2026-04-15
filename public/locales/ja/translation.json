@@ -1,13 +1,19 @@
 {
     "nav": {
+        "home": "ホーム",
         "artist": "アーティスト",
-        "artworks": "作品",
+        "artworks": "ミニツアー",
         "exhibitions": "展覧会",
         "shop": "ショップ",
         "about": "お問い合わせ",
         "login": "ログイン",
         "logout": "ログアウト",
         "cart": "カート",
+        "account": "アカウント",
+        "checkout": "チェックアウト",
+        "success": "注文完了",
+        "forgotPassword": "パスワードを忘れた方",
+        "admin": "管理者パネル",
         "selectLanguage": "言語を選択"
     },
     "footer": {
@@ -51,7 +57,8 @@
             "subject2": "技術・ソフトウェアパートナーシップ",
             "subject3": "一般的な情報",
             "formMessage": "どのようにお手伝いできますか？",
-            "formPlaceholder": "ここにプロジェクトの詳細を記入してください...",
+            "formNamePlaceholder": "名前または会社名",
+            "formMessagePlaceholder": "ここにプロジェクトの詳細を記入してください...",
             "formSubmit": "リクエストを送信"
         }
     },
@@ -74,7 +81,7 @@
     },
     "shop": {
         "title": "スーベニアショップ",
-        "subtitle": "ヒューマニスト写真の一部を持ち帰りましょう。",
+        "subtitle": "展覧会体験を日常生活へと広げる、厳選されたアイテム。",
         "adding": "追加中...",
         "added": "追加しました！",
         "all": "すべて",
@@ -98,6 +105,7 @@
         "empty": "カートは空です",
         "emptySubtitle": "まだカートに商品が追加されていません。",
         "goToShop": "ショッピングを始める",
+        "goToOrders": "注文履歴へ",
         "summary": "注文の概要",
         "subtotal": "小計",
         "shipping": "送料",
@@ -132,6 +140,7 @@
         "back": "展覧会に戻る",
         "bookingTitle": "訪問を予約",
         "chooseTime": "時間帯を選択",
+        "chooseDate": "日付を選択",
         "ticketsLeft": "枚残り",
         "selectTier": "チケットタイプを選択",
         "confirmBooking": "予約を確定",
@@ -148,11 +157,17 @@
         "subtitle": "あなたのプライベートコレクションとキュレーションされた体験にアクセスします。",
         "email": "メールアドレス",
         "password": "パスワード",
+        "oldPassword": "旧パスワード",
+        "newPassword": "新パスワード",
+        "confirmNewPassword": "新パスワード（確認）",
         "submit": "ログイン",
         "forgotPassword": "パスワードをお忘れですか？",
         "noAccount": "アカウントをお持ちではありませんか？",
         "signUp": "今すぐ作成",
         "backHome": "ホームに戻る",
+        "backToLogin": "ログインに戻る",
+        "changePasswordTitle": "パスワードを変更",
+        "changePasswordSubtitle": "資格情報を更新してください。",
         "error": "無効なメールアドレスまたはパスワードです。もう一度お試しください。"
     },
     "register": {
@@ -179,9 +194,9 @@
             "changePassword": "パスワードを変更",
             "changePasswordError": "パスワードの変更中にエラーが発生しました",
             "passwordChanged": "パスワードが正常に変更されました",
-            "currentPassword": "現在のパスワード",
-            "newPassword": "新しいパスワード",
-            "updatePassword": "パスワードを更新"
+            "currentPassword": "旧パスワード",
+            "newPassword": "新パスワード",
+            "updatePassword": "パスワードを変更"
         },
         "ticketsTab": {
             "noTickets": "チケットはありません",
@@ -258,13 +273,13 @@
                 "keyProjectP1": "「Jeddah Diary」では、サウジアラビアの若い女性たちの生活を記録しています。写真がしばしば禁止されている状況で、被写体を保護しながら彼女たちの現実を明らかにするためにフラッシュと影を使用します。",
                 "keyProjectP2": "このプロジェクトは、可視性と語られないものの力についての瞑想であり、芸術的アプローチを通じて伝統的なフォトジャーナリズムの規範を再定義しています。",
                 "philosophyTitle": "共感と構造",
-                "philosophyDesc": "彼女の作品は記録と芸術のギャップを埋め、地理的および文化的境界の個人的な影響や人体の技術的進化に焦点を当てています。",
+                "philosophyDesc": "彼女の作品は記録と芸術のギャップを埋め、地理的および文化的境界の個人的な影響や人体の技術的進化に焦点をおいています。",
                 "iconTitle": "Magnum Photos",
                 "iconDesc": "2013年からマグナムのメンバーであるアーサーは、AIやロボティクスを用いた実験を含め、ドキュメンタリーというメディアを新しい表現形式へと押し上げ続けています。",
                 "iconDate": "Magnum Photos, 2013",
                 "legacyTitle": "新しい物語",
                 "legacyP1": "ロンドンにある彼女のスペース「Fishbar」や世界的なプロジェクトを通じて、彼女は分析的でありながらも脆弱であるという写真のビジョンを支持しています。",
-                "legacyP2": "グローバリゼーションの時代における現代のアイデンティティの複雑さを、画像がどのように伝えることができるかを定義する上で、彼女は依然として不可欠な声です。"
+                "legacyP2": "グローバリゼーションの時代における現代のアイデンティティの複雑さを、画像がどのように伝えることができるかを定義する上で、彼女は依然ほど不可欠な声です。"
             },
             {
                 "id": "seiichi-furuya",

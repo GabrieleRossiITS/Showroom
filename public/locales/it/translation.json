@@ -2,7 +2,7 @@
     "nav": {
         "home": "Home",
         "artist": "Gli artisti",
-        "artworks": "Opere",
+        "artworks": "Mini Tour",
         "exhibitions": "Mostre",
         "shop": "Negozio",
         "about": "Contatti",
@@ -57,7 +57,8 @@
             "subject2": "Partnership tecnica / Software",
             "subject3": "Informazioni generali",
             "formMessage": "Come possiamo aiutarti?",
-            "formPlaceholder": "Scrivi qui i dettagli del tuo progetto...",
+            "formNamePlaceholder": "Il tuo nome o azienda",
+            "formMessagePlaceholder": "Scrivi qui i dettagli del tuo progetto...",
             "formSubmit": "Invia Richiesta"
         }
     },
@@ -80,7 +81,7 @@
     },
     "shop": {
         "title": "Negozio di Souvenir",
-        "subtitle": "Porta a casa un pezzo di fotografia umanista.",
+        "subtitle": "Oggetti curati che prolungano l'esperienza della mostra nella vita quotidiana.",
         "adding": "Aggiunta...",
         "added": "Aggiunto!",
         "all": "Tutto",
@@ -104,6 +105,7 @@
         "empty": "Il carrello è vuoto",
         "emptySubtitle": "Non hai ancora aggiunto articoli al tuo carrello.",
         "goToShop": "Inizia lo shopping",
+        "goToOrders": "Vai ai tuoi ordini",
         "summary": "Riepilogo Ordine",
         "subtotal": "Subtotale",
         "shipping": "Spedizione",
@@ -138,6 +140,7 @@
         "back": "Torna alle Mostre",
         "bookingTitle": "Prenota la tua visita",
         "chooseTime": "Scegli una fascia oraria",
+        "chooseDate": "Scegli una data",
         "ticketsLeft": "biglietti rimasti",
         "selectTier": "Seleziona il tipo di biglietto",
         "confirmBooking": "Conferma Prenotazione",

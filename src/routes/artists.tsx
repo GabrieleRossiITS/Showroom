@@ -87,7 +87,7 @@ function Artists() {
                         className="gap-2 text-(--parisian-stone-dark) hover:text-(--deep-charcoal) transition-transform hover:-translate-x-1"
                     >
                         <MoveLeft className="w-4 h-4" />
-                        {t("artist.backHome")}
+                        {t("artists.titles.backHome")}
                     </Button>
                 </div>
 

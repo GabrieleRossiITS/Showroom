@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { useAuth } from "./AuthContext";
 import { getUserCart, addItemToCart, removeItemFromCart, checkoutCart } from "#/api/fetchers";
-import type { Cart, CartItem, AddCartItemRequest } from "#/types";
+import type { Cart, AddCartItemRequest } from "#/types";
 import { useTranslation } from "react-i18next";
 
 interface CartContextType {

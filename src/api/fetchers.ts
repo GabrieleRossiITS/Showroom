@@ -11,6 +11,7 @@ import type {
     Ticket,
     User,
     TicketTier,
+    CreateTicketRequest,
 } from "../types";
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -512,6 +513,30 @@ export const getUserTickets = async (
             res.status === 403
                 ? "Accesso negato"
                 : "Errore nel recupero dei biglietti",
+        );
+    return res.json();
+};
+
+/** POST /api/users/{userId}/tickets?culture={lang} */
+export const postUserTicket = async (
+    userId: number,
+    request: CreateTicketRequest,
+    lang?: string,
+): Promise<Ticket> => {
+    const url = lang
+        ? `${API_BASE_URL}/users/${userId}/tickets?culture=${lang}`
+        : `${API_BASE_URL}/users/${userId}/tickets`;
+    const res = await fetch(url, {
+        method: "POST",
+        headers: getHeaders(lang, getToken()),
+        credentials: "include",
+        body: JSON.stringify(request),
+    });
+    if (!res.ok)
+        throw new Error(
+            res.status === 403
+                ? "Accesso negato"
+                : "Errore nell'aggiunta del biglietto",
         );
     return res.json();
 };

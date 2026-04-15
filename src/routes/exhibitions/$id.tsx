@@ -6,6 +6,7 @@ import {
     ChevronLeft,
     CheckCircle,
     AlertCircle,
+    Calendar,
 } from "lucide-react";
 import { getExhibitionById, getExhibitionTimeSlots, getExhibitionTiers } from "#/api/fetchers";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,8 @@ import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
 import type { ExhibitionTimeSlot, TicketTier } from "#/types";
+import { useTicket } from "#/components/contexts/TicketContext";
+
 
 export const Route = createFileRoute("/exhibitions/$id")({
     pendingComponent: GlobalLoader,
@@ -34,6 +37,7 @@ function ExhibitionDetail() {
     const { exhibition, timeSlots, tiers } = Route.useLoaderData();
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const { addTicket } = useTicket();
 
 
     const [selectedSlotId, setSelectedSlotId] = useState<number | null>(
@@ -44,6 +48,11 @@ function ExhibitionDetail() {
         tiers.length > 0 ? tiers[0].id : null,
     );
     const [isBooked, setIsBooked] = useState(false);
+
+    const today = new Date().toISOString().split("T")[0];
+    const [selectedDate, setSelectedDate] = useState<string>(
+        exhibition.startDate > today ? exhibition.startDate : today,
+    );
 
     const selectedTier = tiers.find((s) => s.id === selectedTierId) ?? null;
     const selectedSlot = timeSlots.find((s) => s.id === selectedSlotId) ?? null;
@@ -56,9 +65,23 @@ function ExhibitionDetail() {
         };
     }, []);
 
-    const handleBooking = () => {
+    const handleBooking = async () => {
         if (!selectedTier) return;
-        setIsBooked(true);
+        try {
+            await addTicket({
+                exhibitionId: exhibition.id,
+                tierId: selectedTier.id,
+                userId: 0, // This will be overwritten by TicketContext with the correct user.id
+                visitDate: selectedDate,
+                timeSlotId: selectedSlotId || 0,
+            });
+            setIsBooked(true);
+            setTimeout(() => setIsBooked(false), 2500);
+        } catch (error) {
+            console.error("Failed to add ticket:", error);
+        } finally {
+            setIsBooked(false);
+        }
     };
 
     if (isBooked) {
@@ -145,6 +168,29 @@ function ExhibitionDetail() {
                             {exhibition.description}
                         </p>
                     </motion.section>
+
+                    {/* Date Picker */}
+                    <section className="space-y-6">
+                        <h3 className="text-2xl font-bold text-(--deep-charcoal) font-serif flex items-center gap-3">
+                            <Calendar className="w-6 h-6 text-(--burnished-copper)" />
+                            {t("exhibitionDetail.chooseDate") || "Choose Date"}
+                        </h3>
+                        <div className="relative group max-w-sm">
+                            <input
+                                type="date"
+                                value={selectedDate}
+                                min={exhibition.startDate ? exhibition.startDate.split("T")[0] : today}
+                                max={exhibition.endDate ? exhibition.endDate.split("T")[0] : undefined}
+                                onChange={(e) => setSelectedDate(e.target.value)}
+                                className={cn(
+                                    "w-full p-6 rounded-4xl bg-black/5 border-2 border-transparent transition-all duration-300 outline-none text-lg font-mono appearance-none cursor-pointer",
+                                    "focus:border-(--burnished-copper) focus:bg-(--deep-charcoal) focus:text-(--vintage-sepia-light)",
+                                    "hover:bg-black/10",
+                                )}
+                            />
+                            <Calendar className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-40 w-5 h-5" />
+                        </div>
+                    </section>
 
                     {/* Time Slots */}
                     <section className="space-y-6">
@@ -293,15 +339,8 @@ function ExhibitionDetail() {
                             </div>
                             <div className="flex justify-between items-center border-b border-white/5 pb-3">
                                 <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">Day</span>
-                                <span
-                                    className={cn(
-                                        "font-mono text-base",
-                                        !selectedSlot && "text-white/20 italic",
-                                    )}
-                                >
-                                    {selectedSlot
-                                        ? selectedSlot.daysOfWeek.map((d: number) => t("common.days." + d)).join(", ")
-                                        : "--"}
+                                <span className="font-mono text-base">
+                                    {selectedDate}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center border-b border-white/5 pb-3">

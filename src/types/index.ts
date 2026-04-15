@@ -121,6 +121,14 @@ export interface Ticket {
     purchasedAt: string; // ISO date string
 }
 
+export interface CreateTicketRequest {
+    exhibitionId: number;
+    tierId: number;
+    userId: number;
+    visitDate: string; // ISO date string
+    timeSlotId: number;
+}
+
 export interface TicketTier {
     id: number;
     type: string;

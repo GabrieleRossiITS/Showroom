@@ -29,7 +29,7 @@ export const Route = createFileRoute("/shop/")({
     },
     component: ShopPage,
     staticData: {
-        title: "Négociant — Boutique",
+        title: "nav.shop",
         breadcrumb: "nav.shop",
     },
 });

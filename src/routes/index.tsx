@@ -30,8 +30,8 @@ export const Route = createFileRoute("/")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
     staticData: {
-        title: "Home",
-        breadcrumb: "home",
+        title: "nav.home",
+        breadcrumb: "nav.home",
     },
 });
 

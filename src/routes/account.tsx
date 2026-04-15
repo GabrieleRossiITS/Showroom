@@ -39,7 +39,7 @@ export const Route = createFileRoute("/account")({
     },
     component: AccountPage,
     staticData: {
-        title: "Il Mio Account",
+        title: "nav.account",
     },
 });
 

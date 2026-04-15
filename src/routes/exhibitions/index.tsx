@@ -13,7 +13,7 @@ export const Route = createFileRoute("/exhibitions/")({
     loader: ({ context }) => getExhibitions(context.lang.split("-")[0]),
     component: Expositions,
     staticData: {
-        title: "Mostre",
+        title: "nav.exhibitions",
     },
 });
 
@@ -59,7 +59,7 @@ function Expositions() {
                             className={cn(
                                 "group relative flex flex-col bg-white/30 backdrop-blur-sm rounded-[3rem] overflow-hidden border border-black/5 hover:border-(--burnished-copper)/20 transition-all duration-500 hover:shadow-2xl hover:shadow-(--burnished-copper)/10 cursor-pointer",
                                 exp.status === "past" &&
-                                    "opacity-50 cursor-not-allowed grayscale pointer-events-none",
+                                "opacity-50 cursor-not-allowed grayscale pointer-events-none",
                             )}
                         >
                             {/* Image Header */}
@@ -74,11 +74,10 @@ function Expositions() {
                                 {/* Status Badge */}
                                 <div className="absolute top-6 right-6">
                                     <span
-                                        className={`px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-md border ${
-                                            exp.status === "ongoing"
-                                                ? "bg-(--burnished-copper) text-white border-(--burnished-copper)/50"
-                                                : "bg-black/60 text-white/70 border-white/10"
-                                        }`}
+                                        className={`px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-md border ${exp.status === "ongoing"
+                                            ? "bg-(--burnished-copper) text-white border-(--burnished-copper)/50"
+                                            : "bg-black/60 text-white/70 border-white/10"
+                                            }`}
                                     >
                                         {t(`exhibitions.${exp.status}`)}
                                     </span>

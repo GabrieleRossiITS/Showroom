@@ -1,5 +1,6 @@
 {
     "nav": {
+        "home": "Home",
         "artist": "Gli artisti",
         "artworks": "Opere",
         "exhibitions": "Mostre",
@@ -8,6 +9,11 @@
         "login": "Login",
         "logout": "Esci",
         "cart": "Carrello",
+        "account": "Account",
+        "checkout": "Pagamento",
+        "success": "Ordine Completato",
+        "forgotPassword": "Password Dimenticata",
+        "admin": "Pannello Admin",
         "selectLanguage": "Seleziona lingua"
     },
     "footer": {
@@ -148,11 +154,17 @@
         "subtitle": "Accedi alla tua collezione privata e alle esperienze curate.",
         "email": "Indirizzo Email",
         "password": "Password",
+        "oldPassword": "Vecchia Password",
+        "newPassword": "Nuova Password",
+        "confirmNewPassword": "Conferma Nuova Password",
         "submit": "Accedi",
         "forgotPassword": "Password dimenticata?",
         "noAccount": "Non hai un account?",
         "signUp": "Creane uno ora",
         "backHome": "Torna alla Home",
+        "backToLogin": "Torna al login",
+        "changePasswordTitle": "Cambia la password",
+        "changePasswordSubtitle": "Negro.",
         "error": "Email o password non validi. Riprova."
     },
     "register": {

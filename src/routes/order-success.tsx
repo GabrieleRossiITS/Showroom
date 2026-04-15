@@ -13,7 +13,7 @@ import Button from "#/components/ui/Button";
 export const Route = createFileRoute("/order-success")({
     component: OrderSuccessPage,
     staticData: {
-        title: "Grazie! — Robert Doisneau",
+        title: "nav.success",
     },
 });
 

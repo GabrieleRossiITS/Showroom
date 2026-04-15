@@ -17,7 +17,7 @@ import type { CartItem } from "#/types";
 export const Route = createFileRoute("/cart")({
     component: CartPage,
     staticData: {
-        title: "Carrello — Robert Doisneau",
+        title: "nav.cart",
     },
 });
 

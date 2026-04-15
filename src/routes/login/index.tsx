@@ -7,15 +7,17 @@ import Button from "#/components/ui/Button";
 import { authApi } from "#/components/auth";
 import { useAuth } from "#/components/contexts/AuthContext";
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/login/")({
     component: AuthPage,
+    staticData: {
+        title: "nav.login",
+    },
 });
 
 function AuthPage() {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    // Modalità: true = Login, false = Registrazione
     const [isLogin, setIsLogin] = useState(true);
     const { setAuth } = useAuth();
 
@@ -27,7 +29,6 @@ function AuthPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Reset padding for immersive background
     useEffect(() => {
         const mainElement = document.getElementById("main-content");
         if (mainElement) {
@@ -47,12 +48,10 @@ function AuthPage() {
 
         try {
             if (isLogin) {
-                // Backend sets HttpOnly JWT cookie; response is the User object
                 const user = await authApi.login({ email, password });
                 setAuth(user);
                 navigate({ to: "/" });
             } else {
-                // Backend handles auto-login and sets HttpOnly cookie during registration
                 const user = await authApi.register({
                     firstName,
                     lastName,
@@ -88,26 +87,18 @@ function AuthPage() {
 
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-(--vintage-sepia) relative overflow-hidden px-6">
-            {/* Background Layers for Depth (Standardized Gradient) */}
-            <div className="absolute inset-0 z-0 bg-linear-to-br from-(--vintage-sepia) via-(--vintage-sepia-light) to-(--parisian-stone)/20" />
-            <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-(--burnished-copper)/5 rounded-full blur-[120px] animate-pulse pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-(--parisian-stone)/10 rounded-full blur-[100px] pointer-events-none" />
-
             <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={containerVariants}
                 className="w-full max-w-lg relative z-10"
             >
-                {/* Auth Card */}
+
                 <motion.div
                     layout
                     variants={itemFadeUp}
                     className="bg-white/40 backdrop-blur-3xl p-10 md:p-14 rounded-[3.5rem] border border-white/60 shadow-2xl space-y-10 relative overflow-hidden"
                 >
-                    {/* Top Accent Line */}
-                    <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-(--burnished-copper) via-(--parisian-stone) to-(--burnished-copper)" />
-
                     <div className="space-y-4">
                         <motion.h1
                             layout
@@ -125,7 +116,6 @@ function AuthPage() {
                         </motion.p>
                     </div>
 
-                    {/* MOSTRA L'ERRORE QUI */}
                     {error && (
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
@@ -190,7 +180,6 @@ function AuthPage() {
                             )}
                         </AnimatePresence>
 
-                        {/* Email Field */}
                         <motion.div layout className="space-y-2 group">
                             <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-(--parisian-stone) ml-2 transition-colors group-focus-within:text-(--burnished-copper)">
                                 {t("login.email")}
@@ -208,7 +197,6 @@ function AuthPage() {
                             </div>
                         </motion.div>
 
-                        {/* Password Field */}
                         <motion.div layout className="space-y-2 group">
                             <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-(--parisian-stone) ml-2 transition-colors group-focus-within:text-(--burnished-copper)">
                                 {t("login.password")}
@@ -245,7 +233,6 @@ function AuthPage() {
                                 </button>
                             </div>
 
-                            {/* Forgot Password */}
                             <AnimatePresence>
                                 {isLogin && (
                                     <motion.div
@@ -256,6 +243,7 @@ function AuthPage() {
                                     >
                                         <button
                                             type="button"
+                                            onClick={() => navigate({ to: "/login/forgot-password" })}
                                             className="text-[10px] font-bold uppercase tracking-widest text-(--burnished-copper) hover:text-(--burnished-copper-deep) transition-colors cursor-pointer"
                                         >
                                             {t("login.forgotPassword")}

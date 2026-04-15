@@ -51,7 +51,7 @@ export const Route = createFileRoute("/about")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
     staticData: {
-        title: "L'Agenzia",
+        title: "nav.about",
         breadcrumb: "nav.about",
     },
 });

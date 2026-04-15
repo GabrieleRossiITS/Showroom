@@ -49,13 +49,14 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
     const matches = useMatches();
-    const { i18n } = useTranslation(undefined, { useSuspense: false });
+    const { i18n, t } = useTranslation(undefined, { useSuspense: false });
 
     const currentMatch = matches[matches.length - 1];
     const pageTitle = currentMatch.staticData.title ?? "Robert Doisneau";
 
     useEffect(() => {
-        document.title = `${pageTitle} | Robert Doisneau`;
+        const translatedTitle = t(pageTitle);
+        document.title = `${translatedTitle} | Robert Doisneau`;
 
         console.warn(
             "[PyTech-Auth] Production scenario detected. Admin dashboard hidden.",

@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OrderSuccessRouteImport } from './routes/order-success'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as ArtistsRouteImport } from './routes/artists'
@@ -19,20 +18,17 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopIndexRouteImport } from './routes/shop/index'
+import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ExhibitionsIndexRouteImport } from './routes/exhibitions/index'
 import { Route as ArtworksIndexRouteImport } from './routes/artworks/index'
 import { Route as ShopIdRouteImport } from './routes/shop/$id'
+import { Route as LoginForgotPasswordRouteImport } from './routes/login/forgot-password'
 import { Route as ExhibitionsIdRouteImport } from './routes/exhibitions/$id'
 import { Route as ArtworksIdRouteImport } from './routes/artworks/$id'
 
 const OrderSuccessRoute = OrderSuccessRouteImport.update({
   id: '/order-success',
   path: '/order-success',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -75,6 +71,11 @@ const ShopIndexRoute = ShopIndexRouteImport.update({
   path: '/shop/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginIndexRoute = LoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExhibitionsIndexRoute = ExhibitionsIndexRouteImport.update({
   id: '/exhibitions/',
   path: '/exhibitions/',
@@ -88,6 +89,11 @@ const ArtworksIndexRoute = ArtworksIndexRouteImport.update({
 const ShopIdRoute = ShopIdRouteImport.update({
   id: '/shop/$id',
   path: '/shop/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginForgotPasswordRoute = LoginForgotPasswordRouteImport.update({
+  id: '/login/forgot-password',
+  path: '/login/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExhibitionsIdRoute = ExhibitionsIdRouteImport.update({
@@ -109,13 +115,14 @@ export interface FileRoutesByFullPath {
   '/artists': typeof ArtistsRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
-  '/login': typeof LoginRoute
   '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/login/forgot-password': typeof LoginForgotPasswordRoute
   '/shop/$id': typeof ShopIdRoute
   '/artworks/': typeof ArtworksIndexRoute
   '/exhibitions/': typeof ExhibitionsIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
@@ -126,13 +133,14 @@ export interface FileRoutesByTo {
   '/artists': typeof ArtistsRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
-  '/login': typeof LoginRoute
   '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/login/forgot-password': typeof LoginForgotPasswordRoute
   '/shop/$id': typeof ShopIdRoute
   '/artworks': typeof ArtworksIndexRoute
   '/exhibitions': typeof ExhibitionsIndexRoute
+  '/login': typeof LoginIndexRoute
   '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
@@ -144,13 +152,14 @@ export interface FileRoutesById {
   '/artists': typeof ArtistsRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
-  '/login': typeof LoginRoute
   '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
+  '/login/forgot-password': typeof LoginForgotPasswordRoute
   '/shop/$id': typeof ShopIdRoute
   '/artworks/': typeof ArtworksIndexRoute
   '/exhibitions/': typeof ExhibitionsIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRouteTypes {
@@ -163,13 +172,14 @@ export interface FileRouteTypes {
     | '/artists'
     | '/cart'
     | '/checkout'
-    | '/login'
     | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
+    | '/login/forgot-password'
     | '/shop/$id'
     | '/artworks/'
     | '/exhibitions/'
+    | '/login/'
     | '/shop/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -180,13 +190,14 @@ export interface FileRouteTypes {
     | '/artists'
     | '/cart'
     | '/checkout'
-    | '/login'
     | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
+    | '/login/forgot-password'
     | '/shop/$id'
     | '/artworks'
     | '/exhibitions'
+    | '/login'
     | '/shop'
   id:
     | '__root__'
@@ -197,13 +208,14 @@ export interface FileRouteTypes {
     | '/artists'
     | '/cart'
     | '/checkout'
-    | '/login'
     | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
+    | '/login/forgot-password'
     | '/shop/$id'
     | '/artworks/'
     | '/exhibitions/'
+    | '/login/'
     | '/shop/'
   fileRoutesById: FileRoutesById
 }
@@ -215,13 +227,14 @@ export interface RootRouteChildren {
   ArtistsRoute: typeof ArtistsRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
-  LoginRoute: typeof LoginRoute
   OrderSuccessRoute: typeof OrderSuccessRoute
   ArtworksIdRoute: typeof ArtworksIdRoute
   ExhibitionsIdRoute: typeof ExhibitionsIdRoute
+  LoginForgotPasswordRoute: typeof LoginForgotPasswordRoute
   ShopIdRoute: typeof ShopIdRoute
   ArtworksIndexRoute: typeof ArtworksIndexRoute
   ExhibitionsIndexRoute: typeof ExhibitionsIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
 
@@ -232,13 +245,6 @@ declare module '@tanstack/react-router' {
       path: '/order-success'
       fullPath: '/order-success'
       preLoaderRoute: typeof OrderSuccessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -297,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof LoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/exhibitions/': {
       id: '/exhibitions/'
       path: '/exhibitions'
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       path: '/shop/$id'
       fullPath: '/shop/$id'
       preLoaderRoute: typeof ShopIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/forgot-password': {
+      id: '/login/forgot-password'
+      path: '/login/forgot-password'
+      fullPath: '/login/forgot-password'
+      preLoaderRoute: typeof LoginForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/exhibitions/$id': {
@@ -343,13 +363,14 @@ const rootRouteChildren: RootRouteChildren = {
   ArtistsRoute: ArtistsRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
-  LoginRoute: LoginRoute,
   OrderSuccessRoute: OrderSuccessRoute,
   ArtworksIdRoute: ArtworksIdRoute,
   ExhibitionsIdRoute: ExhibitionsIdRoute,
+  LoginForgotPasswordRoute: LoginForgotPasswordRoute,
   ShopIdRoute: ShopIdRoute,
   ArtworksIndexRoute: ArtworksIndexRoute,
   ExhibitionsIndexRoute: ExhibitionsIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
 export const routeTree = rootRouteImport

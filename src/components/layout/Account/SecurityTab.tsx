@@ -1,16 +1,16 @@
 import Button from "#/components/ui/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, CheckCircle2, Eye, EyeOff, Lock } from "lucide-react";
-import { changePassword } from "#/api/fetchers";
+import { authApi } from "#/components/auth";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function SecurityTab({ email }: { email: string }) {
     const { t } = useTranslation();
-    const [currentPassword, setCurrentPassword] = useState("");
+    const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const [showCurrent, setShowCurrent] = useState(false);
-    const [showNew, setShowNew] = useState(false);
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
     const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
         "idle",
     );
@@ -21,9 +21,9 @@ export default function SecurityTab({ email }: { email: string }) {
         setStatus("loading");
         setErrorMsg("");
         try {
-            await changePassword({ email, currentPassword, newPassword });
+            await authApi.changePassword({ email, oldPassword, newPassword });
             setStatus("ok");
-            setCurrentPassword("");
+            setOldPassword("");
             setNewPassword("");
             setTimeout(() => setStatus("idle"), 4000);
         } catch (err: any) {
@@ -72,19 +72,19 @@ export default function SecurityTab({ email }: { email: string }) {
                     <div className="relative">
                         <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
                         <input
-                            type={showCurrent ? "text" : "password"}
+                            type={showOldPassword ? "text" : "password"}
                             required
-                            value={currentPassword}
-                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            value={oldPassword}
+                            onChange={(e) => setOldPassword(e.target.value)}
                             className="w-full bg-white/40 border border-black/5 rounded-[1.25rem] py-4 pl-14 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-(--burnished-copper)/30 focus:bg-white transition-all"
                             placeholder="••••••••"
                         />
                         <button
                             type="button"
-                            onClick={() => setShowCurrent(!showCurrent)}
+                            onClick={() => setShowOldPassword(!showOldPassword)}
                             className="absolute right-5 top-1/2 -translate-y-1/2 text-(--parisian-stone) hover:text-(--deep-charcoal) transition-colors cursor-pointer"
                         >
-                            {showCurrent ? (
+                            {showOldPassword ? (
                                 <EyeOff className="w-4 h-4" />
                             ) : (
                                 <Eye className="w-4 h-4" />
@@ -101,7 +101,7 @@ export default function SecurityTab({ email }: { email: string }) {
                     <div className="relative">
                         <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
                         <input
-                            type={showNew ? "text" : "password"}
+                            type={showNewPassword ? "text" : "password"}
                             required
                             minLength={6}
                             value={newPassword}
@@ -111,10 +111,10 @@ export default function SecurityTab({ email }: { email: string }) {
                         />
                         <button
                             type="button"
-                            onClick={() => setShowNew(!showNew)}
+                            onClick={() => setShowNewPassword(!showNewPassword)}
                             className="absolute right-5 top-1/2 -translate-y-1/2 text-(--parisian-stone) hover:text-(--deep-charcoal) transition-colors cursor-pointer"
                         >
-                            {showNew ? (
+                            {showNewPassword ? (
                                 <EyeOff className="w-4 h-4" />
                             ) : (
                                 <Eye className="w-4 h-4" />

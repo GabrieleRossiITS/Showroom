@@ -16,7 +16,7 @@ export default function Breadcrumbs() {
     if (data?.breadcrumb) {
         currentLabel = t(data.breadcrumb);
     } else if (data?.title) {
-        currentLabel = data.title;
+        currentLabel = t(data.title);
     }
 
     if (loaderData?.title) {

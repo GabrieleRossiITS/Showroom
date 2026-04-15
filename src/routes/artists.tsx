@@ -12,7 +12,7 @@ export const Route = createFileRoute("/artists")({
     pendingComponent: GlobalLoader,
     pendingMs: 0,
     staticData: {
-        title: "Gli artisti",
+        title: "nav.artist",
         breadcrumb: "nav.artist",
     },
 });

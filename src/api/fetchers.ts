@@ -13,6 +13,11 @@ import type {
     TicketTier,
     CreateTicketRequest,
 } from "../types";
+import type {
+    LoginRequest,
+    RegisterRequest,
+    ChangePasswordRequest,
+} from "../types/auth";
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 
@@ -70,26 +75,6 @@ const getHeaders = (lang?: string, token?: string): Record<string, string> => {
  */
 const getToken = (): string | undefined =>
     localStorage.getItem("showroom_token") ?? undefined;
-
-// ─── Auth (/api/auth) ────────────────────────────────────────────────────────
-
-export interface LoginRequest {
-    email: string;
-    password: string;
-}
-
-export interface RegisterRequest {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
-
-export interface ChangePasswordRequest {
-    email: string;
-    currentPassword: string;
-    newPassword: string;
-}
 
 /** POST /api/auth/login  →  sets jwt_token cookie on the backend */
 export const login = async (data: LoginRequest): Promise<User> => {

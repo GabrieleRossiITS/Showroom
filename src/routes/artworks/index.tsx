@@ -20,7 +20,7 @@ export const Route = createFileRoute("/artworks/")({
     loader: ({ context }) => getArtworks(context.lang.split("-")[0]),
     component: AuthorsTimeline,
     staticData: {
-        title: "Robert Doisneau - Timeline",
+        title: "nav.artworks",
     },
 });
 

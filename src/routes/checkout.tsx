@@ -15,7 +15,7 @@ import Button from "#/components/ui/Button";
 export const Route = createFileRoute("/checkout")({
     component: CheckoutPage,
     staticData: {
-        title: "Checkout — Robert Doisneau",
+        title: "nav.checkout",
     },
 });
 

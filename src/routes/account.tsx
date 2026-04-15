@@ -1,8 +1,12 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import {
+    createFileRoute,
+    useRouterState,
+    useNavigate,
+} from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, ShoppingBag, Ticket, Lock, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { useAuth } from "#/components/contexts/AuthContext";
@@ -50,7 +54,23 @@ function AccountPage() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const [activeTab, setActiveTab] = useState<Tab>("profile");
+    const hash = useRouterState({ select: (s) => s.location.hash });
+    const [activeTab, setActiveTab] = useState(hash || "profile");
+
+    useEffect(() => {
+        if (hash) {
+            setActiveTab(hash);
+        }
+    }, [hash]);
+
+    const handleTabChange = (tabId: string) => {
+        setActiveTab(tabId);
+        navigate({
+            to: "/account",
+            hash: tabId,
+            replace: true,
+        });
+    };
 
     const handleLogout = async () => {
         await logout();
@@ -157,7 +177,7 @@ function AccountPage() {
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
+                            onClick={() => handleTabChange(tab.id)}
                             className={[
                                 "flex items-center gap-2 px-5 py-3 rounded-full text-sm font-bold transition-all duration-300",
                                 activeTab === tab.id

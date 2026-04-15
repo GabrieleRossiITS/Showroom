@@ -41,13 +41,29 @@ function CartPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-12"
                 >
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-(--burnished-copper)/10 border border-(--burnished-copper)/20 text-(--burnished-copper-deep) text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
-                        <ShoppingBag className="w-3 h-3" />
-                        {t("cart.label")}
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-serif font-bold italic text-(--deep-charcoal) tracking-tight">
-                        {t("cart.title")}
-                    </h1>
+                    <div>
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-(--burnished-copper)/10 border border-(--burnished-copper)/20 text-(--burnished-copper-deep) text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+                            <ShoppingBag className="w-3 h-3" />
+                            {t("cart.label")}
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-serif font-bold italic text-(--deep-charcoal) tracking-tight">
+                            {t("cart.title")}
+                        </h1>
+                    </div>
+                    <Button
+                        variant="copper"
+                        rounded="full"
+                        size="lg"
+                        onClick={() =>
+                            navigate({
+                                to: "/account",
+                                hash: "orders",
+                            })
+                        }
+                        className="mt-4"
+                    >
+                        {t("cart.goToOrders")}
+                    </Button>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 items-start">
@@ -117,7 +133,7 @@ function CartPage() {
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                    item.quantity,
+                                                        item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}
@@ -141,7 +157,7 @@ function CartPage() {
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                    item.quantity,
+                                                        item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}

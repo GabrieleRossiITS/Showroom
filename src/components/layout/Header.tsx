@@ -9,6 +9,7 @@ import {
     ShoppingBag,
     Ticket,
     Settings,
+    ShoppingCart,
 } from "lucide-react";
 
 const LANGUAGES = [
@@ -82,13 +83,14 @@ export default function Header() {
     };
 
     const displayName = user
-        ? [user.firstName, user.lastName].filter(Boolean).join(" ").trim() || user.email
+        ? [user.firstName, user.lastName].filter(Boolean).join(" ").trim() ||
+          user.email
         : "";
 
     const initials = user
         ? (user.firstName.charAt(0) + user.lastName.charAt(0))
-            .toUpperCase()
-            .trim() || "U"
+              .toUpperCase()
+              .trim() || "U"
         : "U";
 
     return (
@@ -115,7 +117,10 @@ export default function Header() {
             </button>
 
             {/* ── Nav + controls ── */}
-            <nav className="flex items-center gap-6 lg:gap-10" aria-label="Main navigation">
+            <nav
+                className="flex items-center gap-6 lg:gap-10"
+                aria-label="Main navigation"
+            >
                 {/* Nav links */}
                 <ul className="hidden md:flex gap-6 lg:gap-10 text-md">
                     {navLinks.map((link) => (
@@ -198,19 +203,34 @@ export default function Header() {
 
                                     {[
                                         {
-                                            to: "/account",
-                                            icon: <Settings className="w-4 h-4" />,
-                                            label: t("account.myAccount", "Il mio account"),
+                                            to: "/account#profile",
+                                            icon: (
+                                                <Settings className="w-4 h-4" />
+                                            ),
+                                            label: t(
+                                                "account.myAccount",
+                                                "Il mio account",
+                                            ),
                                         },
                                         {
-                                            to: "/account",
-                                            icon: <ShoppingBag className="w-4 h-4" />,
-                                            label: t("account.orders", "Ordini"),
+                                            to: "/account#orders",
+                                            icon: (
+                                                <ShoppingBag className="w-4 h-4" />
+                                            ),
+                                            label: t(
+                                                "account.orders",
+                                                "Ordini",
+                                            ),
                                         },
                                         {
-                                            to: "/account",
-                                            icon: <Ticket className="w-4 h-4" />,
-                                            label: t("account.tickets", "Biglietti"),
+                                            to: "/account#tickets",
+                                            icon: (
+                                                <Ticket className="w-4 h-4" />
+                                            ),
+                                            label: t(
+                                                "account.tickets",
+                                                "Biglietti",
+                                            ),
                                         },
                                     ].map((item) => (
                                         <Link
@@ -252,9 +272,10 @@ export default function Header() {
                         transition-all duration-300 cursor-pointer group
                     "
                         >
-                            <ShoppingBag className="w-5 h-5 text-(--vintage-sepia) group-hover:text-(--burnished-copper) transition-colors" />
+                            <ShoppingCart className="w-5 h-5 text-(--vintage-sepia) group-hover:text-(--burnished-copper) transition-colors" />
                             {cart && cart.items.length > 0 && (
-                                <span className="
+                                <span
+                                    className="
                             absolute -top-1 -right-1
                             min-w-[18px] h-[18px] px-1
                             bg-(--burnished-copper) text-white
@@ -262,7 +283,8 @@ export default function Header() {
                             flex items-center justify-center
                             shadow-lg shadow-black/20
                             animate-in zoom-in duration-300
-                        ">
+                        "
+                                >
                                     {cart.items.length}
                                 </span>
                             )}
@@ -303,14 +325,19 @@ export default function Header() {
                                     className={`
                                         w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left
                                         transition-colors duration-200 cursor-pointer
-                                        ${i18n.language === lang.code
-                                            ? "bg-(--burnished-copper)/30 text-(--burnished-copper) font-bold"
-                                            : "text-(--vintage-sepia) hover:bg-white/10"
+                                        ${
+                                            i18n.language === lang.code
+                                                ? "bg-(--burnished-copper)/30 text-(--burnished-copper) font-bold"
+                                                : "text-(--vintage-sepia) hover:bg-white/10"
                                         }
                                     `}
                                 >
-                                    <span className="text-base">{lang.flag}</span>
-                                    <span className="font-mono tracking-wider">{lang.label}</span>
+                                    <span className="text-base">
+                                        {lang.flag}
+                                    </span>
+                                    <span className="font-mono tracking-wider">
+                                        {lang.label}
+                                    </span>
                                 </button>
                             ))}
                         </div>

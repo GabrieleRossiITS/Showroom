@@ -56,6 +56,11 @@ function Expositions() {
                                 duration: 0.6,
                                 ease: "easeOut",
                             }}
+                            onClick={() =>
+                                navigate({
+                                    to: `/exhibitions/${exp.id}`,
+                                })
+                            }
                             className={cn(
                                 "group relative flex flex-col bg-white/30 backdrop-blur-sm rounded-[3rem] overflow-hidden border border-black/5 hover:border-(--burnished-copper)/20 transition-all duration-500 hover:shadow-2xl hover:shadow-(--burnished-copper)/10 cursor-pointer",
                                 exp.status === "past" &&

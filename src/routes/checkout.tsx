@@ -8,7 +8,7 @@ import {
     Loader2,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "#/components/contexts/CartContext";
 import Button from "#/components/ui/Button";
 
@@ -25,6 +25,12 @@ function CheckoutPage() {
     const navigate = useNavigate();
     const [isProcessing, setIsProcessing] = useState(false);
 
+    useEffect(() => {
+        if (!cart || cart.items.length === 0) {
+            navigate({ to: "/shop" });
+        }
+    }, []);
+
     const handleConfirmPayment = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsProcessing(true);
@@ -38,10 +44,6 @@ function CheckoutPage() {
         }
     };
 
-    if (!cart || cart.items.length === 0) {
-        navigate({ to: "/shop" });
-        return null;
-    }
 
     return (
         <div className="min-h-screen bg-(--vintage-sepia) pt-40 pb-24 px-6 md:px-12">
@@ -139,12 +141,12 @@ function CheckoutPage() {
                                     <span className="flex items-center gap-3">
                                         <ShieldCheck className="w-5 h-5" />
                                         {t("checkout.payNow", "Paga")}{" "}
-                                        {cart.items
+                                        {cart?.items
                                             .reduce(
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                        item.quantity,
+                                                    item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}
@@ -174,15 +176,12 @@ function CheckoutPage() {
                                 {t("checkout.orderItems")}
                             </h3>
                             <div className="max-h-[300px] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
-                                {cart.items.map((item) => (
+                                {cart?.items.map((item) => (
                                     <div
                                         key={item.id}
                                         className="flex justify-between items-center gap-4"
                                     >
                                         <div className="flex items-center gap-3">
-                                            {/* <div className="w-12 h-12 rounded-lg bg-white/50 overflow-hidden grow-0 shrink-0">
-                                                <img src={item.imageUrl} alt={item.souvenirName} className="w-full h-full object-cover" />
-                                            </div> */}
                                             <div>
                                                 <p className="text-sm font-bold text-(--deep-charcoal) line-clamp-1">
                                                     {item.souvenirName}
@@ -206,12 +205,12 @@ function CheckoutPage() {
                                 <div className="flex justify-between text-sm opacity-60">
                                     <span>{t("checkout.subtotal")}</span>
                                     <span className="font-mono">
-                                        {cart.items
+                                        {cart?.items
                                             .reduce(
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                        item.quantity,
+                                                    item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}
@@ -221,12 +220,12 @@ function CheckoutPage() {
                                 <div className="flex justify-between text-lg font-black text-(--burnished-copper)">
                                     <span>{t("checkout.total")}</span>
                                     <span className="font-mono">
-                                        {cart.items
+                                        {cart?.items
                                             .reduce(
                                                 (acc, item) =>
                                                     acc +
                                                     item.souvenirPrice *
-                                                        item.quantity,
+                                                    item.quantity,
                                                 0,
                                             )
                                             .toFixed(2)}

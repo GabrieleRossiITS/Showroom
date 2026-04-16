@@ -6,7 +6,7 @@ import type { Variants } from "framer-motion";
 import type { Quote } from "../types";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Calendar, MapPin, Ticket, Clock, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Ticket, Clock, ArrowRight, Info } from "lucide-react";
 import {
     getExhibitionById,
     getExhibitionTiers,
@@ -140,13 +140,26 @@ function App() {
                                 onClick={() => {
                                     navigate({ to: "/exhibitions/$id", params: { id: "1" } });  // exhibitions/1
                                 }}
-                                variant="primary"
+                                variant="copper"
                                 rounded="full"
                                 size="lg"
-                                className="px-8 md:px-10 py-6 text-lg font-bold shadow-[0_0_40px_rgba(196,132,100,0.4)] hover:shadow-[0_0_60px_rgba(196,132,100,0.6)] hover:-translate-y-1 transition-all gap-3 bg-(--burnished-copper) text-white border-0"
+                                className="px-8 md:px-10 py-6 text-lg font-bold shadow-[0_0_40px_rgba(196,132,100,0.4)] hover:shadow-[0_0_60px_rgba(196,132,100,0.6)] hover:-translate-y-1 transition-all gap-3 border-0 active:scale-95"
                             >
                                 <Ticket className="w-6 h-6" />
                                 {t("home.subtitles.bookTickets", "")}
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    navigate({ to: "/exhibitions/$id", params: { id: "1" } });  // exhibitions/1
+                                }}
+                                variant="glass"
+                                rounded="full"
+                                size="lg"
+                                className="px-8 md:px-10 py-6 text-lg font-bold hover:-translate-y-1 transition-all gap-3 active:scale-95"
+                            >
+                                <Info className="w-6 h-6" />
+                                {t("home.subtitles.exhibitionInfo", "")}
+                                <ArrowRight className="w-6 h-6" />
                             </Button>
                         </motion.div>
                     </motion.div>

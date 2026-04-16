@@ -21,6 +21,7 @@ const buttonVariants = cva(
                     "border-2 border-(--deep-charcoal) text-(--deep-charcoal) hover:bg-(--deep-charcoal)/5",
                 ghost: "text-(--deep-charcoal) hover:bg-(--deep-charcoal)/5",
                 copper: "bg-(--burnished-copper) text-(--vintage-sepia) hover:bg-(--burnished-copper-deep) shadow-md hover:shadow-lg",
+                glass: "bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 shadow-lg hover:shadow-xl",
             },
             size: {
                 default: "h-11 px-6 py-2",

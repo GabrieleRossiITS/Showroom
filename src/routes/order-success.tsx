@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
     Sparkles,
-    ShoppingBag,
     ArrowRight,
     PackageCheck,
     ScrollText,
@@ -41,7 +40,7 @@ function OrderSuccessPage() {
     };
 
     return (
-        <div className="min-h-screen bg-(--vintage-sepia) flex items-center justify-center pt-24 pb-12 px-6">
+        <div className="bg-(--vintage-sepia) flex items-center justify-center pt-24 pb-12 px-6">
             <motion.div
                 variants={containerVariants}
                 initial="initial"

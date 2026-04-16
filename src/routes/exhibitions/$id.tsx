@@ -1,22 +1,17 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { Clock, Users, ChevronLeft, AlertCircle, Calendar } from "lucide-react";
 import {
-    Clock,
-    Users,
-    ChevronLeft,
-    CheckCircle,
-    AlertCircle,
-    Calendar,
-} from "lucide-react";
-import { getExhibitionById, getExhibitionTimeSlots, getExhibitionTiers } from "#/api/fetchers";
+    getExhibitionById,
+    getExhibitionTimeSlots,
+    getExhibitionTiers,
+} from "#/api/fetchers";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
 import type { ExhibitionTimeSlot, TicketTier } from "#/types";
-import { useTicket } from "#/components/contexts/TicketContext";
-
 
 export const Route = createFileRoute("/exhibitions/$id")({
     pendingComponent: GlobalLoader,
@@ -24,7 +19,9 @@ export const Route = createFileRoute("/exhibitions/$id")({
     loader: async ({ params, context }) => {
         const [exhibition, timeSlots, tiers] = await Promise.all([
             getExhibitionById(Number(params.id), context.lang.split("-")[0]),
-            getExhibitionTimeSlots(Number(params.id)).catch(() => [] as ExhibitionTimeSlot[]),
+            getExhibitionTimeSlots(Number(params.id)).catch(
+                () => [] as ExhibitionTimeSlot[],
+            ),
             getExhibitionTiers(context.lang.split("-")[0]),
         ]);
         return { exhibition, timeSlots, tiers };
@@ -37,8 +34,6 @@ function ExhibitionDetail() {
     const { exhibition, timeSlots, tiers } = Route.useLoaderData();
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const { addTicket } = useTicket();
-
 
     const [selectedSlotId, setSelectedSlotId] = useState<number | null>(
         timeSlots.length > 0 ? timeSlots[0].id : null,
@@ -47,7 +42,6 @@ function ExhibitionDetail() {
     const [selectedTierId, setSelectedTierId] = useState<number | null>(
         tiers.length > 0 ? tiers[0].id : null,
     );
-    const [isBooked, setIsBooked] = useState(false);
 
     const today = new Date().toISOString().split("T")[0];
     const [selectedDate, setSelectedDate] = useState<string>(
@@ -85,49 +79,6 @@ function ExhibitionDetail() {
             state: ticketData,
         });
     };
-
-    if (isBooked) {
-        return (
-            <div
-                key="success-view"
-                className="min-h-screen flex items-center justify-center bg-(--vintage-sepia) px-6"
-            >
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="max-w-md w-full bg-(--deep-charcoal) p-10 rounded-[3rem] text-center shadow-2xl space-y-6"
-                >
-                    <div className="flex justify-center">
-                        <CheckCircle className="w-20 h-20 text-(--burnished-copper)" />
-                    </div>
-                    <h2 className="text-3xl font-bold text-(--vintage-sepia-light) font-serif">
-                        {t("exhibitionDetail.bookingSuccess")}
-                    </h2>
-                    <div className="space-y-2">
-                        <p className="text-(--parisian-stone) text-lg font-medium leading-relaxed">
-                            {exhibition.title}
-                        </p>
-                        <div className="flex flex-col gap-1 text-sm font-mono text-(--parisian-stone-dark) opacity-80">
-                            <span>{selectedTier?.name}</span>
-                            {selectedSlot && (
-                                <span>
-                                    {selectedSlot.startTime.slice(0, 5)} - {selectedSlot.endTime.slice(0, 5)}
-                                </span>
-                            )}
-                        </div>
-                    </div>
-                    <Button
-                        onClick={() => navigate({ to: "/exhibitions" })}
-                        className="w-full"
-                        rounded="full"
-                        size="lg"
-                    >
-                        {t("exhibitionDetail.back")}
-                    </Button>
-                </motion.div>
-            </div>
-        );
-    }
 
     return (
         <div
@@ -181,9 +132,19 @@ function ExhibitionDetail() {
                             <input
                                 type="date"
                                 value={selectedDate}
-                                min={exhibition.startDate ? exhibition.startDate.split("T")[0] : today}
-                                max={exhibition.endDate ? exhibition.endDate.split("T")[0] : undefined}
-                                onChange={(e) => setSelectedDate(e.target.value)}
+                                min={
+                                    exhibition.startDate
+                                        ? exhibition.startDate.split("T")[0]
+                                        : today
+                                }
+                                max={
+                                    exhibition.endDate
+                                        ? exhibition.endDate.split("T")[0]
+                                        : undefined
+                                }
+                                onChange={(e) =>
+                                    setSelectedDate(e.target.value)
+                                }
                                 className={cn(
                                     "w-full p-6 rounded-4xl bg-black/5 border-2 border-transparent transition-all duration-300 outline-none text-lg font-mono appearance-none cursor-pointer",
                                     "focus:border-(--burnished-copper) focus:bg-(--deep-charcoal) focus:text-(--vintage-sepia-light)",
@@ -207,13 +168,16 @@ function ExhibitionDetail() {
                                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                             >
                                 {timeSlots.map((slot: ExhibitionTimeSlot) => {
-                                    const isSelected = selectedSlotId === slot.id;
+                                    const isSelected =
+                                        selectedSlotId === slot.id;
                                     return (
                                         <motion.button
                                             key={slot.id}
                                             whileHover={{ y: -4 }}
                                             whileTap={{ scale: 0.98 }}
-                                            onClick={() => setSelectedSlotId(slot.id)}
+                                            onClick={() =>
+                                                setSelectedSlotId(slot.id)
+                                            }
                                             aria-checked={isSelected}
                                             role="radio"
                                             className={cn(
@@ -242,17 +206,22 @@ function ExhibitionDetail() {
                                                             : "text-(--deep-charcoal)",
                                                     )}
                                                 >
-                                                    {slot.startTime.slice(0, 5)} - {slot.endTime.slice(0, 5)}
+                                                    {slot.startTime.slice(0, 5)}{" "}
+                                                    - {slot.endTime.slice(0, 5)}
                                                 </span>
                                             </div>
                                             <div
                                                 className={cn(
                                                     "text-sm font-medium tracking-wide opacity-70",
-                                                    isSelected ? "text-white/60" : "text-(--parisian-stone-dark)",
+                                                    isSelected
+                                                        ? "text-white/60"
+                                                        : "text-(--parisian-stone-dark)",
                                                 )}
                                             >
                                                 {slot.daysOfWeek
-                                                    .map((day: number) => t("common.days." + day))
+                                                    .map((day: number) =>
+                                                        t("common.days." + day),
+                                                    )
                                                     .join(", ")}
                                             </div>
                                         </motion.button>
@@ -286,7 +255,9 @@ function ExhibitionDetail() {
                                     <motion.button
                                         key={tier.id}
                                         whileHover={{ x: 8 }}
-                                        onClick={() => setSelectedTierId(tier.id)}
+                                        onClick={() =>
+                                            setSelectedTierId(tier.id)
+                                        }
                                         role="radio"
                                         aria-checked={isSelected}
                                         className={cn(
@@ -300,7 +271,9 @@ function ExhibitionDetail() {
                                             <span
                                                 className={cn(
                                                     "block text-lg font-bold transition-colors",
-                                                    isSelected ? "text-(--vintage-sepia-light)" : "text-(--deep-charcoal)",
+                                                    isSelected
+                                                        ? "text-(--vintage-sepia-light)"
+                                                        : "text-(--deep-charcoal)",
                                                 )}
                                             >
                                                 {tier.name}
@@ -308,7 +281,9 @@ function ExhibitionDetail() {
                                             <span
                                                 className={cn(
                                                     "text-sm font-medium opacity-60",
-                                                    isSelected ? "text-white/40" : "text-(--parisian-stone-dark)",
+                                                    isSelected
+                                                        ? "text-white/40"
+                                                        : "text-(--parisian-stone-dark)",
                                                 )}
                                             >
                                                 {tier.description}
@@ -334,19 +309,25 @@ function ExhibitionDetail() {
                         </h4>
                         <div className="space-y-6 font-medium text-sm tracking-wide">
                             <div className="flex justify-between items-end border-b border-white/5 pb-3">
-                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">Exhibition</span>
+                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">
+                                    Exhibition
+                                </span>
                                 <span className="font-serif text-right max-w-[160px] text-base leading-tight">
-                                    {exhibition.name}
+                                    {exhibition.title}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">Day</span>
+                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">
+                                    Day
+                                </span>
                                 <span className="font-mono text-base">
                                     {selectedDate}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">Time</span>
+                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">
+                                    Time
+                                </span>
                                 <span
                                     className={cn(
                                         "font-mono text-base",
@@ -359,7 +340,9 @@ function ExhibitionDetail() {
                                 </span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">Tier</span>
+                                <span className="uppercase opacity-50 text-[10px] font-bold tracking-widest min-w-16">
+                                    Tier
+                                </span>
                                 <span
                                     className={cn(
                                         "font-mono text-base",

@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Tag, ChevronRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { useState, useCallback } from "react";
 import { GlobalLoader } from "#/components/GlobalLoader";
 
@@ -38,7 +37,6 @@ export const Route = createFileRoute("/shop/")({
 
 function ShopPage() {
     const { items: allItems, categories, lang } = Route.useLoaderData();
-    const { t } = useTranslation();
 
     const [activeCategoryId, setActiveCategoryId] = useState<number | "all">(
         "all",

@@ -66,22 +66,24 @@ function ExhibitionDetail() {
     }, []);
 
     const handleBooking = async () => {
-        if (!selectedTier) return;
-        try {
-            await addTicket({
-                exhibitionId: exhibition.id,
-                tierId: selectedTier.id,
-                userId: 0, // This will be overwritten by TicketContext with the correct user.id
-                visitDate: selectedDate,
-                timeSlotId: selectedSlotId || 0,
-            });
-            setIsBooked(true);
-            setTimeout(() => setIsBooked(false), 2500);
-        } catch (error) {
-            console.error("Failed to add ticket:", error);
-        } finally {
-            setIsBooked(false);
-        }
+        if (!selectedTier || !selectedSlot) return;
+
+        const ticketData = {
+            exhibitionId: exhibition.id,
+            exhibitionTitle: exhibition.title,
+            tierId: selectedTier.id,
+            tierName: selectedTier.name,
+            tierPrice: selectedTier.price,
+            visitDate: selectedDate,
+            timeSlotId: selectedSlot.id,
+            slotDisplay: `${selectedSlot.startTime.slice(0, 5)} - ${selectedSlot.endTime.slice(0, 5)}`,
+        };
+
+        navigate({
+            to: "/checkout",
+            search: { type: "ticket" },
+            state: ticketData,
+        });
     };
 
     if (isBooked) {

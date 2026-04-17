@@ -20,6 +20,83 @@ export default function CartCheckout({ t }: Props) {
     const navigate = useNavigate();
     const { cart, checkout } = useCart();
     const [isProcessing, setIsProcessing] = useState(false);
+    const [cardNumber, setCardNumber] = useState("");
+    const [expiry, setExpiry] = useState("");
+    const [cvv, setCvv] = useState("");
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = e.target.value.replace(/\D/g, "");
+        if (val.length > 16) val = val.slice(0, 16);
+        const formatted = val.replace(/(\d{4})/g, "$1 ").trim();
+        setCardNumber(formatted);
+        if (errors.cardNumber) setErrors((prev) => ({ ...prev, cardNumber: "" }));
+    };
+
+    const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = e.target.value.replace(/\D/g, "");
+        if (val.length > 4) val = val.slice(0, 4);
+        if (val.length >= 2) {
+            val = `${val.slice(0, 2)} / ${val.slice(2)}`;
+        }
+        setExpiry(val);
+        if (errors.expiry) setErrors((prev) => ({ ...prev, expiry: "" }));
+    };
+
+    const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = e.target.value.replace(/\D/g, "");
+        if (val.length > 4) val = val.slice(0, 4);
+        setCvv(val);
+        if (errors.cvv) setErrors((prev) => ({ ...prev, cvv: "" }));
+    };
+
+    const validateForm = () => {
+        const newErrors: Record<string, string> = {};
+        const cleanedCard = cardNumber.replace(/\D/g, "");
+
+        if (!cleanedCard) {
+            newErrors.cardNumber = t("checkout.errors.required");
+        } else {
+            let sum = 0;
+            let shouldDouble = false;
+            for (let i = cleanedCard.length - 1; i >= 0; i--) {
+                let digit = parseInt(cleanedCard.charAt(i));
+                if (shouldDouble) {
+                    if ((digit *= 2) > 9) digit -= 9;
+                }
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+            const isValidLuhn = sum % 10 === 0;
+
+            if (cleanedCard.length !== 16 || !isValidLuhn) {
+                newErrors.cardNumber = t("checkout.errors.invalidCard", "Numero carta non valido");
+            }
+        }
+
+        const expiryClean = expiry.replace(/\s/g, "");
+        if (!expiryClean) {
+            newErrors.expiry = t("checkout.errors.required");
+        } else if (!/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(expiryClean)) {
+            newErrors.expiry = t("checkout.errors.invalidExpiry");
+        } else {
+            const [month, year] = expiryClean.split("/");
+            const currentYear = new Date().getFullYear() % 100;
+            const currentMonth = new Date().getMonth() + 1;
+            if (parseInt(year) < currentYear || (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
+                newErrors.expiry = t("checkout.errors.expiredCard");
+            }
+        }
+
+        if (!cvv) {
+            newErrors.cvv = t("checkout.errors.required");
+        } else if (!/^\d{3,4}$/.test(cvv)) {
+            newErrors.cvv = t("checkout.errors.invalidCvv");
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     useEffect(() => {
         if (!cart || cart.items.length === 0) {
@@ -29,6 +106,7 @@ export default function CartCheckout({ t }: Props) {
 
     const handleConfirmPayment = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!validateForm()) return;
         setIsProcessing(true);
         try {
             await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -84,39 +162,48 @@ export default function CartCheckout({ t }: Props) {
                             className="space-y-6"
                         >
                             <div className="space-y-2">
-                                <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-(--parisian-stone) ml-1">
+                                <label className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 ${errors.cardNumber ? 'text-red-500' : 'text-(--parisian-stone)'}`}>
                                     {t("checkout.cardNumber")}
                                 </label>
                                 <input
                                     required
                                     type="text"
+                                    value={cardNumber}
+                                    onChange={handleCardNumberChange}
                                     placeholder="0000 0000 0000 0000"
-                                    className="w-full h-14 px-6 rounded-2xl bg-white/50 border border-black/5 focus:border-(--burnished-copper) focus:outline-none transition-colors font-mono tracking-widest"
+                                    className={`w-full h-14 px-6 rounded-2xl bg-white/50 border focus:outline-none transition-colors font-mono tracking-widest ${errors.cardNumber ? 'border-red-500 focus:border-red-500' : 'border-black/5 focus:border-(--burnished-copper)'}`}
                                 />
+                                {errors.cardNumber && <p className="text-xs text-red-500 ml-1">{errors.cardNumber}</p>}
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-(--parisian-stone) ml-1">
+                                    <label className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 ${errors.expiry ? 'text-red-500' : 'text-(--parisian-stone)'}`}>
                                         {t("checkout.expiry")}
                                     </label>
                                     <input
                                         required
                                         type="text"
+                                        value={expiry}
+                                        onChange={handleExpiryChange}
                                         placeholder="MM / YY"
-                                        className="w-full h-14 px-6 rounded-2xl bg-white/50 border border-black/5 focus:border-(--burnished-copper) focus:outline-none transition-colors font-mono tracking-widest"
+                                        className={`w-full h-14 px-6 rounded-2xl bg-white/50 border focus:outline-none transition-colors font-mono tracking-widest ${errors.expiry ? 'border-red-500 focus:border-red-500' : 'border-black/5 focus:border-(--burnished-copper)'}`}
                                     />
+                                    {errors.expiry && <p className="text-xs text-red-500 ml-1">{errors.expiry}</p>}
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-(--parisian-stone) ml-1">
+                                    <label className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 ${errors.cvv ? 'text-red-500' : 'text-(--parisian-stone)'}`}>
                                         {t("checkout.cvv")}
                                     </label>
                                     <input
                                         required
                                         type="text"
+                                        value={cvv}
+                                        onChange={handleCvvChange}
                                         placeholder="000"
-                                        className="w-full h-14 px-6 rounded-2xl bg-white/50 border border-black/5 focus:border-(--burnished-copper) focus:outline-none transition-colors font-mono tracking-widest"
+                                        className={`w-full h-14 px-6 rounded-2xl bg-white/50 border focus:outline-none transition-colors font-mono tracking-widest ${errors.cvv ? 'border-red-500 focus:border-red-500' : 'border-black/5 focus:border-(--burnished-copper)'}`}
                                     />
+                                    {errors.cvv && <p className="text-xs text-red-500 ml-1">{errors.cvv}</p>}
                                 </div>
                             </div>
 

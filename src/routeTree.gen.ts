@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OrderSuccessRouteImport } from './routes/order-success'
+import { Route as OrderFailedRouteImport } from './routes/order-failed'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as ArtistsRouteImport } from './routes/artists'
@@ -29,6 +30,11 @@ import { Route as ArtworksIdRouteImport } from './routes/artworks/$id'
 const OrderSuccessRoute = OrderSuccessRouteImport.update({
   id: '/order-success',
   path: '/order-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderFailedRoute = OrderFailedRouteImport.update({
+  id: '/order-failed',
+  path: '/order-failed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/artists': typeof ArtistsRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/order-failed': typeof OrderFailedRoute
   '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/artists': typeof ArtistsRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/order-failed': typeof OrderFailedRoute
   '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/artists': typeof ArtistsRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/order-failed': typeof OrderFailedRoute
   '/order-success': typeof OrderSuccessRoute
   '/artworks/$id': typeof ArtworksIdRoute
   '/exhibitions/$id': typeof ExhibitionsIdRoute
@@ -172,6 +181,7 @@ export interface FileRouteTypes {
     | '/artists'
     | '/cart'
     | '/checkout'
+    | '/order-failed'
     | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/artists'
     | '/cart'
     | '/checkout'
+    | '/order-failed'
     | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/artists'
     | '/cart'
     | '/checkout'
+    | '/order-failed'
     | '/order-success'
     | '/artworks/$id'
     | '/exhibitions/$id'
@@ -227,6 +239,7 @@ export interface RootRouteChildren {
   ArtistsRoute: typeof ArtistsRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  OrderFailedRoute: typeof OrderFailedRoute
   OrderSuccessRoute: typeof OrderSuccessRoute
   ArtworksIdRoute: typeof ArtworksIdRoute
   ExhibitionsIdRoute: typeof ExhibitionsIdRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/order-success'
       fullPath: '/order-success'
       preLoaderRoute: typeof OrderSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-failed': {
+      id: '/order-failed'
+      path: '/order-failed'
+      fullPath: '/order-failed'
+      preLoaderRoute: typeof OrderFailedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -363,6 +383,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArtistsRoute: ArtistsRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  OrderFailedRoute: OrderFailedRoute,
   OrderSuccessRoute: OrderSuccessRoute,
   ArtworksIdRoute: ArtworksIdRoute,
   ExhibitionsIdRoute: ExhibitionsIdRoute,

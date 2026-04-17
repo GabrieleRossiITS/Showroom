@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useNavigate } from '@tanstack/react-router';
-import { motion } from 'framer-motion';
-import Button from '../ui/Button';
+import React, { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import Button from "../ui/Button";
 import {
     CreditCard,
     Lock,
@@ -9,14 +9,14 @@ import {
     ShieldCheck,
     Loader2,
 } from "lucide-react";
-import type { TFunction } from 'i18next';
-import { useTicket } from '../contexts/TicketContext';
-import type { TicketCheckoutData } from '#/types';
+import type { TFunction } from "i18next";
+import { useTicket } from "../contexts/TicketContext";
+import type { TicketCheckoutData } from "#/types";
 
 type Props = {
     t: TFunction<"translation", undefined>;
     ticket: TicketCheckoutData;
-}
+};
 
 export default function TicketCheckout({ t, ticket }: Props) {
     const navigate = useNavigate();
@@ -116,6 +116,7 @@ export default function TicketCheckout({ t, ticket }: Props) {
             navigate({ to: "/order-success" });
         } catch (error) {
             console.error("Payment failed:", error);
+        } finally {
             setIsProcessing(false);
         }
     };
@@ -130,11 +131,15 @@ export default function TicketCheckout({ t, ticket }: Props) {
                 >
                     <Button
                         variant="ghost"
-                        onClick={() => navigate({ to: `/exhibitions/${ticket.exhibitionId}` })}
+                        onClick={() =>
+                            navigate({
+                                to: `/exhibitions/${ticket.exhibitionId}`,
+                            })
+                        }
                         className="group gap-2 text-(--parisian-stone-dark) bg-white/20 rounded-full px-6"
                     >
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        {t("checkout.backToExhibition", "Back to Exhibition")}
+                        {t("checkout.backToExhibition")}
                     </Button>
                 </motion.div>
 
@@ -158,7 +163,10 @@ export default function TicketCheckout({ t, ticket }: Props) {
                             </div>
                         </div>
 
-                        <form onSubmit={handleConfirmPayment} className="space-y-6">
+                        <form
+                            onSubmit={handleConfirmPayment}
+                            className="space-y-6"
+                        >
                             <div className="space-y-2">
                                 <label className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 ${errors.cardNumber ? 'text-red-500' : 'text-(--parisian-stone)'}`}>
                                     {t("checkout.cardNumber")}
@@ -220,7 +228,8 @@ export default function TicketCheckout({ t, ticket }: Props) {
                                 ) : (
                                     <span className="flex items-center gap-3">
                                         <ShieldCheck className="w-5 h-5" />
-                                        {t("checkout.payNow")} {ticket.tierPrice.toFixed(2)}€
+                                        {t("checkout.payNow")}{" "}
+                                        {ticket.tierPrice.toFixed(2)}€
                                     </span>
                                 )}
                                 <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
@@ -247,22 +256,36 @@ export default function TicketCheckout({ t, ticket }: Props) {
 
                             <div className="space-y-4">
                                 <div className="flex justify-between items-start">
-                                    <span className="text-xs font-mono uppercase opacity-50">{t("checkout.exhibition", "Exhibition")}</span>
+                                    <span className="text-xs font-mono uppercase opacity-50">
+                                        {t("checkout.exhibition", "Exhibition")}
+                                    </span>
                                     <span className="text-sm font-bold text-(--deep-charcoal) text-right max-w-[200px]">
                                         {ticket.exhibitionTitle}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-xs font-mono uppercase opacity-50">{t("checkout.tier", "Tier")}</span>
-                                    <span className="text-sm font-bold text-(--deep-charcoal)">{ticket.tierName}</span>
+                                    <span className="text-xs font-mono uppercase opacity-50">
+                                        {t("checkout.tier", "Tier")}
+                                    </span>
+                                    <span className="text-sm font-bold text-(--deep-charcoal)">
+                                        {ticket.tierName}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-xs font-mono uppercase opacity-50">{t("checkout.date", "Date")}</span>
-                                    <span className="text-sm font-mono font-bold text-(--parisian-stone-dark)">{ticket.visitDate}</span>
+                                    <span className="text-xs font-mono uppercase opacity-50">
+                                        {t("checkout.date", "Date")}
+                                    </span>
+                                    <span className="text-sm font-mono font-bold text-(--parisian-stone-dark)">
+                                        {ticket.visitDate}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-xs font-mono uppercase opacity-50">{t("checkout.time", "Time")}</span>
-                                    <span className="text-sm font-mono font-bold text-(--parisian-stone-dark)">{ticket.slotDisplay}</span>
+                                    <span className="text-xs font-mono uppercase opacity-50">
+                                        {t("checkout.time", "Time")}
+                                    </span>
+                                    <span className="text-sm font-mono font-bold text-(--parisian-stone-dark)">
+                                        {ticket.slotDisplay}
+                                    </span>
                                 </div>
                             </div>
 

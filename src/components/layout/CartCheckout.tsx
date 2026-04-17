@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useCart } from '../contexts/CartContext';
-import { useNavigate } from '@tanstack/react-router';
-import { motion } from 'framer-motion';
-import Button from '../ui/Button';
+import React, { useEffect, useState, useMemo } from "react";
+import { useCart } from "../contexts/CartContext";
+import { useNavigate } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import Button from "../ui/Button";
 import {
     CreditCard,
     Lock,
@@ -10,11 +10,11 @@ import {
     ShieldCheck,
     Loader2,
 } from "lucide-react";
-import type { TFunction } from 'i18next';
+import type { TFunction } from "i18next";
 
 type Props = {
     t: TFunction<"translation", undefined>;
-}
+};
 
 export default function CartCheckout({ t }: Props) {
     const navigate = useNavigate();
@@ -99,10 +99,19 @@ export default function CartCheckout({ t }: Props) {
     };
 
     useEffect(() => {
-        if (!cart || cart.items.length === 0) {
+        if (!isProcessing && !isSuccess && (!cart || cart.items.length === 0)) {
             navigate({ to: "/shop" });
         }
-    }, [cart, navigate]);
+    }, [cart, navigate, isProcessing, isSuccess]);
+
+    const totalAmount = useMemo(() => {
+        return (
+            cart?.items.reduce(
+                (acc, item) => acc + item.souvenirPrice * item.quantity,
+                0,
+            ) || 0
+        );
+    }, [cart]);
 
     const handleConfirmPayment = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -110,10 +119,17 @@ export default function CartCheckout({ t }: Props) {
         setIsProcessing(true);
         try {
             await new Promise((resolve) => setTimeout(resolve, 2000));
+            // Prevent immediate auto-redirect to /shop when context resets cart
+            setIsSuccess(true);
             await checkout(true);
-            navigate({ to: "/order-success" });
+            navigate({
+                to: "/order-success",
+                state: { cartData: cart, totalAmount }
+            });
         } catch (error) {
             console.error("Payment failed:", error);
+            setIsSuccess(false);
+        } finally {
             setIsProcessing(false);
         }
     };
@@ -137,7 +153,6 @@ export default function CartCheckout({ t }: Props) {
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* ── Payment Form ── */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -223,16 +238,7 @@ export default function CartCheckout({ t }: Props) {
                                     <span className="flex items-center gap-3">
                                         <ShieldCheck className="w-5 h-5" />
                                         {t("checkout.payNow")}{" "}
-                                        {cart?.items
-                                            .reduce(
-                                                (acc, item) =>
-                                                    acc +
-                                                    item.souvenirPrice *
-                                                    item.quantity,
-                                                0,
-                                            )
-                                            .toFixed(2)}
-                                        €
+                                        {totalAmount.toFixed(2)}€
                                     </span>
                                 )}
                                 <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
@@ -247,7 +253,6 @@ export default function CartCheckout({ t }: Props) {
                         </div>
                     </motion.div>
 
-                    {/* ── Order Summary ── */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -287,31 +292,13 @@ export default function CartCheckout({ t }: Props) {
                                 <div className="flex justify-between text-sm opacity-60">
                                     <span>{t("checkout.subtotal")}</span>
                                     <span className="font-mono">
-                                        {cart?.items
-                                            .reduce(
-                                                (acc, item) =>
-                                                    acc +
-                                                    item.souvenirPrice *
-                                                    item.quantity,
-                                                0,
-                                            )
-                                            .toFixed(2)}
-                                        €
+                                        {totalAmount.toFixed(2)}€
                                     </span>
                                 </div>
                                 <div className="flex justify-between text-lg font-black text-(--burnished-copper)">
                                     <span>{t("checkout.total")}</span>
                                     <span className="font-mono">
-                                        {cart?.items
-                                            .reduce(
-                                                (acc, item) =>
-                                                    acc +
-                                                    item.souvenirPrice *
-                                                    item.quantity,
-                                                0,
-                                            )
-                                            .toFixed(2)}
-                                        €
+                                        {totalAmount.toFixed(2)}€
                                     </span>
                                 </div>
                             </div>

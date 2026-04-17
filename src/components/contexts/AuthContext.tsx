@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 import type { User } from "#/types";
-import { logout as apiLogout } from "#/api/fetchers";
+import { logout as apiLogout, getUserById } from "#/api/fetchers";
 
 interface AuthContextType {
     user: User | null;
@@ -21,11 +21,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         const savedUser = localStorage.getItem("showroom_user");
         if (savedUser) {
             try {
-                setUser(JSON.parse(savedUser));
+                const parsedUser = JSON.parse(savedUser);
+                setUser(parsedUser);
+                getUserById(parsedUser.id).catch(() => {
+                    setUser(null);
+                    localStorage.removeItem("showroom_user");
+                });
             } catch (e) {
                 console.error("Failed to parse user from localStorage", e);
             }
         }
+
+        const handleUnauthorized = () => {
+            setUser(null);
+            localStorage.removeItem("showroom_user");
+        };
+        window.addEventListener("auth_unauthorized", handleUnauthorized);
+        return () => window.removeEventListener("auth_unauthorized", handleUnauthorized);
     }, []);
 
     const setAuth = (userData: User) => {

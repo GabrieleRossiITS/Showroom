@@ -224,7 +224,8 @@
             "work": "Werk",
             "techDetails": "Technische Details",
             "mood": "Stimmung",
-            "subjects": "Themen"
+            "subjects": "Themen",
+            "goToArtworks": "Zu den Kunstwerken"
         },
         "data": [
             {

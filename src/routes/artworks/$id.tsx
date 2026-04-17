@@ -55,7 +55,7 @@ function ArtworkDetail() {
     }, [showModal]);
 
     return (
-        <div className="top-0 bottom-0 page-wrap z-10 max-w-7xl mx-auto mt-16">
+        <div className="top-0 bottom-0 page-wrap z-10 max-w-7xl mx-auto mt-16 mb-24">
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}

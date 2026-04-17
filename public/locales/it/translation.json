@@ -225,7 +225,8 @@
             "work": "Opera",
             "techDetails": "Dettagli Tecnici",
             "mood": "Mood",
-            "subjects": "Soggetti"
+            "subjects": "Soggetti",
+            "goToArtworks": "Vai alle Opere"
         },
         "data": [
             {

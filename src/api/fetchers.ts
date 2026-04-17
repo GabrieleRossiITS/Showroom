@@ -72,9 +72,12 @@ const getHeaders = (lang?: string, token?: string): Record<string, string> => {
 
 /**
  * Retrieves the JWT from localStorage (set after login).
+ * Safely checks for window to avoid SSR crashes.
  */
-const getToken = (): string | undefined =>
-    localStorage.getItem("showroom_token") ?? undefined;
+const getToken = (): string | undefined => {
+    if (typeof window === "undefined") return undefined;
+    return localStorage.getItem("showroom_token") ?? undefined;
+};
 
 /** POST /api/auth/login  →  sets jwt_token cookie on the backend */
 export const login = async (data: LoginRequest): Promise<User> => {
@@ -524,4 +527,29 @@ export const postUserTicket = async (
                 : "Errore nell'aggiunta del biglietto",
         );
     return res.json();
+};
+
+// ─── Media () ─────────────────────────────────────────────────────
+
+/** GET /api/previews/artists */
+export const getMediaPreviews = async (
+    lang?: string,
+): Promise<Record<string, string>> => {
+    const url = `${API_BASE_URL}/previews/artists`;
+    const res = await fetch(url, {
+        headers: getHeaders(lang, getToken()),
+        credentials: "include",
+    });
+    if (!res.ok)
+        throw new Error(
+            res.status === 403
+                ? "Accesso negato"
+                : "Errore nel recupero delle anteprime",
+        );
+    const data: Record<string, string> = await res.json();
+    const normalizedData: Record<string, string> = {};
+    for (const [key, path] of Object.entries(data)) {
+        normalizedData[key] = normalizeUrl(path.startsWith("/") ? path : `/${path}`);
+    }
+    return normalizedData;
 };

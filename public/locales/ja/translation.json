@@ -224,7 +224,8 @@
             "work": "作品",
             "techDetails": "技術的な詳細",
             "mood": "ムード",
-            "subjects": "主題"
+            "subjects": "主題",
+            "goToArtworks": "作品を見る"
         },
         "data": [
             {

@@ -6,8 +6,13 @@ import { useTranslation } from "react-i18next";
 import { GlobalLoader } from "#/components/GlobalLoader";
 import { useEffect, useState } from "react";
 import type { Quote } from "#/types";
+import { getMediaPreviews } from "#/api/fetchers";
 
 export const Route = createFileRoute("/artists")({
+    loader: async () => {
+        const mediaPreviews = await getMediaPreviews();
+        return { mediaPreviews };
+    },
     component: Artists,
     pendingComponent: GlobalLoader,
     pendingMs: 0,
@@ -49,8 +54,11 @@ function Artists() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const artistsData = t("artists.data", { returnObjects: true }) as Artist[];
-    const [quote, setQuote] = useState<string>("");
 
+    const { mediaPreviews } = Route.useLoaderData();
+
+    const [quote, setQuote] = useState<string>("");
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
         whileInView: { opacity: 1, y: 0 },
@@ -59,7 +67,7 @@ function Artists() {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/quotes.json")
+        fetch("/data/quotes.json")
             .then((res: Response) => res.json())
             .then((data: Quote[]) => {
                 if (data.length > 0) {
@@ -67,7 +75,6 @@ function Artists() {
                     setQuote(data[randomIndex].text);
                 }
             })
-            .catch(console.error);
     }, []);
 
     return (
@@ -102,23 +109,13 @@ function Artists() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
-                                    className="relative aspect-square w-full rounded-[3rem] bg-(--vintage-sepia-light)/40 backdrop-blur-3xl border border-(--line) shadow-xl flex flex-col items-center justify-center p-8 text-center"
+                                    className="relative aspect-square w-full rounded-[3rem] overflow-hidden bg-(--vintage-sepia-light)/40 backdrop-blur-3xl border border-(--line) shadow-xl flex flex-col items-center justify-center text-center"
                                 >
-                                    <div className="relative w-32 h-32 mb-8">
-                                        <div className="absolute inset-0 border-2 border-dashed border-(--burnished-copper)/30 rounded-full animate-[spin_15s_linear_infinite]" />
-                                        <div className="absolute inset-3 border border-solid border-(--deep-charcoal)/10 rounded-full flex items-center justify-center">
-                                            <span className="text-2xl font-serif italic text-(--deep-charcoal) opacity-50">
-                                                {artist.firstName[0]}
-                                                {artist.lastName[0]}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <h3 className="text-xl font-serif font-bold text-(--deep-charcoal) mb-2">
-                                        Visual ID
-                                    </h3>
-                                    <p className="text-(--parisian-stone-dark) text-xs uppercase tracking-widest">
-                                        {artist.id.replace("-", " ")}
-                                    </p>
+                                    <img
+                                        src={`${API_BASE_URL.replace("/api", "")}${mediaPreviews[artist.firstName + "_" + artist.lastName]}`}
+                                        alt={`${artist.firstName} ${artist.lastName}`}
+                                        className="w-full h-full object-cover"
+                                    />
                                 </motion.div>
 
                                 <motion.div
@@ -178,6 +175,22 @@ function Artists() {
                                         </div>
                                     </div>
                                 </motion.div>
+
+                                {(artist.firstName == "Robert" && artist.lastName == "Doisneau") && (
+                                    <motion.div {...fadeIn}>
+                                        <Button
+                                            onClick={() => {
+                                                navigate({ to: "/artworks" });
+                                            }}
+                                            variant="copper"
+                                            rounded="full"
+                                            size="lg"
+                                            className="w-full px-8 md:px-10 py-6 text-lg font-bold shadow-[0_0_40px_rgba(196,132,100,0.4)] hover:shadow-[0_0_60px_rgba(196,132,100,0.6)] hover:-translate-y-1 transition-all gap-3 border-0 active:scale-95"
+                                        >
+                                            {t("artists.titles.goToArtworks")}
+                                        </Button>
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-12">

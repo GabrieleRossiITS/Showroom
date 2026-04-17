@@ -224,7 +224,8 @@
             "work": "Artwork",
             "techDetails": "Technical Details",
             "mood": "Mood",
-            "subjects": "Subjects"
+            "subjects": "Subjects",
+            "goToArtworks": "Go to Artworks"
         },
         "data": [
             {

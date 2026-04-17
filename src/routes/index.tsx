@@ -64,9 +64,6 @@ function App() {
                     setQuote(data[randomIndex].text);
                 }
             })
-            .catch((error) => {
-                console.error("Errore durante il recupero dei dati:", error);
-            });
     }, []);
 
     const staggerContainer: Variants = {

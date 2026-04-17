@@ -224,7 +224,8 @@
             "work": "Obra",
             "techDetails": "Detalles Técnicos",
             "mood": "Atmósfera",
-            "subjects": "Sujetos"
+            "subjects": "Sujetos",
+            "goToArtworks": "Ver Obras"
         },
         "data": [
             {

@@ -129,6 +129,17 @@ export interface CreateTicketRequest {
     timeSlotId: number;
 }
 
+export interface TicketCheckoutData {
+    exhibitionId: number;
+    exhibitionTitle: string;
+    tierId: number;
+    tierName: string;
+    tierPrice: number;
+    visitDate: string;
+    timeSlotId: number;
+    slotDisplay: string;
+}
+
 export interface TicketTier {
     id: number;
     type: string;

@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Trash2,
-    ShoppingBag,
     ArrowRight,
     Loader2,
     Package,
@@ -167,7 +166,7 @@ function CartPage() {
                                 rounded="full"
                                 size="lg"
                                 className="w-full group"
-                                onClick={() => navigate({ to: "/checkout" })}
+                                onClick={() => navigate({ to: "/checkout", search: { type: "cart" } })}
                             >
                                 {t("cart.checkout")}
                                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

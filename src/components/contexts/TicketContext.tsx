@@ -44,7 +44,6 @@ export const TicketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const addTicket = async (item: CreateTicketRequest) => {
         if (!isAuthenticated || !user) return;
         try {
-            // Automatically inject the authenticated user's ID
             const requestWithUserId = {
                 ...item,
                 userId: user.id,

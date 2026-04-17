@@ -20,6 +20,7 @@ export default function CartCheckout({ t }: Props) {
     const navigate = useNavigate();
     const { cart, checkout } = useCart();
     const [isProcessing, setIsProcessing] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const [cardNumber, setCardNumber] = useState("");
     const [expiry, setExpiry] = useState("");
     const [cvv, setCvv] = useState("");

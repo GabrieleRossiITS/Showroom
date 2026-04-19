@@ -35,7 +35,8 @@
             "ticketsAvailable": "Tickets verfügbar",
             "specialOpenings": "Sonderöffnung am 26. Dezember und 6. Januar. Geschlossen am 25. Dezember und 1. Januar.",
             "exploreUniverse": "Erkunden Sie das Universum",
-            "ofTheArtist": "des Künstlers"
+            "ofTheArtist": "des Künstlers",
+            "exhibitionInfo": "Ausstellungsinfos"
         }
     },
     "about": {
@@ -97,7 +98,8 @@
             "only": "Nur noch",
             "remaining": "übrig",
             "knowMore": "Mehr erfahren"
-        }
+        },
+        "loginToBuy": "Zum Kaufen anmelden"
     },
     "cart": {
         "label": "Einkaufstasche",
@@ -150,7 +152,8 @@
         "reduced": "Ermäßigter Eintritt",
         "reducedDesc": "Studenten, Senioren und Gruppen.",
         "premium": "Premium (Geführt)",
-        "premiumDesc": "Beinhaltet eine Führung und den exklusiven Katalog."
+        "premiumDesc": "Beinhaltet eine Führung und den exklusiven Katalog.",
+        "loginToBook": "Zum Buchen anmelden"
     },
     "login": {
         "title": "Willkommen zurück",

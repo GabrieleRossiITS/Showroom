@@ -87,6 +87,7 @@
         "added": "Aggiunto!",
         "all": "Tutto",
         "backToShop": "Torna al negozio",
+        "loginToBuy": "Accedi per acquistare",
         "inStock": "Disponibile",
         "outOfStock": "Esaurito",
         "description": "Descrizione",
@@ -151,7 +152,8 @@
         "reduced": "Ingresso Ridotto",
         "reducedDesc": "Studenti, anziani e gruppi.",
         "premium": "Premium (Guidata)",
-        "premiumDesc": "Include una visita guidata e il catalogo esclusivo."
+        "premiumDesc": "Include una visita guidata e il catalogo esclusivo.",
+        "loginToBook": "Accedi per prenotare"
     },
     "login": {
         "title": "Bentornato",

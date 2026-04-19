@@ -186,7 +186,7 @@ function About() {
                                         rows={4}
                                         className="w-full bg-(--bg-base) border border-border rounded-md px-4 py-3 text-(--deep-charcoal) focus:outline-none focus:ring-2 focus:ring-ring transition-all resize-none"
                                         placeholder={t(
-                                            "about.form.formPlaceholder",
+                                            "about.form.formMessagePlaceholder",
                                         )}
                                     ></textarea>
                                 </div>

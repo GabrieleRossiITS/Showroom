@@ -35,7 +35,8 @@
             "ticketsAvailable": "チケット販売中",
             "specialOpenings": "12月26日、1月6日は特別開館。12月25日、1月1日は休館。",
             "exploreUniverse": "世界を探求する",
-            "ofTheArtist": "アーティストの"
+            "ofTheArtist": "アーティストの",
+            "exhibitionInfo": "展示情報"
         }
     },
     "about": {
@@ -97,7 +98,8 @@
             "only": "残り",
             "remaining": "点",
             "knowMore": "詳細を見る"
-        }
+        },
+        "loginToBuy": "購入にはログインが必要です"
     },
     "cart": {
         "label": "ショッピングバッグ",
@@ -150,7 +152,8 @@
         "reduced": "割引入場",
         "reducedDesc": "学生、シニア、グループ。",
         "premium": "プレミアム（ガイド付き）",
-        "premiumDesc": "ガイドツアーと限定カタログ付き。"
+        "premiumDesc": "ガイドツアーと限定カタログ付き。",
+        "loginToBook": "予約にはログインが必要です"
     },
     "login": {
         "title": "おかえりなさい",

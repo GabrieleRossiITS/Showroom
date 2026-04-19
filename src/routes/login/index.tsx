@@ -93,7 +93,6 @@ function AuthPage() {
                 variants={containerVariants}
                 className="w-full max-w-lg relative z-10"
             >
-
                 <motion.div
                     layout
                     variants={itemFadeUp}
@@ -243,7 +242,11 @@ function AuthPage() {
                                     >
                                         <button
                                             type="button"
-                                            onClick={() => navigate({ to: "/login/forgot-password" })}
+                                            onClick={() =>
+                                                navigate({
+                                                    to: "/login/forgot-password",
+                                                })
+                                            }
                                             className="text-[10px] font-bold uppercase tracking-widest text-(--burnished-copper) hover:text-(--burnished-copper-deep) transition-colors cursor-pointer"
                                         >
                                             {t("login.forgotPassword")}

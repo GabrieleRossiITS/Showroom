@@ -12,6 +12,7 @@ import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { cn } from "#/lib/utils";
 import type { ExhibitionTimeSlot, TicketTier } from "#/types";
+import { useAuth } from "#/components/contexts/AuthContext";
 
 export const Route = createFileRoute("/exhibitions/$id")({
     pendingComponent: GlobalLoader,
@@ -34,6 +35,7 @@ function ExhibitionDetail() {
     const { exhibition, timeSlots, tiers } = Route.useLoaderData();
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
 
     const [selectedSlotId, setSelectedSlotId] = useState<number | null>(
         timeSlots.length > 0 ? timeSlots[0].id : null,
@@ -362,14 +364,16 @@ function ExhibitionDetail() {
                             </span>
                         </div>
                         <Button
-                            disabled={!selectedSlot}
-                            onClick={handleBooking}
+                            disabled={isAuthenticated && !selectedSlot}
+                            onClick={isAuthenticated ? handleBooking : () => navigate({ to: "/login" })}
                             variant="copper"
                             rounded="full"
                             className="w-full py-6 text-base font-bold shadow-xl disabled:opacity-30 disabled:translate-y-0"
                             size="lg"
                         >
-                            {t("exhibitionDetail.confirmBooking")}
+                            {isAuthenticated
+                                ? t("exhibitionDetail.confirmBooking")
+                                : t("exhibitionDetail.loginToBook")}
                         </Button>
                         {!selectedSlot && timeSlots.length > 0 && (
                             <div className="flex items-center gap-2 text-xs text-white/40 justify-center">

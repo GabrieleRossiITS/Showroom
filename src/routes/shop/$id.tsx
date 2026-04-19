@@ -9,6 +9,7 @@ import {
     AlertCircle,
     Ruler,
     Loader2,
+    User,
 } from "lucide-react";
 import { getSouvenirById } from "#/api/fetchers";
 import { useTranslation } from "react-i18next";
@@ -17,6 +18,7 @@ import { GlobalLoader } from "#/components/GlobalLoader";
 import Button from "#/components/ui/Button";
 import { ProtectedImage } from "#/components/ui/ProtectedImage";
 import { useCart } from "#/components/contexts/CartContext";
+import { useAuth } from "#/components/contexts/AuthContext";
 import { JsonList } from "#/components/ui/JsonList";
 
 // ─── Loader ───────────────────────────────────────────────────────────────────
@@ -39,6 +41,7 @@ function SouvenirDetail() {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { addToCart } = useCart();
+    const { isAuthenticated } = useAuth();
     const [qty, setQty] = useState(1);
     const [added, setAdded] = useState(false);
     const [isAdding, setIsAdding] = useState(false);
@@ -231,7 +234,11 @@ function SouvenirDetail() {
 
                         {/* Add to cart button */}
                         <Button
-                            onClick={handleAddToCart}
+                            onClick={
+                                isAuthenticated
+                                    ? handleAddToCart
+                                    : () => navigate({ to: "/login" })
+                            }
                             disabled={!item.inStock || added || isAdding}
                             variant="copper"
                             size="lg"
@@ -250,11 +257,21 @@ function SouvenirDetail() {
                                 </span>
                             ) : (
                                 <span className="flex items-center justify-center gap-3">
-                                    <ShoppingBag className="w-5 h-5" />
-                                    {t("shop.addToCart")}
-                                    <span className="font-mono font-black text-white/80">
-                                        · {(item.price * qty).toFixed(2)}€
-                                    </span>
+                                    {isAuthenticated ? (
+                                        <>
+                                            <ShoppingBag className="w-5 h-5" />
+                                            {t("shop.addToCart")}
+                                            <span className="font-mono font-black text-white/80">
+                                                ·{" "}
+                                                {(item.price * qty).toFixed(2)}€
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <User className="w-5 h-5" />
+                                            {t("shop.loginToBuy")}
+                                        </>
+                                    )}
                                 </span>
                             )}
                             <div className="absolute inset-0 bg-white/10 -translate-x-full hover:translate-x-0 transition-transform duration-500" />

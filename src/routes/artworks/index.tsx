@@ -1,13 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef, useEffect, useMemo } from "react";
-import {
-    motion,
-    useScroll,
-    useTransform,
-    useMotionTemplate,
-} from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import Button from "#/components/ui/Button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowLeft, ArrowRight, MoveRight } from "lucide-react";
 import { getArtworks } from "#/api/fetchers";
 import { createArtworkSlug } from "#/components/utlis";
 import { GlobalLoader } from "#/components/GlobalLoader";
@@ -24,26 +18,17 @@ export const Route = createFileRoute("/artworks/")({
     },
 });
 
-// ─── Timeline derived from backend artworks ───────────────────────────────────
-// A "color era" starts at year >= 1960 (matches Doisneau's evolution as a photographer)
-const COLOR_ERA_START = 1960;
-
 function AuthorsTimeline() {
     const artworks = Route.useLoaderData();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const isScrolling = useRef(false);
     const navigate = useNavigate();
 
-    // Sort artworks chronologically and build timeline entries from them
+    const total = artworks.length;
+
     const timelineArtworks = useMemo(
         () => [...artworks].sort((a, b) => a.year - b.year),
         [artworks],
-    );
-
-    // Index of the first "color" artwork → drives the grayscale-to-color scroll transition
-    const colorIndex = useMemo(
-        () => timelineArtworks.findIndex((a) => a.year >= COLOR_ERA_START),
-        [timelineArtworks],
     );
 
     useEffect(() => {
@@ -62,19 +47,15 @@ function AuthorsTimeline() {
             if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
             if (e.deltaY === 0) return;
             e.preventDefault();
-
             if (isScrolling.current) return;
             isScrolling.current = true;
-
-            const scrollAmount = window.innerWidth;
             el.scrollBy({
-                left: e.deltaY > 0 ? scrollAmount : -scrollAmount,
+                left: e.deltaY > 0 ? window.innerWidth : -window.innerWidth,
                 behavior: "smooth",
             });
-
             setTimeout(() => {
                 isScrolling.current = false;
-            }, 600);
+            }, 650);
         };
 
         el.addEventListener("wheel", onWheel, { passive: false });
@@ -90,109 +71,62 @@ function AuthorsTimeline() {
     };
 
     const { scrollXProgress } = useScroll({ container: scrollContainerRef });
-
-    const total = timelineArtworks.length;
-    const safeColorIndex = colorIndex === -1 ? total : colorIndex;
-    const transitionStart =
-        Math.max(0, safeColorIndex - 1.5) / Math.max(total - 1, 1);
-    const transitionEnd = safeColorIndex / Math.max(total - 1, 1);
-
-    const grayscaleValue = useTransform(
-        scrollXProgress,
-        [0, transitionStart, transitionEnd, 1],
-        [1, 1, 0, 0],
-    );
-
-    const filterTemplate = useMotionTemplate`grayscale(${grayscaleValue})`;
+    // Progress bar
+    const progressWidth = useTransform(scrollXProgress, [0, 1], ["0%", "100%"]);
 
     return (
-        <div className="relative h-screen w-screen overflow-hidden bg-(--deep-charcoal)">
-            {/* ── Animated background blobs ── */}
-            <motion.div
-                style={{ filter: filterTemplate }}
-                className="absolute inset-0 pointer-events-none z-0 transition-opacity"
-            >
+        <motion.div className="relative h-screen w-screen overflow-hidden">
+            <header className="absolute top-0 left-0 right-0 z-40 pt-32 flex flex-col items-center gap-2 pointer-events-none">
                 <motion.div
-                    animate={{
-                        x: [0, 50, -30, 0],
-                        y: [0, -40, 60, 0],
-                        rotate: [0, 5, -5, 0],
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                    className="absolute top-[-15%] left-[-10%] w-[130vw] h-[80vh] bg-(--burnished-copper-deep)/60 rounded-[40%_60%_70%_30%/40%_40%_60%_50%] blur-[120px]"
-                />
-                <motion.div
-                    animate={{
-                        x: [0, -60, 40, 0],
-                        y: [0, 30, -20, 0],
-                        scale: [1, 1.1, 0.95, 1],
-                    }}
-                    transition={{
-                        duration: 25,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                    className="absolute bottom-[-20%] left-[20vw] w-[140vw] h-[90vh] bg-(--burnished-copper)/50 rounded-[30%_70%_50%_50%/50%_30%_70%_50%] blur-[150px] mix-blend-overlay"
-                />
-                <motion.div
-                    animate={{
-                        opacity: [0.1, 0.4, 0.1],
-                        scale: [0.8, 1.2, 0.8],
-                        rotate: [0, 90, 0],
-                    }}
-                    transition={{
-                        duration: 18,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                    className="absolute top-[20%] right-[-10%] w-[80vw] h-[80vh] bg-(--parisian-stone)/40 rounded-[50%_50%_30%_70%/60%_40%_60%_40%] blur-[180px]"
-                />
-                <div className="absolute inset-0 bg-linear-to-b from-(--deep-charcoal)/30 via-(--deep-charcoal)/60 to-(--deep-charcoal)/90" />
-            </motion.div>
-
-            {/* ── Nav arrows ── */}
-            <div className="absolute inset-0 pointer-events-none z-50 p-8 pb-12 md:p-12 md:pb-16 flex flex-col justify-end">
-                <div className="flex justify-between items-end mb-8 w-full">
-                    <Button
-                        onClick={() => scroll("left")}
-                        variant="ghost"
-                        size="icon"
-                        rounded="full"
-                        aria-label="Scroll left"
-                        className="w-16 h-16 bg-(--parisian-stone)/10 hover:bg-(--parisian-stone)/30 border border-(--parisian-stone)/20 backdrop-blur-md text-(--vintage-sepia) pointer-events-auto shadow-xl"
-                    >
-                        <ArrowLeft className="w-8 h-8" aria-hidden="true" />
-                    </Button>
-                    <Button
-                        onClick={() => scroll("right")}
-                        variant="ghost"
-                        size="icon"
-                        rounded="full"
-                        aria-label="Scroll right"
-                        className="w-16 h-16 bg-(--parisian-stone)/10 hover:bg-(--parisian-stone)/30 border border-(--parisian-stone)/20 backdrop-blur-md text-(--vintage-sepia) pointer-events-auto shadow-xl"
-                    >
-                        <ArrowRight className="w-8 h-8" aria-hidden="true" />
-                    </Button>
-                </div>
-            </div>
-
-            {/* ── Page heading ── */}
-            <header className="absolute top-48 left-0 right-0 z-40 text-center">
-                <motion.h1
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-3xl md:text-5xl font-black text-white/50 font-serif drop-shadow-xl inline-block px-12 py-4"
+                    transition={{ duration: 0.9 }}
+                    className="flex items-center gap-4"
+                >
+                    <div className="h-px w-10 bg-(--parisian-stone)/30" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-(--parisian-stone) font-sans">
+                        {t("artwork.title")}
+                    </span>
+                    <div className="h-px w-10 bg-(--parisian-stone)/30" />
+                </motion.div>
+                <motion.h1
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.1 }}
+                    className="text-2xl md:text-4xl font-black text-(--deep-charcoal) font-serif italic tracking-tight"
                 >
                     {t("artwork.pageTitle")}
                 </motion.h1>
             </header>
 
-            {/* ── Horizontal scrolling timeline ── */}
+            <div className="absolute bottom-0 left-0 right-0 z-50 h-[2px] bg-(--parisian-stone)/10">
+                <motion.div
+                    style={{ width: progressWidth }}
+                    className="h-full bg-(--burnished-copper) rounded-full origin-left"
+                />
+            </div>
+
+            <div className="absolute bottom-24 w-full z-50 flex items-center justify-between px-8">
+                <motion.button
+                    onClick={() => scroll("left")}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.94 }}
+                    aria-label="Scroll left"
+                    className="w-11 h-11 left-16 rounded-full border border-(--parisian-stone)/30 bg-(--vintage-sepia-light)/60 backdrop-blur-md text-(--parisian-stone-dark) hover:text-(--deep-charcoal) hover:border-(--burnished-copper)/50 hover:bg-white/60 transition-all duration-300 flex items-center justify-center shadow-md"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                </motion.button>
+                <motion.button
+                    onClick={() => scroll("right")}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.94 }}
+                    aria-label="Scroll right"
+                    className="w-11 h-11 right-16 rounded-full border border-(--parisian-stone)/30 bg-(--vintage-sepia-light)/60 backdrop-blur-md text-(--parisian-stone-dark) hover:text-(--deep-charcoal) hover:border-(--burnished-copper)/50 hover:bg-white/60 transition-all duration-300 flex items-center justify-center shadow-md"
+                >
+                    <ArrowRight className="w-4 h-4" />
+                </motion.button>
+            </div>
+
             <section
                 aria-label="Artistic Journey Timeline"
                 ref={scrollContainerRef}
@@ -203,51 +137,81 @@ function AuthorsTimeline() {
                 }}
                 className="relative z-10 h-screen w-full flex items-center overflow-x-auto overflow-y-hidden no-scrollbar focus:outline-none snap-x snap-mandatory"
             >
-                {/* Timeline horizontal line */}
-                <div
-                    className="absolute top-1/2 left-0 h-[2px] bg-linear-to-r from-transparent via-(--burnished-copper)/40 to-transparent pointer-events-none"
-                    style={{ width: `${timelineArtworks.length * 100}vw` }}
-                />
-
                 {timelineArtworks.map((artwork, index) => {
-                    const isEven = index % 2 === 0;
-                    const isColor = artwork.year >= COLOR_ERA_START;
-
                     return (
                         <div
                             key={artwork.id}
-                            className="shrink-0 w-screen h-full flex flex-col justify-center relative px-6 md:px-[12vw] snap-center"
+                            className="shrink-0 w-screen h-full flex items-center snap-center relative"
                         >
-                            {/* Centre dot on the timeline line */}
-                            <div className="absolute top-1/2 left-1/2 w-6 h-6 bg-(--burnished-copper) rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-[0_0_20px_rgba(184,115,51,0.8)] z-20 border-4 border-(--deep-charcoal)" />
-
-                            {/* Year stamp — alternates above/below the line */}
-                            <div
-                                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 md:-translate-y-1/2 z-30 pointer-events-none"
-                                style={{ marginTop: isEven ? "-80px" : "40px" }}
-                            >
-                                <h2 className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-linear-to-b from-(--burnished-copper) to-(--vintage-sepia) font-mono tabular-nums tracking-tighter opacity-80 drop-shadow-2xl">
+                            <div className="absolute inset-0 flex items-center justify-start pl-[6vw] pointer-events-none select-none overflow-hidden">
+                                <span
+                                    className="text-[22vw] font-black font-mono tabular-nums tracking-tighter leading-none select-none"
+                                    style={{
+                                        color: "rgba(43,45,47,0.05)",
+                                    }}
+                                >
                                     {artwork.year}
-                                </h2>
+                                </span>
                             </div>
 
-                            {/* Content row: text left/right + photo */}
-                            <div
-                                className={`w-full flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-24 relative z-10 ${isEven ? "" : "md:flex-row-reverse"}`}
-                            >
-                                {/* Period title — from backend historicalPeriod */}
-                                <div
-                                    className={`w-full md:w-1/2 text-center ${isEven ? "md:text-left" : "md:text-right"} bg-(--deep-charcoal)/40 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-6 md:p-0 rounded-3xl md:rounded-none`}
+                            <div className="relative z-10 w-full h-full flex items-center px-8 md:px-16 lg:px-[8vw] gap-10 lg:gap-16">
+                                <motion.div
+                                    initial={{ opacity: 0, x: -24 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.5 }}
+                                    transition={{
+                                        duration: 0.7,
+                                        ease: "easeOut",
+                                    }}
+                                    className="hidden md:flex flex-col justify-center gap-6 w-[32%] lg:w-[28%] shrink-0"
                                 >
-                                    <h3 className="text-3xl lg:text-5xl font-serif text-(--parisian-stone) drop-shadow-md">
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-(--parisian-stone) tabular-nums">
+                                            {String(index + 1).padStart(2, "0")}{" "}
+                                            / {String(total).padStart(2, "0")}
+                                        </span>
+                                        <div className="h-px flex-1 bg-(--parisian-stone)/20" />
+                                    </div>
+
+                                    <span className="block text-7xl lg:text-8xl font-black font-mono tabbular-nums tracking-tighter leading-none text-(--burnished-copper)">
+                                        {artwork.year}
+                                    </span>
+                                    <h3 className="space-y-2 text-2xl lg:text-3xl font-serif italic leading-tight text-(--deep-charcoal)">
                                         {artwork.historicalPeriod}
                                     </h3>
-                                </div>
+                                    {artwork.title && (
+                                        <div className="space-y-1.5 pt-4 border-t border-(--parisian-stone)/15">
+                                            <p className="text-sm font-medium text-(--parisian-stone-dark) leading-snug">
+                                                {artwork.title}
+                                            </p>
+                                        </div>
+                                    )}
+                                </motion.div>
 
-                                {/* Photo card — clickable → artwork detail */}
-                                <div className="w-full md:w-[45%] lg:w-[35%] flex justify-center">
-                                    <button
-                                        className="w-full max-w-[400px] relative p-2 md:p-3 bg-linear-to-br from-(--burnished-copper)/30 to-transparent rounded-[2.5rem] md:rounded-[3.5rem] shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden aspect-4/5 md:hover:scale-[1.03] transition-transform duration-500 group text-left block focus:outline-none focus:ring-4 focus:ring-(--burnished-copper)/50"
+                                {/* ── Right: photo card ── */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 24 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.4 }}
+                                    transition={{
+                                        duration: 0.9,
+                                        ease: [0.16, 1, 0.3, 1],
+                                    }}
+                                    className="flex-1 flex justify-center items-center h-full py-24"
+                                >
+                                    <motion.button
+                                        whileHover={{ scale: 1.03, y: -5 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 260,
+                                            damping: 22,
+                                        }}
+                                        className="group relative focus:outline-none focus-visible:ring-2 focus-visible:ring-(--burnished-copper)/60 focus-visible:ring-offset-4 rounded-4xl"
+                                        style={{
+                                            width: "min(40vw, 460px)",
+                                            aspectRatio: "3/4",
+                                        }}
                                         onClick={() =>
                                             navigate({
                                                 to: `/artworks/$id`,
@@ -259,32 +223,79 @@ function AuthorsTimeline() {
                                                 },
                                             })
                                         }
-                                        aria-label={`Visualizza opera: ${artwork.title} (${artwork.year})`}
+                                        aria-label={`View artwork: ${artwork.title} (${artwork.year})`}
                                     >
-                                        <div className="w-full h-full rounded-4xl md:rounded-[3rem] bg-(--deep-charcoal) relative overflow-hidden border border-(--inset-glint)/20">
-                                            <div className="absolute inset-0 bg-linear-to-t from-(--deep-charcoal)/90 via-transparent to-transparent z-10 opacity-70 group-hover:opacity-20 transition-opacity duration-500" />
-                                            <ProtectedImage
-                                                src={artwork.imageUrl}
-                                                alt={
-                                                    artwork.title ||
-                                                    `${artwork.year}`
-                                                }
-                                                className={`w-full h-full object-cover transition-all duration-700 pointer-events-none ${
-                                                    isColor
-                                                        ? "saturate-100 group-hover:saturate-150"
-                                                        : "filter grayscale sepia-[0.3] group-hover:grayscale-0 group-hover:sepia-0"
-                                                }`}
-                                            />
-                                            {artwork.title && (
-                                                <div className="absolute bottom-6 left-6 right-6 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                                                    <p className="text-(--parisian-stone) font-serif italic text-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                                                        {artwork.title} (
-                                                        {artwork.year})
+                                        {/* Copper glow on hover (colour era) / stone glow (B&W) */}
+                                        <div
+                                            className="absolute -inset-4 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl"
+                                            style={{
+                                                background:
+                                                    "rgba(100,102,90,0.12)",
+                                            }}
+                                        />
+
+                                        {/* Card frame — like a physical photo */}
+                                        <div
+                                            className="relative w-full h-full rounded-4xl overflow-hidden shadow-[0_24px_70px_rgba(43,45,47,0.18)] border"
+                                            style={{
+                                                borderColor:
+                                                    "rgba(43,45,47,0.10)",
+                                                background:
+                                                    "var(--vintage-sepia-light)",
+                                            }}
+                                        >
+                                            {/* Photo with grayscale transition */}
+                                            <motion.div className="absolute inset-0">
+                                                <ProtectedImage
+                                                    src={artwork.imageUrl}
+                                                    alt={
+                                                        artwork.title ||
+                                                        `${artwork.year}`
+                                                    }
+                                                    className="w-full h-full object-cover scale-[1.02] group-hover:scale-110 transition-transform duration-700"
+                                                />
+                                            </motion.div>
+
+                                            {/* Subtle warm vignette */}
+                                            <div className="absolute inset-0 bg-linear-to-t from-(--deep-charcoal)/60 via-transparent to-transparent pointer-events-none z-10 opacity-70 group-hover:opacity-95 transition-opacity duration-500" />
+
+                                            {/* Hover caption */}
+                                            <div className="absolute inset-0 z-20 flex flex-col justify-end p-7 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                                                {artwork.title && (
+                                                    <p className="text-(--vintage-sepia) font-serif italic text-lg leading-snug drop-shadow-lg">
+                                                        {artwork.title}
                                                     </p>
+                                                )}
+                                                <p className="text-(--vintage-sepia)/50 font-mono text-xs tracking-widest mt-1">
+                                                    {artwork.year}
+                                                </p>
+                                                <div className="flex items-center gap-2 mt-4">
+                                                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-(--burnished-copper)">
+                                                        View
+                                                    </span>
+                                                    <MoveRight className="w-3 h-3 text-(--burnished-copper) group-hover:translate-x-1 transition-transform" />
                                                 </div>
-                                            )}
+                                            </div>
+
+                                            {/* Glass sheen */}
+                                            <div className="absolute inset-0 z-30 bg-linear-to-br from-white/20 via-transparent to-transparent pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
                                         </div>
-                                    </button>
+                                    </motion.button>
+                                </motion.div>
+
+                                {/* ── Mobile label ── */}
+                                <div className="md:hidden absolute bottom-16 left-6 right-6 z-20">
+                                    <span
+                                        className="block text-5xl font-black font-mono tabular-nums tracking-tighter mb-1"
+                                        style={{
+                                            color: "rgba(43,45,47,0.25)",
+                                        }}
+                                    >
+                                        {artwork.year}
+                                    </span>
+                                    <h3 className="text-xl font-serif italic text-(--parisian-stone-dark)">
+                                        {artwork.historicalPeriod}
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -296,6 +307,6 @@ function AuthorsTimeline() {
                 .no-scrollbar::-webkit-scrollbar { display: none; }
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
-        </div>
+        </motion.div>
     );
 }

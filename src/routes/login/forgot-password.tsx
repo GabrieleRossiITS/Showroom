@@ -47,11 +47,15 @@ function ForgotPasswordPage() {
         setIsLoading(true);
         setError(null);
         if (oldPassword === newPassword) {
-            setError("La vecchia password e la nuova password non possono essere uguali.");
+            setError(
+                "La vecchia password e la nuova password non possono essere uguali.",
+            );
             return;
         }
         if (newPassword !== secondNewPassword) {
-            setError("La nuova password e la conferma della nuova password non coincidono.");
+            setError(
+                "La nuova password e la conferma della nuova password non coincidono.",
+            );
             return;
         }
         try {
@@ -93,7 +97,6 @@ function ForgotPasswordPage() {
                 variants={containerVariants}
                 className="w-full max-w-lg relative z-10"
             >
-
                 <motion.div
                     layout
                     variants={itemFadeUp}
@@ -136,7 +139,9 @@ function ForgotPasswordPage() {
                                         type="email"
                                         required
                                         value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
                                         className="w-full bg-white/40 border border-black/5 rounded-[1.25rem] py-4.5 pl-14 pr-5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-(--burnished-copper)/30 focus:bg-white transition-all outline-none"
                                         placeholder="your@email.com"
                                     />
@@ -150,7 +155,11 @@ function ForgotPasswordPage() {
                                 <div className="relative">
                                     <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
                                     <input
-                                        type={showOldPassword ? "text" : "password"}
+                                        type={
+                                            showOldPassword
+                                                ? "text"
+                                                : "password"
+                                        }
                                         required
                                         value={oldPassword}
                                         onChange={(e) =>
@@ -187,7 +196,11 @@ function ForgotPasswordPage() {
                                 <div className="relative">
                                     <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
                                     <input
-                                        type={showNewPassword ? "text" : "password"}
+                                        type={
+                                            showNewPassword
+                                                ? "text"
+                                                : "password"
+                                        }
                                         required
                                         value={newPassword}
                                         onChange={(e) =>
@@ -224,7 +237,11 @@ function ForgotPasswordPage() {
                                 <div className="relative">
                                     <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--parisian-stone) opacity-50" />
                                     <input
-                                        type={showSecondNewPassword ? "text" : "password"}
+                                        type={
+                                            showSecondNewPassword
+                                                ? "text"
+                                                : "password"
+                                        }
                                         required
                                         value={secondNewPassword}
                                         onChange={(e) =>
@@ -236,7 +253,9 @@ function ForgotPasswordPage() {
                                     <button
                                         type="button"
                                         onClick={() =>
-                                            setShowSecondNewPassword(!showSecondNewPassword)
+                                            setShowSecondNewPassword(
+                                                !showSecondNewPassword,
+                                            )
                                         }
                                         className="absolute right-5 top-1/2 -translate-y-1/2 text-(--parisian-stone) hover:text-(--deep-charcoal) transition-colors cursor-pointer"
                                         aria-label={
@@ -260,7 +279,9 @@ function ForgotPasswordPage() {
                             >
                                 <p className="text-sm font-medium text-(--parisian-stone-dark)">
                                     <button
-                                        onClick={() => navigate({ to: "/login" })}
+                                        onClick={() =>
+                                            navigate({ to: "/login" })
+                                        }
                                         className="text-(--burnished-copper) font-bold hover:underline cursor-pointer ml-1"
                                     >
                                         {t("login.backToLogin")}

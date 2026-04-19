@@ -35,7 +35,8 @@
             "ticketsAvailable": "Tickets Available",
             "specialOpenings": "Special opening on Dec 26 and Jan 6. Closed on Dec 25 and Jan 1.",
             "exploreUniverse": "Explore the universe",
-            "ofTheArtist": "of the artist"
+            "ofTheArtist": "of the artist",
+            "exhibitionInfo": "Exhibition info"
         }
     },
     "about": {
@@ -97,7 +98,8 @@
             "only": "Only",
             "remaining": "left",
             "knowMore": "Learn more"
-        }
+        },
+        "loginToBuy": "Login to buy"
     },
     "cart": {
         "label": "Shopping Bag",
@@ -150,7 +152,8 @@
         "reduced": "Reduced Entry",
         "reducedDesc": "Students, seniors, and groups.",
         "premium": "Premium (Guided)",
-        "premiumDesc": "Includes a guided tour and the exclusive catalog."
+        "premiumDesc": "Includes a guided tour and the exclusive catalog.",
+        "loginToBook": "Login to book"
     },
     "login": {
         "title": "Welcome back",
